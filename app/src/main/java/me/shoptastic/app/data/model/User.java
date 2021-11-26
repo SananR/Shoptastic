@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */
-public class User {
+public abstract class User {
 
     private String email;
     private String password;
@@ -27,4 +27,6 @@ public class User {
     public String getDisplayName() {
         return displayName;
     }
+
+    public abstract ArrayList<Order> getOrders();
 }
