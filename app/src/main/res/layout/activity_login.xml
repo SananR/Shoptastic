@@ -39,7 +39,7 @@
 
     <Button
             android:id="@+id/login"
-            android:enabled="false"
+            android:enabled="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -64,6 +64,7 @@
             app:layout_constraintEnd_toEndOf="@+id/password"
             app:layout_constraintStart_toStartOf="@+id/password"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.499"
+            app:layout_constraintHorizontal_bias="0.715" />
 
 </android.support.constraint.ConstraintLayout>
