@@ -10,6 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shoptastic">
         <activity
+            android:name=".SAccount"
+            android:exported="false" />
+        <activity
+            android:name=".CAccount"
+            android:exported="false" />
+        <activity
+            android:name=".Account"
+            android:exported="false" />
+        <activity
+            android:name=".Products"
+            android:exported="false" />
+        <activity
+            android:name=".Stores"
+            android:exported="false" />
+        <activity
+            android:name=".ShopInfoSignIn"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
