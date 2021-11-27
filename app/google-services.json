@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "174816579728",
+    "project_id": "shoptastic-6670d",
+    "storage_bucket": "shoptastic-6670d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174816579728:android:a22b92399ac246cb34c815",
+        "android_client_info": {
+          "package_name": "me.shoptastic.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174816579728-skpmofj0712bjg9rdn3st35ha3921nvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA100RetZ-Lkg9NTAx7xO4h9k9SfKOhCQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174816579728-skpmofj0712bjg9rdn3st35ha3921nvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
