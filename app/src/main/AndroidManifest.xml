@@ -14,8 +14,29 @@
                 android:exported="false"
                 android:label="@string/title_activity_login" />
         <activity
-                android:name=".MainActivity"
-                android:exported="true">
+            android:name=".SAccount"
+            android:exported="false" />
+        <activity
+            android:name=".CAccount"
+            android:exported="false" />
+        <activity
+            android:name=".Account"
+            android:exported="false" />
+        <activity
+            android:name=".Products"
+            android:exported="false" />
+        <activity
+            android:name=".Stores"
+            android:exported="false" />
+        <activity
+            android:name=".ShopInfoSignIn"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
