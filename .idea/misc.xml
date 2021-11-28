@@ -3,20 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11574074074074074" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_account.xml" value="0.26268115942028986" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_caccount.xml" value="0.2558876811594203" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_products.xml" value="0.26268115942028986" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_saccount.xml" value="0.2558876811594203" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_shop_info_sign_in.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_sproducts.xml" value="0.24230072463768115" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_sstores.xml" value="0.24230072463768115" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_stores.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12314814814814815" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.12314814814814815" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/layout/activity_account.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_caccount.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_products.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_saccount.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_shop_info_sign_in.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2833190703639564" />
+        <entry key="app/src/main/res/layout/activity_sproducts.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_stores.xml" value="0.1359375" />
       </map>
     </option>
   </component>
