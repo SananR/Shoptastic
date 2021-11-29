@@ -1,7 +1,8 @@
 package me.shoptastic.app.ui.register;
 
-import android.arch.lifecycle.ViewModel;
 import android.util.Patterns;
+
+import androidx.lifecycle.ViewModel;
 
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.RegisterRepository;
@@ -24,7 +25,7 @@ public class RegisterCustomerViewModel extends ViewModel {
 
 
         // can be launched in a separate asynchronous job
-        Result<User> result = registerRepository.register(null);
+        Result<User> result = registerRepository.register(new Customer(email, name, phone), password);
 
         if (result instanceof Result.Success) {
             User data = ((Result.Success<User>) result).getData();
