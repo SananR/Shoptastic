@@ -18,7 +18,7 @@ import me.shoptastic.app.data.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private final LoginRepository repository = LoginRepository.getInstance(new LoginDataSource());
+    private final LoginRepository repository = LoginRepository.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

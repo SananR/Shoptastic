@@ -8,13 +8,13 @@ public class RegisterRepository {
 
 
     // private constructor : singleton access
-    private RegisterRepository(RegisterDataSource dataSource) {
-        this.dataSource = dataSource;
+    private RegisterRepository() {
+        this.dataSource = new RegisterDataSource();
     }
 
-    public static RegisterRepository getInstance(RegisterDataSource dataSource) {
+    public static RegisterRepository getInstance() {
         if (instance == null) {
-            instance = new RegisterRepository(dataSource);
+            instance = new RegisterRepository();
         }
         return instance;
     }

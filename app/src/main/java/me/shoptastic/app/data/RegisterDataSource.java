@@ -1,51 +1,46 @@
 package me.shoptastic.app.data;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
 import me.shoptastic.app.data.model.Customer;
-import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
 public class RegisterDataSource {
     private final FirebaseAuth fAuth;
+    private final DatabaseReference dRef;
 
     public RegisterDataSource() {
         fAuth = FirebaseAuth.getInstance();
+        dRef = FirebaseDatabase.getInstance().getReference();
     }
 
     public Result<User> register(User user, String password) {
         try {
-            if (user instanceof Customer) {
-                fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            //Registration successful
-                            //TODO DATA
-                            return;
-                        } else {
-
-                        }
-                    }
-                });
-            } else if (user instanceof StoreOwner) {
-
-            }
-            // TODO: handle loggedInUser authentication
-//            User fakeUser =
-//                    new User(
-//                            java.util.UUID.randomUUID().toString(),
-//                            "Jane Doe");
-            return new Result.Success<>(null);
+            fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    //Registration successful
+                    String child;
+                    if (user instanceof Customer) child = "users";
+                    else child = "owners";
+                    dRef.child(child).child(user.getUUID().toString()).setValue(user);
+                    LoginRepository.getInstance().setLoggedInUser(user);
+                    Log.d("TEST", "Success");
+                } else {
+                    //TODOs
+                    Log.d("TEST", task.getException().getMessage());
+                    Log.d("TEST", user.getEmail());
+                }
+            });
+            if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
+            else return new Result.Error(new IOException("Error creating Firebase user"));
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
+            return new Result.Error(new IOException("Error registering new user", e));
         }
     }
 }
