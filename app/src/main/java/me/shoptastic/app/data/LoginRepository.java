@@ -17,13 +17,13 @@ public class LoginRepository {
     private User user = null;
 
     // private constructor : singleton access
-    private LoginRepository(LoginDataSource dataSource) {
-        this.dataSource = dataSource;
+    private LoginRepository() {
+        this.dataSource = new LoginDataSource();
     }
 
-    public static LoginRepository getInstance(LoginDataSource dataSource) {
+    public static LoginRepository getInstance() {
         if (instance == null) {
-            instance = new LoginRepository(dataSource);
+            instance = new LoginRepository();
         }
         return instance;
     }
@@ -37,7 +37,7 @@ public class LoginRepository {
         dataSource.logout();
     }
 
-    private void setLoggedInUser(User user) {
+    public void setLoggedInUser(User user) {
         this.user = user;
     }
 
