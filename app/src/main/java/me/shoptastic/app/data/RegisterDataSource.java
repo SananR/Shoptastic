@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 
-import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
@@ -35,7 +34,7 @@ public class RegisterDataSource {
 
                         }
                     }
-                })
+                });
             } else if (user instanceof StoreOwner) {
 
             }

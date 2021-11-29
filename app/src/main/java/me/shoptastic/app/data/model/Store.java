@@ -1,17 +1,22 @@
 package me.shoptastic.app.data.model;
 
+import android.graphics.Bitmap;
+
 import java.util.HashSet;
-import java.util.Objects;
 
 public class Store {
-    private String store_name;
+    private final String store_name;
     HashSet<Product> store_products;
+    String address;
+    Bitmap logo;
 
-    public Store(String name, HashSet<Product> products){
+    public Store(String name, String address, Bitmap logo, HashSet<Product> products) {
         store_name = name;
-        for(Product s: products){
+        for (Product s : products) {
             store_products.add(s);
         }
+        this.address = address;
+        this.logo = logo;
     }
 
     @Override
