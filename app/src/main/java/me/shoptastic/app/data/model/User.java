@@ -7,15 +7,13 @@ import java.util.ArrayList;
  */
 public abstract class User {
 
-    private String email;
-    private String password;
-    private String phone;
-    private String displayName;
+    private final String email;
+    private final String phone;
+    private final String displayName;
 
 
-    public User(String email, String password, String displayName, String phone) {
+    public User(String email, String displayName, String phone) {
         this.email = email;
-        this.password = password;
         this.phone = phone;
         this.displayName = displayName;
     }

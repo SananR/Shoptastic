@@ -2,11 +2,12 @@ package me.shoptastic.app.data.model;
 
 import java.util.ArrayList;
 
-public class StoreOwner extends User{
+public class StoreOwner extends User {
     private Store store;
 
-    public StoreOwner(String email, String password, String displayName, String phone) {
-        super(email, password, displayName, phone);
+    public StoreOwner(String email, String displayName, String phone, Store store) {
+        super(email, displayName, phone);
+        this.store = store;
     }
 
     @Override
@@ -14,8 +15,8 @@ public class StoreOwner extends User{
         return null;
     }
 
-    public Store getStore(){
-        if (store == null){
+    public Store getStore() {
+        if (store == null) {
             // Get store
             store = null;
         }

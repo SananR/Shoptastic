@@ -1,11 +1,15 @@
 package me.shoptastic.app.ui.register;
 
-import android.arch.lifecycle.ViewModel;
 import android.graphics.Bitmap;
+
+import androidx.lifecycle.ViewModel;
+
+import java.util.HashSet;
 
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.RegisterRepository;
 import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
@@ -19,9 +23,12 @@ public class RegisterStoreOwnerViewModel extends ViewModel {
     }
 
 
-    public Result<User> register(String email, String name, String address, Bitmap Image) {
+    public Result<User> register(String email, String name, String phone, String password, String storeName, String address, Bitmap Image) {
         // can be launched in a separate asynchronous job
-        Result<User> result = registerRepository.register(null);
+        Result<User> result = registerRepository.register(
+                new StoreOwner(email, name, phone,
+                        new Store(storeName, address, Image, new HashSet<>())),
+                password);
 
         if (result instanceof Result.Success) {
             User data = ((Result.Success<User>) result).getData();
