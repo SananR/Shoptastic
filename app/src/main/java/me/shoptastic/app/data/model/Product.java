@@ -17,7 +17,10 @@ public class Product {
         this.Id = Id;
         this.Price = Price;
     }
-
+    public Integer ID(Product p){ return p.Id;}
+    public Integer price(Product p){ return p.Price;}
+    public void changePrice(Product p, int Price){ p.Price = Price;}
+    public void changeDescription(Product p, String description){ p.description = description;}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
