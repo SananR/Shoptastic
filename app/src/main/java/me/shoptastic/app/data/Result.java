@@ -1,5 +1,9 @@
 package me.shoptastic.app.data;
 
+import androidx.annotation.StringRes;
+
+import me.shoptastic.app.data.model.Resources;
+
 /**
  * A generic class that holds a result success w/ data or an error exception.
  */
@@ -20,10 +24,19 @@ public class Result<T> {
         return "";
     }
 
-    // Success sub-class
+    /**
+     * Success sub-class
+     * Use this subclass when an operation has been successful to return the data
+     * i.e. new Result.Success<User>(loggedInUser)
+     **/
     public final static class Success<T> extends Result {
         private final T data;
 
+        /**
+         * Successful operation that returns data
+         *
+         * @param data Successful data
+         */
         public Success(T data) {
             this.data = data;
         }
@@ -33,17 +46,43 @@ public class Result<T> {
         }
     }
 
-    // Error sub-class
+    /**
+     * Error sub-class
+     * Use this subclass when an operation has failed to return an exception and an error msg
+     * i.e. new Result.Error(new IllegalArgumentException("invalid password"), "has to be longer")
+     */
     public final static class Error extends Result {
         private final Exception exception;
-        private Integer error;
+        private String error;
 
+        /**
+         * An error occurred with no error msg
+         *
+         * @param error Exception that occurred
+         */
         public Error(Exception error) {
             this.exception = error;
         }
 
-        public Error(Exception exception, Integer error) {
-            this.exception = exception;
+        /**
+         * An error occurred with an error message provided as a resource
+         *
+         * @param exception Exception that occurred
+         * @param error     String resource integer
+         */
+        public Error(Exception exception, @StringRes Integer error) {
+            this(exception);
+            this.error = Resources.getString(error);
+        }
+
+        /**
+         * An error occurred with the specified error msg
+         *
+         * @param exception Exception that occurred
+         * @param error     Error msg
+         */
+        public Error(Exception exception, String error) {
+            this(exception);
             this.error = error;
         }
 
@@ -51,7 +90,7 @@ public class Result<T> {
             return this.exception;
         }
 
-        public Integer getError() {
+        public String getError() {
             return this.error;
         }
     }

@@ -7,11 +7,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.LoginDataSource;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.User;
@@ -46,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showLoginFailed(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }
