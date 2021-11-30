@@ -13,11 +13,11 @@ import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
-public class RegisterStoreOwnerViewModel extends ViewModel {
+public class RegisterStoreOwnerPresenter extends ViewModel {
     private final RegisterRepository registerRepository;
     private final LoginRepository loginRepository;
 
-    RegisterStoreOwnerViewModel(LoginRepository loginRepository, RegisterRepository registerRepository) {
+    RegisterStoreOwnerPresenter(LoginRepository loginRepository, RegisterRepository registerRepository) {
         this.loginRepository = loginRepository;
         this.registerRepository = registerRepository;
     }

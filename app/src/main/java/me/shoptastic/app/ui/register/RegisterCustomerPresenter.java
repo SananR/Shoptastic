@@ -15,12 +15,12 @@ import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
 
-public class RegisterCustomerViewModel extends ViewModel {
+public class RegisterCustomerPresenter extends ViewModel {
 
     private final RegisterRepository registerRepository;
     private final LoginRepository loginRepository;
 
-    RegisterCustomerViewModel(LoginRepository loginRepository, RegisterRepository registerRepository) {
+    RegisterCustomerPresenter(LoginRepository loginRepository, RegisterRepository registerRepository) {
         this.loginRepository = loginRepository;
         this.registerRepository = registerRepository;
     }
