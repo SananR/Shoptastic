@@ -1,4 +1,4 @@
-package me.shoptastic.app.data;
+package me.shoptastic.app.data.register;
 
 import android.util.Log;
 
@@ -8,6 +8,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
+import me.shoptastic.app.data.LoginRepository;
+import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.User;
 
@@ -30,11 +32,9 @@ public class RegisterDataSource {
                     else child = "owners";
                     dRef.child(child).child(user.getUUID().toString()).setValue(user);
                     LoginRepository.getInstance().setLoggedInUser(user);
-                    Log.d("TEST", "Success");
                 } else {
-                    //TODOs
+                    //TODO
                     Log.d("TEST", task.getException().getMessage());
-                    Log.d("TEST", user.getEmail());
                 }
             });
             if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
