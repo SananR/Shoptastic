@@ -1,7 +1,6 @@
 package me.shoptastic.app.ui.register;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,10 +9,15 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.RegisterRepository;
-import me.shoptastic.app.data.model.Customer;
+import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 
-public class RegisterCustomerActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
+
+    private RegisterPresenter presenter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +39,16 @@ public class RegisterCustomerActivity extends AppCompatActivity {
         final EditText password = findViewById(R.id.editTextTextPassword);
         final CheckBox checkBox = findViewById(R.id.checkBox);
         if (!checkBox.isChecked()) {
-            Customer c = new Customer(email.getText().toString(), name.getText().toString(), phone.getText().toString());
-            RegisterRepository.getInstance().register(c, password.toString());
-            Log.d("WHAT", c.getEmail());
+            presenter = new RegisterCustomerPresenter();
+            Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.toString());
+            if (r instanceof Result.Success) {
+
+            } else {
+                //TODO Update UI with error
+            }
         } else {
+            //TODO Need some changes to architecture to support this
+           // presenter = new RegisterOwnerPresenter();
 
         }
     }

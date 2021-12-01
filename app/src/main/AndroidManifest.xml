@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shoptastic" >
         <activity
-            android:name=".ui.register.RegisterCustomerActivity"
+            android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".SProducts"

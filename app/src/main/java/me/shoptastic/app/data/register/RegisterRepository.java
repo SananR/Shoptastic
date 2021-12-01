@@ -1,5 +1,6 @@
-package me.shoptastic.app.data;
+package me.shoptastic.app.data.register;
 
+import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.User;
 
 public class RegisterRepository {
