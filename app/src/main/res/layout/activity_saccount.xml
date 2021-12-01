@@ -101,14 +101,12 @@
         android:layout_width="141dp"
         android:layout_height="136dp"
         android:layout_marginStart="109dp"
-        android:layout_marginLeft="109dp"
         android:layout_marginTop="133dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginRight="161dp"
+        android:layout_marginEnd="119dp"
         android:layout_marginBottom="49dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/DefaultProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
