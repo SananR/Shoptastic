@@ -29,10 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.button_register);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("TEST", "1");
                 register(v);
-                Log.d("TEST", "2");
-
             }
         });
 
