@@ -31,6 +31,8 @@ public abstract class User {
         return displayName;
     }
 
+    public String getPhone() { return phone; }
+
     public UUID getUUID() { return uuid; }
 
     public abstract ArrayList<Order> getOrders();
