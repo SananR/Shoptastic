@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "174816579728",
+    "project_number": "860556998395",
+    "firebase_url": "https://shoptastic-1a860-default-rtdb.firebaseio.com",
     "project_id": "shoptastic-1a860",
-    "storage_bucket": "shoptastic-6670d.appspot.com"
+    "storage_bucket": "shoptastic-1a860.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:174816579728:android:a22b92399ac246cb34c815",
+        "mobilesdk_app_id": "1:860556998395:android:7f5e3387139c176f73625e",
         "android_client_info": {
           "package_name": "me.shoptastic.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "174816579728-skpmofj0712bjg9rdn3st35ha3921nvb.apps.googleusercontent.com",
+          "client_id": "860556998395-k5sgvuk57uafbf153gm1hnigclvtpit2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA100RetZ-Lkg9NTAx7xO4h9k9SfKOhCQY"
+          "current_key": "AIzaSyDSpRSSku6GJXeiKkwQVZDfT0RftCVNKsg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "174816579728-skpmofj0712bjg9rdn3st35ha3921nvb.apps.googleusercontent.com",
+              "client_id": "860556998395-k5sgvuk57uafbf153gm1hnigclvtpit2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
