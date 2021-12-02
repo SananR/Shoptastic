@@ -10,35 +10,53 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.RegisterRepository;
-import me.shoptastic.app.data.model.Customer;
+import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Resources;
+import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 
-public class RegisterCustomerActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
+
+    private RegisterPresenter presenter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Resources.setContext(this);
         setContentView(R.layout.activity_register);
         Button button = (Button) findViewById(R.id.button_register);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.d("TEST", "1");
                 register(v);
+                Log.d("TEST", "2");
+
             }
         });
 
     }
 
     public void register(View v) {
+        Log.d("TEST", "3");
         final EditText name = findViewById(R.id.editTextTextPersonName);
         final EditText email = findViewById(R.id.editTextTextEmailAddress);
         final EditText phone = findViewById(R.id.editTextPhone);
         final EditText password = findViewById(R.id.editTextTextPassword);
         final CheckBox checkBox = findViewById(R.id.checkBox);
         if (!checkBox.isChecked()) {
-            Customer c = new Customer(email.getText().toString(), name.getText().toString(), phone.getText().toString());
-            RegisterRepository.getInstance().register(c, password.toString());
-            Log.d("WHAT", c.getEmail());
+            presenter = new RegisterCustomerPresenter();
+            Log.d("TEST", "4");
+            Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.toString());
+            if (r instanceof Result.Success) {
+
+            } else {
+                //TODO Update UI with error
+            }
         } else {
+            //TODO Need some changes to architecture to support this
+           // presenter = new RegisterOwnerPresenter();
 
         }
     }
