@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="owner_postProduct"
-    android:background="@drawable/img11">
+    tools:context="owner_postProduct">
 
     <ImageButton
         android:id="@+id/image_upload"
@@ -37,7 +36,7 @@
             android:layout_height="30dp"
             android:id="@+id/textView"
             android:text="Name"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginLeft="5dp"
             android:textSize="18sp" />
 
@@ -54,8 +53,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/description"
-        android:textColorHint="@color/white"
+        android:id="@+id/ID"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_layout"
@@ -66,9 +65,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description"
+            android:hint="ID"
             android:inputType="text"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,10 +76,10 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/Quantity"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/ID"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.053"
         app:layout_constraintHorizontal_bias="0.53">
@@ -99,7 +98,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/price"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Quantity"
@@ -121,7 +120,7 @@
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:id="@+id/post"
-        android:background="@drawable/btnred"
+        android:background="@drawable/btngreen"
         app:layout_constraintTop_toBottomOf="@id/price"
         android:text="Post"
         android:textColor="@color/white"
