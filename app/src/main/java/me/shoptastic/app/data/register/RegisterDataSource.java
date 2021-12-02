@@ -32,6 +32,7 @@ public class RegisterDataSource {
                     else child = "owners";
                     dRef.child(child).child(user.getUUID().toString()).setValue(user);
                     LoginRepository.getInstance().setLoggedInUser(user);
+                    Log.d("TEST", "Success");
                 } else {
                     //TODO
                     Log.d("TEST", task.getException().getMessage());
