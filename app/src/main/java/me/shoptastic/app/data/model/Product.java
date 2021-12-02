@@ -8,12 +8,10 @@ public class Product {
     Integer Id;
     Integer Price;
     String description;
-    Bitmap image;
 
-    public Product(String name, String description, Bitmap image, Integer Price, Integer Id) {
+    public Product(String name, String description, Integer Price, Integer Id) {
         product_name = name;
         this.description = description;
-        this.image = image;
         this.Id = Id;
         this.Price = Price;
     }
