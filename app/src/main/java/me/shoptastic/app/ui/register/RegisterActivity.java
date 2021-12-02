@@ -1,6 +1,7 @@
 package me.shoptastic.app.ui.register;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
@@ -22,17 +24,22 @@ public class RegisterActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Resources.setContext(this);
         setContentView(R.layout.activity_register);
         Button button = (Button) findViewById(R.id.button_register);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.d("TEST", "1");
                 register(v);
+                Log.d("TEST", "2");
+
             }
         });
 
     }
 
     public void register(View v) {
+        Log.d("TEST", "3");
         final EditText name = findViewById(R.id.editTextTextPersonName);
         final EditText email = findViewById(R.id.editTextTextEmailAddress);
         final EditText phone = findViewById(R.id.editTextPhone);
@@ -40,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         final CheckBox checkBox = findViewById(R.id.checkBox);
         if (!checkBox.isChecked()) {
             presenter = new RegisterCustomerPresenter();
+            Log.d("TEST", "4");
             Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.toString());
             if (r instanceof Result.Success) {
 
