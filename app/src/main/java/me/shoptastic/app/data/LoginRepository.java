@@ -49,4 +49,8 @@ public class LoginRepository {
         }
         return result;
     }
+
+    public User getUser(){
+        return user;
+    };
 }
