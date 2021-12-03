@@ -1,5 +1,6 @@
 package me.shoptastic.app.data.register.presenter;
 
+import android.util.Log;
 import android.util.Patterns;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public abstract class RegisterPresenter {
      * Validates username
      */
     protected boolean validateName(String name) {
-        return true;
+        return name.length() >= 3;
     }
 
     /**
@@ -41,14 +42,18 @@ public abstract class RegisterPresenter {
     protected Result<Boolean> validatePassword(String password) {
         Integer password_min_length = Resources.getInteger(R.integer.password_min_length);
         String[] special_characters = Resources.getStringArray(R.array.special_symbols);
-        if (password.length() < R.integer.password_min_length) return new
-                Result.Error(new IllegalArgumentException("Invalid password"),
-                String.format(Locale.CANADA, "Password must be longer than %d",
-                        password_min_length));
-        if (!Arrays.stream(special_characters).anyMatch(password::contains)) return new
-                Result.Error(new IllegalArgumentException("Invalid password"),
-                String.format(Locale.CANADA, "Password must contain one of %s",
-                        String.join(" ", special_characters)));
+        if (password == null || password.length() < password_min_length) {
+            return new
+                    Result.Error(new IllegalArgumentException("Invalid password"),
+                    String.format(Locale.CANADA, "Password must be longer than %d",
+                            password_min_length));
+        }
+//        if (!Arrays.stream(special_characters).anyMatch(password::contains)) {
+//            return new
+//                    Result.Error(new IllegalArgumentException("Invalid password"),
+//                    String.format(Locale.CANADA, "Password must contain one of %s",
+//                            String.join(" ", special_characters)));
+//        }
 
         return new Result.Success<Boolean>(true);
 

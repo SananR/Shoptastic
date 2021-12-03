@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Resources;
@@ -35,17 +37,30 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    public void error(boolean name, boolean email, boolean phone, boolean password) {
+        TextInputLayout tilEmail = (TextInputLayout) findViewById(R.id.tilEmail);
+        TextInputLayout tilName = (TextInputLayout) findViewById(R.id.tilName);
+        TextInputLayout tilPhone = (TextInputLayout) findViewById(R.id.tilPhone);
+        TextInputLayout tilPass = (TextInputLayout) findViewById(R.id.tilPassword);
+        if (name) tilName.setError(Resources.getString(R.string.register_invalid_name));
+        else tilName.setErrorEnabled(false);
+        if (email) tilEmail.setError(Resources.getString(R.string.register_invalid_email));
+        else tilEmail.setErrorEnabled(false);
+        if (phone) tilPhone.setError(Resources.getString(R.string.register_invalid_phone));
+        else tilPhone.setErrorEnabled(false);
+        if (password) tilPass.setError(Resources.getString(R.string.register_invalid_password));
+        else tilPass.setErrorEnabled(false);
+    }
+
     public void register(View v) {
-        Log.d("TEST", "3");
         final EditText name = findViewById(R.id.editTextTextPersonName);
         final EditText email = findViewById(R.id.editTextTextEmailAddress);
         final EditText phone = findViewById(R.id.editTextPhone);
         final EditText password = findViewById(R.id.editTextTextPassword);
         final CheckBox checkBox = findViewById(R.id.checkBox);
         if (!checkBox.isChecked()) {
-            presenter = new RegisterCustomerPresenter();
-            Log.d("TEST", "4");
-            Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.toString());
+            presenter = new RegisterCustomerPresenter(this);
+            Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString());
             if (r instanceof Result.Success) {
 
             } else {
