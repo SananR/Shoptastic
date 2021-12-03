@@ -22,7 +22,7 @@ public class RegisterRepository {
     }
 
 
-    public Result<User> register(User user, String password) {
+    public Result register(User user, String password) {
         // handle register
         return dataSource.register(user, password);
     }

@@ -22,7 +22,7 @@ public class RegisterDataSource {
         dRef = FirebaseDatabase.getInstance().getReference();
     }
 
-    public Result<User> register(User user, String password) {
+    public Result register(User user, String password) {
         try {
             fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
