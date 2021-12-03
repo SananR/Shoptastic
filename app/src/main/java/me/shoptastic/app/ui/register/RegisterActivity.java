@@ -9,9 +9,14 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashSet;
+
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Resources;
+import me.shoptastic.app.data.model.Store;
+import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
@@ -19,6 +24,7 @@ import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 public class RegisterActivity extends AppCompatActivity {
 
     private RegisterPresenter presenter;
+    StoreOwner storeOwner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     public void register(View v) {
         Log.d("TEST", "3");
@@ -52,8 +60,9 @@ public class RegisterActivity extends AppCompatActivity {
                 //TODO Update UI with error
             }
         } else {
-            //TODO Need some changes to architecture to support this
-           // presenter = new RegisterOwnerPresenter();
+            HashSet<Product> p = new HashSet<Product>();
+            Store s = new Store("A", "A", p);
+            storeOwner = new StoreOwner(name.getText().toString(), email.getText().toString(), phone.getText().toString(), s);
 
         }
     }
