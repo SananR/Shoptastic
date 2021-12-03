@@ -8,40 +8,62 @@ import java.util.Locale;
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.model.User;
 
 public abstract class RegisterPresenter {
 
-    public abstract Result<User> register(String name, String email, String phone, String password);
+    public abstract void register();
 
     /**
      * Validates username
      */
-    protected boolean validateName(String name) {
-        return true;
+    protected Result validateName(String name) {
+        return new Result.Success<>(true);
     }
 
     /**
      * validates user email
      */
-    protected boolean validateEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    protected Result validateEmail(String email) {
+        if (Patterns.EMAIL_ADDRESS == null) {
+            return new Result.Success<>(true);
+        }
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Invalid Email"), "Email not valid");
+        }
     }
 
     /**
      * validates phone
      */
-    protected boolean validatePhone(String phone) {
-        return Patterns.PHONE.matcher(phone).matches();
+    protected Result validatePhone(String phone) {
+        if (Patterns.PHONE == null) {
+            return new Result.Success<>(true);
+        }
+        if (Patterns.PHONE.matcher(phone).matches()) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Invalid phone"), "Phone not valid");
+        }
     }
 
     /**
      * validates password
      */
-    protected Result<Boolean> validatePassword(String password) {
-        Integer password_min_length = Resources.getInteger(R.integer.password_min_length);
-        String[] special_characters = Resources.getStringArray(R.array.special_symbols);
-        if (password.length() < R.integer.password_min_length) return new
+    protected Result validatePassword(String password) {
+        Integer password_min_length;
+        String[] special_characters;
+        try {
+            password_min_length = Resources.getInteger(R.integer.password_min_length);
+            special_characters = Resources.getStringArray(R.array.special_symbols);
+        } catch (NullPointerException e) {
+            password_min_length = 8;
+            special_characters = new String[]{"#", "%"};
+        }
+
+
+        if (password.length() < password_min_length) return new
                 Result.Error(new IllegalArgumentException("Invalid password"),
                 String.format(Locale.CANADA, "Password must be longer than %d",
                         password_min_length));

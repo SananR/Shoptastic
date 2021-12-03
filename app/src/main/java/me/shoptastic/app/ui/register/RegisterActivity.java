@@ -1,30 +1,26 @@
 package me.shoptastic.app.ui.register;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashSet;
-
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.Result;
-import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.model.Store;
-import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
-import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private RegisterPresenter presenter;
-    StoreOwner storeOwner;
+    public static String name = "name";
+    public static String email = "email";
+    public static String phone = "phone";
+    public static String password = "password";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,29 +37,40 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    public String getName() {
+        return ((EditText) findViewById(R.id.editTextTextPersonName)).getText().toString();
+    }
 
+    public String getEmail() {
+        return ((EditText) findViewById(R.id.editTextTextEmailAddress)).getText().toString();
+    }
+
+    public String getPhone() {
+        return ((EditText) findViewById(R.id.editTextPhone)).getText().toString();
+    }
+
+    public String getPassword() {
+        return ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
+    }
 
     public void register(View v) {
-        Log.d("TEST", "3");
-        final EditText name = findViewById(R.id.editTextTextPersonName);
-        final EditText email = findViewById(R.id.editTextTextEmailAddress);
-        final EditText phone = findViewById(R.id.editTextPhone);
-        final EditText password = findViewById(R.id.editTextTextPassword);
-        final CheckBox checkBox = findViewById(R.id.checkBox);
-        if (!checkBox.isChecked()) {
-            presenter = new RegisterCustomerPresenter();
-            Log.d("TEST", "4");
-            Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.toString());
-            if (r instanceof Result.Success) {
-
-            } else {
-                //TODO Update UI with error
-            }
+        final boolean checkBox = ((CheckBox) findViewById(R.id.checkBox)).isChecked();
+        RegisterCustomerPresenter presenter = new RegisterCustomerPresenter(this);
+        if (!checkBox) {
+            presenter.register();
         } else {
-            HashSet<Product> p = new HashSet<Product>();
-            Store s = new Store("A", "A", p);
-            storeOwner = new StoreOwner(name.getText().toString(), email.getText().toString(), phone.getText().toString(), s);
-
+            if (presenter.validate(getName(), getEmail(), getPhone(), getPassword())) {
+                Intent intent = new Intent(this, RegisterStoreActivity.class);
+                intent.putExtra(RegisterActivity.name, getName());
+                intent.putExtra(RegisterActivity.email, getEmail());
+                intent.putExtra(RegisterActivity.phone, getPhone());
+                intent.putExtra(RegisterActivity.password, getPassword());
+                startActivity(intent);
+            }
         }
+    }
+
+    public void showErrorMsg(String errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }
