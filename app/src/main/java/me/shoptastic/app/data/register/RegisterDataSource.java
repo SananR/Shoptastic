@@ -16,17 +16,14 @@ import me.shoptastic.app.data.model.User;
 public class RegisterDataSource {
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
-    private final DatabaseReference ARef;
 
     public RegisterDataSource() {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference();
-        ARef = FirebaseDatabase.getInstance().getReference("Hi");
     }
 
     public Result<User> register(User user, String password) {
         try {
-            ARef.setValue("Hey!");
             fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     //Registration successful
