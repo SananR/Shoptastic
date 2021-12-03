@@ -2,6 +2,7 @@ package me.shoptastic.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import me.shoptastic.app.data.register.ProductDataSource;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_register);
         Intent i = new Intent(this, RegisterActivity.class);
+        ProductDataSource productDataSource = new ProductDataSource();
+        productDataSource.addtodatabase();
         startActivity(i);
     }
 
