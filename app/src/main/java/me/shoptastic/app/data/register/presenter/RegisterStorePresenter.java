@@ -1,48 +1,56 @@
 package me.shoptastic.app.data.register.presenter;
-import android.widget.EditText;
 
 import java.util.HashSet;
 
-import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.StoreRepository;
 import me.shoptastic.app.data.model.Product;
-import me.shoptastic.app.data.model.StoreOwner;
-import me.shoptastic.app.data.model.User;
 import me.shoptastic.app.data.model.Store;
-import me.shoptastic.app.ui.register.RegisterActivity;
 import me.shoptastic.app.ui.register.RegisterStoreActivity;
 
-public class RegisterStorePresenter extends RegisterPresenter {
+public class RegisterStorePresenter {
 
     private final StoreRepository storeRepository;
+    private final RegisterStoreActivity activity;
 
-    public RegisterStorePresenter() {
+    public RegisterStorePresenter(RegisterStoreActivity activity) {
         this.storeRepository = StoreRepository.getInstance();
+        this.activity = activity;
     }
 
-    @Override
-    public Result<User> register(String name, String email, String phone, String password) {
+    private Result validateStoreName(String storeName) {
+        return new Result.Success<>(true);
+    }
+
+    private Result validateStoreLocation(String location) {
+        return new Result.Success<>(true);
+    }
+
+    public boolean validate(String storeName, String location) {
+        Result[] results = {validateStoreName(storeName), validateStoreLocation(location)};
+        for (Result result :
+                results) {
+            if (result instanceof Result.Error) {
+                activity.showErrorMsg(((Result.Error) result).getError());
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void register() {
+        String name = activity.getStoreName();
+        String location = activity.getLocation();
+        if (!validate(name, location)) {
+            return;
+        }
         // TODO Update UI
-        if (!validateName(name)) {
-
-
-        }
-        if (!validateEmail(email)) {
-
-        }
-        if (!validatePhone(phone)) {
-
-        }
-        if (validatePassword(password) instanceof Result.Error) {
-
-        }
-
         // can be launched in a separate asynchronous job
-        HashSet<Product> p = new HashSet<Product>();
-        Store store = new Store(name, RegisterStoreActivity.storeLocation, p);
-        Result<User> result = storeRepository.register(new StoreOwner(RegisterStoreActivity.storeOwnerEmail, RegisterStoreActivity.storeOwnerName, phone, store), store, password);
-        return result;
+        Store store = new Store(name, location, new HashSet<Product>());
+        Result result = storeRepository.register(store);
+        if (result instanceof Result.Error) {
+            activity.showErrorMsg(((Result.Error) result).getError());
+        }
     }
 
 }
