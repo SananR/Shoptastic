@@ -28,7 +28,7 @@ public class RegisterOwnerPresenter {
         // can be launched in a separate asynchronous job
         Result<User> result = registerRepository.register(
                 new StoreOwner(email, name, phone,
-                        new Store(storeName, address, Image, new HashSet<>())),
+                        new Store(storeName, address, new HashSet<>())),
                 password);
 
         if (result instanceof Result.Success) {

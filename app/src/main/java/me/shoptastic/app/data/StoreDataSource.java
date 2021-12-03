@@ -1,4 +1,5 @@
-package me.shoptastic.app.data.register;
+package me.shoptastic.app.data;
+
 
 import android.util.Log;
 
@@ -8,40 +9,39 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
-import me.shoptastic.app.data.LoginRepository;
-import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
+import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.data.model.Store;
+import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
-public class RegisterDataSource {
+public class StoreDataSource {
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
 
-    public RegisterDataSource() {
+    public StoreDataSource() {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference();
     }
 
-    public Result<User> register(User user, String password) {
+    public Result<User> register(StoreOwner user, Store store, String password) {
         try {
             fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     //Registration successful
                     String child;
-                    if (user instanceof Customer) child = "users";
-                    else child = "owners";
-                    dRef.child(child).child(user.getUUID().toString()).setValue(user);
+                    child = "stores";
+                    dRef.child(child).child(user.getUUID().toString()).setValue(store);
                     LoginRepository.getInstance().setLoggedInUser(user);
-                    Log.d("TEST", "Success");
                 } else {
                     //TODO
                     Log.d("TEST", task.getException().getMessage());
                 }
             });
-            if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
-            else return new Result.Error(new IOException("Error creating Firebase user"));
+            if (fAuth.getCurrentUser() != null) return new Result.Success<>(store);
+            else return new Result.Error(new IOException("Error creating Firebase store"));
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error registering new user", e));
+            return new Result.Error(new IOException("Error registering new store", e));
         }
     }
 }

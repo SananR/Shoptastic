@@ -7,7 +7,7 @@
     tools:context=".SAccount">
 
     <EditText
-        android:id="@+id/editTextTextPersonName9"
+        android:id="@+id/storephoneNumber"
         android:layout_width="192dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.562" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName10"
+        android:id="@+id/storeEmail"
         android:layout_width="192dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.654" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName11"
+        android:id="@+id/storePassword"
         android:layout_width="192dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -52,7 +52,7 @@
         app:layout_constraintVertical_bias="0.75" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName12"
+        android:id="@+id/storeName"
         android:layout_width="192dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.841" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName13"
+        android:id="@+id/storeLocation"
         android:layout_width="192dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.935" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName14"
+        android:id="@+id/storeownerName"
         android:layout_width="192dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -101,14 +101,12 @@
         android:layout_width="141dp"
         android:layout_height="136dp"
         android:layout_marginStart="109dp"
-        android:layout_marginLeft="109dp"
         android:layout_marginTop="133dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginRight="161dp"
+        android:layout_marginEnd="119dp"
         android:layout_marginBottom="49dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName14"
+        app:layout_constraintBottom_toTopOf="@+id/storeownerName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/DefaultProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>

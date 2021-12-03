@@ -27,6 +27,10 @@ public abstract class User {
         return email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public String getDisplayName() {
         return displayName;
     }

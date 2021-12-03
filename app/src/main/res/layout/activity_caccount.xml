@@ -70,15 +70,14 @@
         android:id="@+id/imageView3"
         android:layout_width="177dp"
         android:layout_height="168dp"
-        android:layout_marginStart="97dp"
-        android:layout_marginLeft="97dp"
         android:layout_marginTop="142dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginRight="137dp"
+        android:layout_marginEnd="119dp"
         android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@drawable/DefaultProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
