@@ -31,7 +31,7 @@ public class LoginDataSource {
     }
 
     public Result<User> login(String email, String password) {
-        boolean value = false;
+        final boolean[] value = {false};
         try {
             fAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -40,25 +40,25 @@ public class LoginDataSource {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Test", "signInWithEmail:success");
-                                FirebaseUser user = fAuth.getCurrentUser();
-                                user.
-                                value = true;
+                                //FirebaseUser user = fAuth.getCurrentUser();
+                                value[0] = true;
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("Test", "signInWithEmail:failure", task.getException());
-                                value = false;
+                                value[0] = false;
                             }
                         }
                     });
             // get the values from the firebase check if that user is store ownwer as they will have a key of "store"
             // then pass on these values in the user
-
+            FirebaseUser user = fAuth.getCurrentUser();
             // create presenter and then presenter will take them to the sign in page
-            if (value) return new Result.Success<>(user);
+            if (value[0]) return new Result.Success<>(user);
             else return new Result.Error(new IOException("Error signing in the user"));
         } catch (Exception e) {
             return new Result.Error(new IOException("Error signing in", e));
         }
+    }
 
         public void logout(){
             // TODO: revoke authentication
