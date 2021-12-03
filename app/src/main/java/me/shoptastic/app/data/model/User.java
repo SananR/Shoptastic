@@ -1,6 +1,7 @@
 package me.shoptastic.app.data.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
@@ -35,7 +36,22 @@ public abstract class User {
         return displayName;
     }
 
-    public UUID getUUID() { return uuid; }
+    public UUID getUUID() {
+        return uuid;
+    }
 
     public abstract ArrayList<Order> getOrders();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email.equals(user.email) && phone.equals(user.phone) && displayName.equals(user.displayName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, phone, displayName);
+    }
 }
