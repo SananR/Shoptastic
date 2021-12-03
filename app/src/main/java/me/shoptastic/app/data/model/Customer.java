@@ -8,7 +8,7 @@ public class Customer extends User {
     }
 
     @Override
-    public ArrayList<Order> getOrders() {
+    public ArrayList<Product> getOrder() {
         return null;
     }
 

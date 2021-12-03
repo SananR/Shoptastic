@@ -24,6 +24,8 @@
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2833190703639564" />
         <entry key="app/src/main/res/layout/activity_sproducts.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_stores.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/viewholder_cart.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/viewholder_products.xml" value="0.2953125" />
       </map>
     </option>
   </component>

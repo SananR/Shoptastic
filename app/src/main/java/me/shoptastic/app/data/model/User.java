@@ -33,5 +33,5 @@ public abstract class User {
 
     public UUID getUUID() { return uuid; }
 
-    public abstract ArrayList<Order> getOrders();
+    public abstract ArrayList<Product> getOrder();
 }
