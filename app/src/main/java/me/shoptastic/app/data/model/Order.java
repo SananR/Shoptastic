@@ -11,7 +11,7 @@ public class Order {
         boolean existAlready = false;
         int n = 0;
         for(int i = 0; i < listProduct.size(); i ++){
-            if(listProduct.get(i).Id == (product.Id)){
+            if(listProduct.get(i).getId() == (product.getId())){
                 existAlready = true;
                 n = i;
                 break;
@@ -23,14 +23,20 @@ public class Order {
     }
 
     public ArrayList<Product> getListCart(){
-        return new ArrayList<Product>();
+        //Testing(demo)
+        Product p1 = new Product("Pizza", "delicous", 1, 1);
+        Product p2 = new Product("Apple", "fresh", 1,2);
+        ArrayList<Product> anOrder = new ArrayList<Product>();
+        anOrder.add(p1);
+        anOrder.add(p2);
+        return anOrder;
     }
 /*
     public void plusNumberFood(ArrayList<Product> listProduct, int position, ){
 
     }
     */
- */
+
 
     public int getSumPrice(){
         ArrayList<Product> listProduct2 = getListCart();

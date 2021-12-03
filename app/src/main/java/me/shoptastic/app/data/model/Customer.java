@@ -9,7 +9,7 @@ public class Customer extends User {
 
     @Override
     public ArrayList<Product> getOrder() {
-        return null;
+        return this.anOrder;
     }
 
 }
