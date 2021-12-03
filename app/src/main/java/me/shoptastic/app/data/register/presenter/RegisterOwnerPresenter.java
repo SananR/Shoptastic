@@ -1,4 +1,4 @@
-package me.shoptastic.app.ui.register;
+package me.shoptastic.app.data.register.presenter;
 
 import android.graphics.Bitmap;
 
@@ -7,19 +7,20 @@ import androidx.lifecycle.ViewModel;
 import java.util.HashSet;
 
 import me.shoptastic.app.data.LoginRepository;
-import me.shoptastic.app.data.RegisterRepository;
+import me.shoptastic.app.data.register.RegisterRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
-public class RegisterStoreOwnerPresenter extends ViewModel {
+public class RegisterOwnerPresenter {
+
     private final RegisterRepository registerRepository;
     private final LoginRepository loginRepository;
 
-    RegisterStoreOwnerPresenter(LoginRepository loginRepository, RegisterRepository registerRepository) {
-        this.loginRepository = loginRepository;
-        this.registerRepository = registerRepository;
+    public RegisterOwnerPresenter() {
+        this.loginRepository = LoginRepository.getInstance();
+        this.registerRepository = RegisterRepository.getInstance();
     }
 
 

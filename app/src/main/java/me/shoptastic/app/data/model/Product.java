@@ -8,19 +8,17 @@ public class Product {
     Integer Id;
     Integer Price;
     String description;
-    Bitmap image;
 
-    public Product(String name, String description, Bitmap image, Integer Price, Integer Id) {
+    public Product(String name, String description, Integer Price, Integer Id) {
         product_name = name;
         this.description = description;
-        this.image = image;
         this.Id = Id;
         this.Price = Price;
     }
-    public Integer ID(Product p){ return p.Id;}
-    public Integer price(Product p){ return p.Price;}
-    public void changePrice(Product p, int Price){ p.Price = Price;}
-    public void changeDescription(Product p, String description){ p.description = description;}
+    public Integer ID(){ return this.Id;}
+    public Integer price(){ return this.Price;}
+    public void changePrice(int Price){ this.Price = Price;}
+    public void changeDescription(String description){ this.description = description;}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
