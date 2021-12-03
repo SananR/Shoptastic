@@ -8,12 +8,10 @@ public class Product {
     Integer Id;
     Integer Price;
     String description;
-    Bitmap image;
 
-    public Product(String name, String description, Bitmap image, Integer Price, Integer Id) {
+    public Product(String name, String description, Integer Price, Integer Id) {
         product_name = name;
         this.description = description;
-        this.image = image;
         this.Id = Id;
         this.Price = Price;
     }
@@ -25,7 +23,7 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-       Product product = (Product) o;
+        Product product = (Product) o;
         return Id.equals(product.Id);
     }
 
