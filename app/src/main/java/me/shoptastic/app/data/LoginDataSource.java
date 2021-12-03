@@ -64,5 +64,4 @@ public class LoginDataSource {
             // TODO: revoke authentication
             FirebaseAuth.getInstance().signOut();
         }
-    }
 }
