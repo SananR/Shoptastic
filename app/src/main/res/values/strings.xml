@@ -10,4 +10,8 @@
     <string name="invalid_password">Invalid password!</string>
     <string name="login_failed">"Login failed"</string>
     <string name="register_failed">"Registration failed"</string>
+    <string name="register_invalid_name">"Name must be at least 3 characters long."</string>
+    <string name="register_invalid_email">"Please enter a valid email address."</string>
+    <string name="register_invalid_phone">"Please enter a valid phone number."</string>
+    <string name="register_invalid_password">"Password must be a minimum of 8 characters long."</string>
 </resources>
