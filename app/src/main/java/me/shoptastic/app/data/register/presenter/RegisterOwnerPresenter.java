@@ -2,14 +2,14 @@ package me.shoptastic.app.data.register.presenter;
 
 import android.content.Intent;
 
-import me.shoptastic.app.OwnerRegisterActivity;
-import me.shoptastic.app.StoresActivity;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.ui.OwnerRegisterActivity;
+import me.shoptastic.app.ui.StoresActivity;
 
 public class RegisterOwnerPresenter extends RegisterStorePresenter {
 

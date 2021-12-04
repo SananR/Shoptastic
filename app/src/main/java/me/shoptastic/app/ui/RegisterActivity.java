@@ -1,4 +1,4 @@
-package me.shoptastic.app.ui.register;
+package me.shoptastic.app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,16 +7,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputLayout;
 
-import me.shoptastic.app.OwnerRegisterActivity;
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends Activity {
 
     public static String name = "me.shoptastic.app.name";
     public static String email = "me.shoptastic.app.email";
@@ -30,13 +27,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         Resources.setContext(this);
         setContentView(R.layout.activity_register);
-
-        Button button = (Button) findViewById(R.id.button_register);
+        Button button = findViewById(R.id.button_register);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 register(v);
             }
         });
+
     }
 
     public String getName() {
@@ -56,10 +53,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void error(String name, String email, String phone, String password) {
-        TextInputLayout tilEmail = (TextInputLayout) findViewById(R.id.tilEmail);
-        TextInputLayout tilName = (TextInputLayout) findViewById(R.id.tilName);
-        TextInputLayout tilPhone = (TextInputLayout) findViewById(R.id.tilPhone);
-        TextInputLayout tilPass = (TextInputLayout) findViewById(R.id.tilPassword);
+        TextInputLayout tilEmail = findViewById(R.id.tilEmail);
+        TextInputLayout tilName = findViewById(R.id.tilName);
+        TextInputLayout tilPhone = findViewById(R.id.tilPhone);
+        TextInputLayout tilPass = findViewById(R.id.tilPassword);
         if (name != null) tilName.setError(name);
         else tilName.setErrorEnabled(false);
         if (email != null) tilEmail.setError(email);

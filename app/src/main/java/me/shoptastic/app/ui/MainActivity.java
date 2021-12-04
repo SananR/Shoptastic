@@ -1,19 +1,14 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.ui.register.RegisterActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Resources.setContext(this);
+        //setContentView(R.layout.activity_register);
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }

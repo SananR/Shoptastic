@@ -16,7 +16,7 @@ import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.register.RegisterRepository;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
-import me.shoptastic.app.ui.register.RegisterActivity;
+import me.shoptastic.app.ui.RegisterActivity;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

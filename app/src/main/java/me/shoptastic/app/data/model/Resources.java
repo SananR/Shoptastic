@@ -4,12 +4,10 @@ import android.content.Context;
 
 import java.lang.ref.WeakReference;
 
-import me.shoptastic.app.R;
-
 public class Resources {
 
     private static WeakReference<Context> context;
-    public static String FireBaseLink = Resources.getString(R.string.firebase_link);
+    public final static String FireBaseLink = "https://shoptastic-1a860-default-rtdb.firebaseio.com/";
 
     public static void setContext(Context context) {
         Resources.context = new WeakReference<>(context.getApplicationContext());

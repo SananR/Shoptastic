@@ -1,16 +1,15 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
-public class Account extends AppCompatActivity {
+public class Account extends Activity {
 
     public static final String NAME = "me.Shoptastic.app.NAME";
     public static final String EMAIL = "me.Shoptastic.app.EMAIL";

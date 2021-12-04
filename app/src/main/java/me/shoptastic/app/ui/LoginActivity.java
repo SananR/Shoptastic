@@ -1,4 +1,4 @@
-package me.shoptastic.app.ui.login;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,13 +7,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private final LoginRepository repository = LoginRepository.getInstance();
 
