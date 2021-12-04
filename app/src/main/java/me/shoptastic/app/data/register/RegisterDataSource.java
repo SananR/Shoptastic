@@ -2,7 +2,12 @@ package me.shoptastic.app.data.register;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -14,19 +19,29 @@ import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.User;
 
 public class RegisterDataSource {
+
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
-    private final DatabaseReference ARef;
 
     public RegisterDataSource() {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference();
-        ARef = FirebaseDatabase.getInstance().getReference("Hi");
+    }
+
+    public boolean isEmailRegistered(String email) {
+        fAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                if (task.isSuccessful()) {
+                    return;
+                }
+            }
+        });
+        return true;
     }
 
     public Result<User> register(User user, String password) {
         try {
-            ARef.setValue("Hey!");
             fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     //Registration successful
@@ -36,9 +51,6 @@ public class RegisterDataSource {
                     dRef.child(child).child(user.getUUID().toString()).setValue(user);
                     LoginRepository.getInstance().setLoggedInUser(user);
                     Log.d("TEST", "Success");
-                } else {
-                    //TODO
-                    Log.d("TEST", task.getException().getMessage());
                 }
             });
             if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);

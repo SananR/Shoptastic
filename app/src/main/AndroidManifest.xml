@@ -28,10 +28,10 @@
             android:name=".Products"
             android:exported="false" />
         <activity
-            android:name=".Stores"
+            android:name=".StoresActivity"
             android:exported="false" />
         <activity
-            android:name=".ShopInfoSignIn"
+            android:name=".OwnerRegisterActivity"
             android:exported="false" />
         <activity
             android:name=".SignIn"

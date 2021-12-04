@@ -1,7 +1,7 @@
 package me.shoptastic.app.ui.register;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import me.shoptastic.app.OwnerRegisterActivity;
 import me.shoptastic.app.R;
+import me.shoptastic.app.StoresActivity;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
-import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -26,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.presenter = new RegisterPresenter(this);
         Resources.setContext(this);
         setContentView(R.layout.activity_register);
         Button button = (Button) findViewById(R.id.button_register);
@@ -58,18 +59,23 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText phone = findViewById(R.id.editTextPhone);
         final EditText password = findViewById(R.id.editTextTextPassword);
         final CheckBox checkBox = findViewById(R.id.checkBox);
-        if (!checkBox.isChecked()) {
-            presenter = new RegisterCustomerPresenter(this);
-            Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString());
-            if (r instanceof Result.Success) {
-
+        Boolean valid = presenter.validateInput(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString());
+        if (valid) {
+            if (!checkBox.isChecked()) {
+                Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString());
+                if (r instanceof Result.Success) {
+                    Intent intent = new Intent(this, StoresActivity.class);
+                    startActivity(intent);
+                }
             } else {
-                //TODO Update UI with error
+                Intent intent = new Intent(this, OwnerRegisterActivity.class);
+                intent.putExtra("me.shoptastic.app.name", name.getText().toString());
+                intent.putExtra("me.shoptastic.app.email", email.getText().toString());
+                intent.putExtra("me.shoptastic.app.phone", phone.getText().toString());
+                intent.putExtra("me.shoptastic.app.password", password.getText().toString());
+                startActivity(intent);
             }
-        } else {
-            //TODO Need some changes to architecture to support this
-           // presenter = new RegisterOwnerPresenter();
-
         }
+
     }
 }
