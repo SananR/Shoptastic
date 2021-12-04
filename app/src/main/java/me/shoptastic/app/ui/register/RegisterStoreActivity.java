@@ -60,7 +60,9 @@ public class RegisterStoreActivity extends AppCompatActivity {
         return new Store(getName(), getLocation(), new HashSet<>());
     }
 
+
     public void register(View v) {
+        final Button logo = findViewById(R.id.button4);
         RegisterStorePresenter storePresenter = new RegisterStorePresenter(this);
         storePresenter.register();
         RegisterOwnerPresenter ownerPresenter = new RegisterOwnerPresenter(this);
@@ -71,5 +73,3 @@ public class RegisterStoreActivity extends AppCompatActivity {
     public void showErrorMsg(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
-
-}

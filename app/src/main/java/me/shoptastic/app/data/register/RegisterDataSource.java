@@ -16,10 +16,23 @@ import me.shoptastic.app.data.model.User;
 public class RegisterDataSource {
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
+    private final DatabaseReference ARef;
 
     public RegisterDataSource() {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference();
+    }
+
+    public boolean isEmailRegistered(String email) {
+        fAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                if (task.isSuccessful()) {
+                    return;
+                }
+            }
+        });
+        return true;
     }
 
     public Result register(User user, String password) {

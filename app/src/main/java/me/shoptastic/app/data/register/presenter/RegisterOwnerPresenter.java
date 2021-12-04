@@ -1,39 +1,39 @@
 package me.shoptastic.app.data.register.presenter;
 
+import android.graphics.Bitmap;
+
+import androidx.lifecycle.ViewModel;
+
+import java.util.HashSet;
+
 import me.shoptastic.app.data.LoginRepository;
+import me.shoptastic.app.data.register.RegisterRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.register.RegisterRepository;
-import me.shoptastic.app.ui.register.RegisterStoreActivity;
 
 public class RegisterOwnerPresenter extends RegisterPresenter {
 
     private final RegisterRepository registerRepository;
     private final LoginRepository loginRepository;
-    private final RegisterStoreActivity activity;
+    private final OwnerRegisterActivity view;
 
-    public RegisterOwnerPresenter(RegisterStoreActivity activity) {
+    public RegisterOwnerPresenter(OwnerRegisterActivity view) {
         this.loginRepository = LoginRepository.getInstance();
         this.registerRepository = RegisterRepository.getInstance();
-        this.activity = activity;
+        this.view = view;
     }
 
-    public boolean validate(String name, String email, String phone, String password) {
-        Result[] res = {validateName(name), validateEmail(email), validatePhone(phone),
-                validatePassword(password)};
-        for (Result result :
-                res) {
-            if (result instanceof Result.Error) {
-                this.activity.showErrorMsg(((Result.Error) result).getError());
-                return false;
-            }
-        }
-        return true;
+    public boolean validateInput() {
+        boolean errorName = false, errorAddress = false;
+        if (!validateStoreName(view)) errorName = true;
+        if (!validateAddress(view)) errorAddress = true;
+        view.error(errorName, errorAddress);
+        return !(errorName || errorAddress);
     }
 
-    @Override
+
     public void register() {
         String name = activity.getName();
         String email = activity.getEmail();
@@ -41,27 +41,40 @@ public class RegisterOwnerPresenter extends RegisterPresenter {
         String password = activity.getPassword();
         Store store = activity.getStore();
 
-        if (!validate(name, email, phone, password)) {
+        if (!p.validateStoreInput(store.getStore_name(), store.getAddress())) {
             return;
         }
-        RegisterStorePresenter p = new RegisterStorePresenter(this.activity);
-        if (!p.validate(store.getStore_name(), store.getAddress())) {
-            return;
-        }
-
         // can be launched in a separate asynchronous job
         Result result = registerRepository.register(
-                new StoreOwner(email, name, phone, store), password);
+                new StoreOwner(email, name, phone,
+                        new Store(storeName, address, Image, new HashSet<>())),
+                password);
 
         if (result instanceof Result.Success) {
             User data = ((Result.Success<User>) result).getData();
             if (data instanceof StoreOwner) {
-                loginRepository.setLoggedInUser(data);
+                loginRepository.login(data.getEmail(), "");
+                return result;
             } else {
                 throw new RuntimeException("Registered a store owner and got a customer back.");
             }
         } else {
-            this.activity.showErrorMsg(((Result.Error) result).getError());
+            return result;
         }
     }
+
+    /**
+     * Validates store name
+     */
+    public boolean validateStoreName(String name) {
+        return true;
+    }
+
+    /**
+     * Validates store address
+     */
+    public boolean validateAddress(String address) {
+        return return address.length() >= 5;
+    }
+
 }

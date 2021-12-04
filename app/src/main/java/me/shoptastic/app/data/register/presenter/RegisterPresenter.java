@@ -7,17 +7,51 @@ import java.util.Locale;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
+import me.shoptastic.app.data.model.User;
+public class RegisterPresenter {
 
-public abstract class RegisterPresenter {
+    private final RegisterActivity view;
+    private final RegisterRepository repo;
 
-    public abstract void register();
+    public RegisterPresenter(RegisterActivity view) {
+        this.view = view;
+        this.repo = RegisterRepository.getInstance();
+    }
+    public RegisterPresenter() {
+        this.view = null;
+        this.repo = RegisterRepository.getInstance();
+    }
+
+    public Result<User> register(String name, String email, String phone, String password) {
+        // can be launched in a separate asynchronous job
+        if (validateInput(name, email, phone, password)) {
+            Result<User> result = repo.register(new Customer(email, name, phone), password);
+            return result;
+        } return new Result.Error(new IllegalArgumentException("User input error"));
+    }
+
+    public boolean validateInput(String name, String email, String phone, String password) {
+        boolean errorName = false, errorEmail = false, errorPhone = false, errorPassword = false;
+        if (!validateName(name)) errorName = true;
+        if (!validateEmail(email)) errorEmail = true;
+        if (!validatePhone(phone)) errorPhone = true;
+        if (validatePassword(password) instanceof Result.Error) errorPassword = true;
+        if (errorName || errorEmail || errorPhone || errorPassword) {
+            view.error(errorName, errorEmail, errorPhone, errorPassword);
+            return false;
+        } else {
+            view.error(false, false, false, false);
+            return true;
+        }
+    }
 
     /**
      * Validates username
      */
-    protected Result validateName(String name) {
-        return new Result.Success<>(true);
+    protected boolean validateName(String name) {
+        return name.length() >= 3;
     }
 
     /**
