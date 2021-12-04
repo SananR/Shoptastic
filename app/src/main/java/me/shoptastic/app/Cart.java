@@ -1,13 +1,13 @@
 package me.shoptastic.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import me.shoptastic.app.data.model.Order;
 
@@ -25,7 +25,7 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        order = new Order(this);
+        order = new Order();
 
         initView();
         initList();
@@ -36,11 +36,10 @@ public class Cart extends AppCompatActivity {
         recyclerViewList.setLayoutManager(linearLayoutManager);
         //adapter =
                 recyclerViewList.setAdapter(adapter);
-        if(Order.getListCart().isEmpty()){
+        if (order.getListCart().isEmpty()) {
             emptyTxt.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             emptyTxt.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }

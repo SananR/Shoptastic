@@ -3,12 +3,10 @@ package me.shoptastic.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.shoptastic.app.data.LoginRepository;
-import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
@@ -29,7 +27,7 @@ public class Account extends AppCompatActivity {
 
     // This function is called when clicked acc details
     public void account_details(View v){
-        User user = LoginRepository.getUser();
+        User user = LoginRepository.getInstance().getUser();
         //EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
 
         if (user instanceof StoreOwner) {

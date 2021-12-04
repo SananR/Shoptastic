@@ -24,7 +24,7 @@ public class SProducts extends AppCompatActivity {
 
     private void recyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewList = findViewById(R.id.recyclerView);
+        recyclerViewList = findViewById(R.id.recyclerview);
         recyclerViewList.setLayoutManager(linearLayoutManager);
 
         ArrayList<Product> products = new ArrayList<>();
