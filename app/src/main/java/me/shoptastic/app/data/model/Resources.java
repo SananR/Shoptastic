@@ -7,6 +7,7 @@ import java.lang.ref.WeakReference;
 import me.shoptastic.app.R;
 
 public class Resources {
+
     private static WeakReference<Context> context;
     public static String FireBaseLink = Resources.getString(R.string.firebase_link);
 

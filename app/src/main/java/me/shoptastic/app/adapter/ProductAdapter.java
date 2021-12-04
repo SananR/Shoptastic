@@ -1,4 +1,4 @@
-package me.shoptastic.app.Adapter;
+package me.shoptastic.app.adapter;
 
 import android.content.Intent;
 import android.os.Parcelable;
@@ -16,25 +16,25 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.ShowDetailActivity;
 import me.shoptastic.app.data.model.Product;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
     ArrayList<Product> productDomains;
 
-    public CartAdapter (ArrayList<Product> productDomains){
+    public ProductAdapter (ArrayList<Product> productDomains){
         this.productDomains = productDomains;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cart, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_products, parent, false);
 
         return new ViewHolder(inflate);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         holder.title.setText(productDomains.get(position).getName());
         holder.fee.setText(String.valueOf(productDomains.get(position).getPrice()));
-
         holder.addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -47,7 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     }
     @Override
     public int getItemCount(){
-        return 0;
+        return productDomains.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,6 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             super(itemView);
             title = itemView.findViewById(R.id.title);
             fee = itemView.findViewById(R.id.fee);
+            addBtn = itemView.findViewById(R.id.addBtn);
 
         }
 

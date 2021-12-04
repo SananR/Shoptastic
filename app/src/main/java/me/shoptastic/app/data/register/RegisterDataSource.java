@@ -20,6 +20,7 @@ import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
 
 public class RegisterDataSource {
+
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
 

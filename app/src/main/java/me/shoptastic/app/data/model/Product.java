@@ -4,9 +4,10 @@ import android.graphics.Bitmap;
 
 
 public class Product {
+
     private String product_name;
-    private Integer Id;
-    private Integer Price;
+    private Integer id;
+    private Integer price;
     private String description;
     private int numberInCart;
 
@@ -14,35 +15,37 @@ public class Product {
     public Product(String name, String description, Integer Price, Integer Id) {
         product_name = name;
         this.description = description;
-        this.Id = Id;
-        this.Price = Price;
+        this.id = Id;
+        this.price = Price;
     }
 
-    public Integer getId(){
-        return this.Id;
-    }
+    public String getName() { return this.product_name; }
+
+    public Integer getId() { return this.id; }
 
     public Integer getPrice(){
-        return this.Price;
+        return this.price;
     }
 
     public int getNumberInCart(){
         return this.numberInCart;
     }
 
-    public void changePrice(int Price){ this.Price = Price;}
-    public void changeDescription(String description){ this.description = description;}
+    public void setPrice(int Price){ this.price = Price; }
+
+    public void setDescription(String description){ this.description = description; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
        Product product = (Product) o;
-        return Id.equals(product.Id);
+        return id.equals(product.id);
     }
 
     @Override
     public int hashCode() {
-        return Id;
+        return id;
     }
 }
 

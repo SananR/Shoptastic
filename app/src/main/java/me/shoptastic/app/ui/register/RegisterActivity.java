@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Resources.setContext(this);
         setContentView(R.layout.activity_register);
+
         Button button = (Button) findViewById(R.id.button_register);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
