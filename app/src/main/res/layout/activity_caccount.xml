@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.574" />
 
     <TextView
-        android:id="@+id/Email"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.661" />
 
     <TextView
-        android:id="@+id/PhoneNumber"
+        android:id="@+id/phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PhoneNumber"

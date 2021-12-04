@@ -50,7 +50,7 @@ public class LoginRepository {
         return result;
     }
 
-    public User getUser(){
+    public static User getUser(){
         return user;
     };
 }
