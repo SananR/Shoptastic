@@ -1,7 +1,7 @@
 package me.shoptastic.app.ui.register;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -9,16 +9,16 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import me.shoptastic.app.OwnerRegisterActivity;
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
-import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    public static String name = "me.shoptastic.app.name"";
+    public static String name = "me.shoptastic.app.name";
     public static String email = "me.shoptastic.app.email";
     public static String phone = "me.shoptastic.app.phone";
     public static String password = "me.shoptastic.app.password";
@@ -55,31 +55,28 @@ public class RegisterActivity extends AppCompatActivity {
         return ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
     }
 
-    public void error(boolean name, boolean email, boolean phone, boolean password) {
+    public void error(String name, String email, String phone, String password) {
         TextInputLayout tilEmail = (TextInputLayout) findViewById(R.id.tilEmail);
         TextInputLayout tilName = (TextInputLayout) findViewById(R.id.tilName);
         TextInputLayout tilPhone = (TextInputLayout) findViewById(R.id.tilPhone);
         TextInputLayout tilPass = (TextInputLayout) findViewById(R.id.tilPassword);
-        if (name) tilName.setError(Resources.getString(R.string.register_invalid_name));
+        if (name != null) tilName.setError(name);
         else tilName.setErrorEnabled(false);
-        if (email) tilEmail.setError(Resources.getString(R.string.register_invalid_email));
+        if (email != null) tilEmail.setError(email);
         else tilEmail.setErrorEnabled(false);
-        if (phone) tilPhone.setError(Resources.getString(R.string.register_invalid_phone));
+        if (phone != null) tilPhone.setError(phone);
         else tilPhone.setErrorEnabled(false);
-        if (password) tilPass.setError(Resources.getString(R.string.register_invalid_password));
+        if (password != null) tilPass.setError(password);
         else tilPass.setErrorEnabled(false);
     }
 
     public void register(View v) {
-        Boolean valid = presenter.validateInput();
+        RegisterPresenter presenter = new RegisterPresenter(this);
+        boolean valid = presenter.validateInput();
         if (valid) {
             final boolean checkBox = ((CheckBox) findViewById(R.id.checkBox)).isChecked();
             if (!checkBox) {
-                Result r = presenter.register();
-                if (r instanceof Result.Success) {
-                    Intent intent = new Intent(this, StoresActivity.class);
-                    startActivity(intent);
-                }
+                presenter.register();
             } else {
                 Intent intent = new Intent(this, OwnerRegisterActivity.class);
                 intent.putExtra(RegisterActivity.name, getName());

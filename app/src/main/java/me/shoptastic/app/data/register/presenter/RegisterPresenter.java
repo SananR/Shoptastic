@@ -1,57 +1,88 @@
 package me.shoptastic.app.data.register.presenter;
 
+import android.content.Intent;
 import android.util.Patterns;
 
 import java.util.Arrays;
 import java.util.Locale;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.StoresActivity;
+import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.ui.register.RegisterActivity;
+
 public class RegisterPresenter {
 
     private final RegisterActivity view;
-    private final RegisterRepository repo;
+    private final RegisterRepository registerRepository;
+    private final LoginRepository loginRepository;
 
     public RegisterPresenter(RegisterActivity view) {
         this.view = view;
-        this.repo = RegisterRepository.getInstance();
+        this.registerRepository = RegisterRepository.getInstance();
+        this.loginRepository = LoginRepository.getInstance();
     }
+
     public RegisterPresenter() {
         this.view = null;
-        this.repo = RegisterRepository.getInstance();
+        this.registerRepository = RegisterRepository.getInstance();
+        this.loginRepository = LoginRepository.getInstance();
     }
 
-    public Result<User> register(String name, String email, String phone, String password) {
+    public RegisterPresenter(RegisterActivity v, RegisterRepository registerRepository,
+                             LoginRepository loginRepository) {
+        this.registerRepository = registerRepository;
+        this.loginRepository = loginRepository;
+        this.view = v;
+    }
+
+    public void register() {
         // can be launched in a separate asynchronous job
-        if (validateInput(name, email, phone, password)) {
-            Result<User> result = repo.register(new Customer(email, name, phone), password);
-            return result;
-        } return new Result.Error(new IllegalArgumentException("User input error"));
+        if (validateInput()) {
+            Result result = registerRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone()), view.getPassword());
+
+            if (result instanceof Result.Success) {
+                User data = ((Result.Success<User>) result).getData();
+                loginRepository.setLoggedInUser(data);
+                Intent intent = new Intent(this.view, StoresActivity.class);
+                this.view.startActivity(intent);
+            }
+        }
     }
 
-    public boolean validateInput(String name, String email, String phone, String password) {
-        boolean errorName = false, errorEmail = false, errorPhone = false, errorPassword = false;
-        if (!validateName(name)) errorName = true;
-        if (!validateEmail(email)) errorEmail = true;
-        if (!validatePhone(phone)) errorPhone = true;
-        if (validatePassword(password) instanceof Result.Error) errorPassword = true;
-        if (errorName || errorEmail || errorPhone || errorPassword) {
-            view.error(errorName, errorEmail, errorPhone, errorPassword);
-            return false;
-        } else {
-            view.error(false, false, false, false);
-            return true;
-        }
+    public boolean validateInput() {
+        String errorName = null, errorEmail = null, errorPhone = null, errorPassword = null;
+
+        Result result = validateName(this.view.getName());
+        if (result instanceof Result.Error) errorName = ((Result.Error) result).getError();
+
+        result = validateEmail(this.view.getEmail());
+        if (result instanceof Result.Error) errorEmail = ((Result.Error) result).getError();
+
+        result = validatePhone(this.view.getPhone());
+        if (result instanceof Result.Error) errorPhone = ((Result.Error) result).getError();
+
+        result = validatePassword(this.view.getPassword());
+        if (result instanceof Result.Error) errorPassword = ((Result.Error) result).getError();
+
+        view.error(errorName, errorEmail, errorPhone, errorPassword);
+        return (errorName == null && errorEmail == null && errorPhone == null && errorPassword == null);
     }
 
     /**
      * Validates username
      */
-    protected boolean validateName(String name) {
-        return name.length() >= 3;
+    protected Result validateName(String name) {
+        if (name.length() >= 3) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("User name too short"), R.string.register_invalid_name);
+        }
     }
 
     /**

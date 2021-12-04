@@ -1,55 +1,81 @@
 package me.shoptastic.app.data.register.presenter;
 
+import android.content.Intent;
+
 import java.util.HashSet;
 
+import me.shoptastic.app.OwnerRegisterActivity;
+import me.shoptastic.app.R;
+import me.shoptastic.app.StoresActivity;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.StoreRepository;
-import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Store;
-import me.shoptastic.app.ui.register.RegisterStoreActivity;
 
 public class RegisterStorePresenter {
 
     private final StoreRepository storeRepository;
-    private final RegisterStoreActivity activity;
+    protected final OwnerRegisterActivity activity;
 
-    public RegisterStorePresenter(RegisterStoreActivity activity) {
+    public RegisterStorePresenter() {
+        activity = null;
+        storeRepository = StoreRepository.getInstance();
+    }
+
+    public RegisterStorePresenter(OwnerRegisterActivity activity) {
         this.storeRepository = StoreRepository.getInstance();
         this.activity = activity;
     }
 
-    private Result validateStoreName(String storeName) {
-        return new Result.Success<>(true);
-    }
-
-    private Result validateStoreLocation(String location) {
-        return new Result.Success<>(true);
-    }
-
-    public boolean validate(String storeName, String location) {
-        Result[] results = {validateStoreName(storeName), validateStoreLocation(location)};
-        for (Result result :
-                results) {
-            if (result instanceof Result.Error) {
-                activity.showErrorMsg(((Result.Error) result).getError());
-                return false;
-            }
+    /**
+     * Validates store name
+     */
+    public Result validateStoreName(String name) {
+        if (name.length() >= 3) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Store name too short"), R.string.register_invalid_name);
         }
-        return true;
     }
+
+    /**
+     * Validates store address
+     */
+    public Result validateAddress(String address) {
+        if (address.length() >= 5) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Address too short"), R.string.register_invalid_email);
+        }
+
+    }
+
+    public boolean validateInput() {
+        String errorName = null, errorAddress = null;
+        Result result = validateStoreName(this.activity.getStoreName());
+        if (result instanceof Result.Error) errorName = ((Result.Error) result).getError();
+
+        result = validateAddress(this.activity.getAddress());
+        if (result instanceof Result.Error) errorAddress = ((Result.Error) result).getError();
+        activity.error(errorName, errorAddress);
+        return (errorName == null && errorAddress == null);
+    }
+
 
     public void register() {
         String name = activity.getStoreName();
-        String location = activity.getLocation();
-        if (!validate(name, location)) {
+        String location = activity.getAddress();
+        if (!validateInput()) {
             return;
         }
-        // TODO Update UI
-        // can be launched in a separate asynchronous job
-        Store store = new Store(name, location, new HashSet<Product>());
+
+
+        Store store = new Store(name, location, new HashSet<>());
         Result result = storeRepository.register(store);
         if (result instanceof Result.Error) {
-            activity.showErrorMsg(((Result.Error) result).getError());
+            Intent intent = new Intent(this.activity, StoresActivity.class);
+            this.activity.startActivity(intent);
+        } else {
+            throw new RuntimeException();
         }
     }
 
