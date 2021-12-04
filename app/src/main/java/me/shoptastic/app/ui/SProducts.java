@@ -1,16 +1,16 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Product;
 
-public class SProducts extends AppCompatActivity {
+public class SProducts extends Activity {
     private RecyclerView.Adapter adapter, adapter2;
     private RecyclerView recyclerViewList;
 

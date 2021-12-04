@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.StoresActivity;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
 import me.shoptastic.app.data.register.RegisterRepository;
-import me.shoptastic.app.ui.register.RegisterActivity;
+import me.shoptastic.app.ui.RegisterActivity;
+import me.shoptastic.app.ui.StoresActivity;
 
 public class RegisterPresenter {
 

@@ -1,13 +1,9 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import me.shoptastic.app.ui.register.RegisterActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

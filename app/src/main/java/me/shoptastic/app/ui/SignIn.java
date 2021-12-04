@@ -1,13 +1,13 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignIn extends AppCompatActivity {
+import me.shoptastic.app.R;
+
+public class SignIn extends Activity {
     private FirebaseAuth mAuth;
 
     @Override

@@ -1,17 +1,17 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Order;
 
-public class Cart extends AppCompatActivity {
+public class Cart extends Activity {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
