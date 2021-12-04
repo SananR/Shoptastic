@@ -4,10 +4,12 @@ import android.graphics.Bitmap;
 
 
 public class Product {
-    private final String product_name;
-    Integer Id;
-    Integer Price;
-    String description;
+    private String product_name;
+    private Integer Id;
+    private Integer Price;
+    private String description;
+    private int numberInCart;
+
 
     public Product(String name, String description, Integer Price, Integer Id) {
         product_name = name;
@@ -15,8 +17,19 @@ public class Product {
         this.Id = Id;
         this.Price = Price;
     }
-    public Integer ID(){ return this.Id;}
-    public Integer price(){ return this.Price;}
+
+    public Integer getId(){
+        return this.Id;
+    }
+
+    public Integer getPrice(){
+        return this.Price;
+    }
+
+    public int getNumberInCart(){
+        return this.numberInCart;
+    }
+
     public void changePrice(int Price){ this.Price = Price;}
     public void changeDescription(String description){ this.description = description;}
     @Override
