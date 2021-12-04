@@ -2,7 +2,12 @@ package me.shoptastic.app.data.register;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -11,16 +16,16 @@ import java.io.IOException;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
+import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
 
 public class RegisterDataSource {
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
-    private final DatabaseReference ARef;
 
     public RegisterDataSource() {
         fAuth = FirebaseAuth.getInstance();
-        dRef = FirebaseDatabase.getInstance().getReference();
+        dRef = FirebaseDatabase.getInstance(Resources.FireBaseLink).getReference();
     }
 
     public boolean isEmailRegistered(String email) {
@@ -51,10 +56,11 @@ public class RegisterDataSource {
                     Log.d("TEST", task.getException().getMessage());
                 }
             });
-            if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
-            else return new Result.Error(new IOException("Error creating Firebase user"));
+            return new Result.Success<>(user);
+//            if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
+//            else return new Result.Error(new IOException("Error creating Firebase user"), "Registration worked but current ");
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error registering new user", e));
+            return new Result.Error(new IOException("Error registering new user", e), "Error registering user");
         }
     }
 }

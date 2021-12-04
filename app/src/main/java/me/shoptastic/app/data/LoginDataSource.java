@@ -2,7 +2,6 @@ package me.shoptastic.app.data;
 
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -11,13 +10,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
-import me.shoptastic.app.R;
-import me.shoptastic.app.SignIn;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.model.User;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -25,12 +22,14 @@ import me.shoptastic.app.data.model.User;
 public class LoginDataSource {
 
     private final FirebaseAuth fAuth;
+    private final FirebaseDatabase database;
 
     public LoginDataSource() {
         fAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance(Resources.FireBaseLink);
     }
 
-    public Result<User> login(String email, String password) {
+    public Result login(String email, String password) {
         final boolean[] value = {false};
         try {
             fAuth.signInWithEmailAndPassword(email, password)
