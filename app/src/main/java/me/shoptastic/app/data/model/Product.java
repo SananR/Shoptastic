@@ -18,6 +18,10 @@ public class Product {
         this.Price = Price;
     }
 
+    public String getName(){
+        return this.product_name;
+    }
+
     public Integer getId(){
         return this.Id;
     }
@@ -30,6 +34,11 @@ public class Product {
         return this.numberInCart;
     }
 
+
+
+    public void setNumberInCart(int newNumberInCart){
+        this.numberInCart = newNumberInCart;
+    }
     public void changePrice(int Price){ this.Price = Price;}
     public void changeDescription(String description){ this.description = description;}
     @Override
