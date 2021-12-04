@@ -16,16 +16,16 @@ import java.io.IOException;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
+import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
 
 public class RegisterDataSource {
-
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
 
     public RegisterDataSource() {
         fAuth = FirebaseAuth.getInstance();
-        dRef = FirebaseDatabase.getInstance().getReference();
+        dRef = FirebaseDatabase.getInstance(Resources.FireBaseLink).getReference();
     }
 
     public boolean isEmailRegistered(String email) {
@@ -40,7 +40,7 @@ public class RegisterDataSource {
         return true;
     }
 
-    public Result<User> register(User user, String password) {
+    public Result register(User user, String password) {
         try {
             fAuth.createUserWithEmailAndPassword(user.getEmail(), password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -51,12 +51,16 @@ public class RegisterDataSource {
                     dRef.child(child).child(user.getUUID().toString()).setValue(user);
                     LoginRepository.getInstance().setLoggedInUser(user);
                     Log.d("TEST", "Success");
+                } else {
+                    //TODO
+                    Log.d("TEST", task.getException().getMessage());
                 }
             });
-            if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
-            else return new Result.Error(new IOException("Error creating Firebase user"));
+            return new Result.Success<>(user);
+//            if (fAuth.getCurrentUser() != null) return new Result.Success<>(user);
+//            else return new Result.Error(new IOException("Error creating Firebase user"), "Registration worked but current ");
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error registering new user", e));
+            return new Result.Error(new IOException("Error registering new user", e), "Error registering user");
         }
     }
 }
