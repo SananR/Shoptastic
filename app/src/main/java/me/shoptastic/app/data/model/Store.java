@@ -40,4 +40,10 @@ public class Store {
     public int hashCode() {
         return store_name.hashCode()+store_products.hashCode();
     }
+
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public String getAddress(){return address;}
 }
