@@ -15,6 +15,7 @@ public abstract class User {
     private final String displayName;
     @Nonnull
     private final UUID uuid;
+    public ArrayList<Product> anOrder = new ArrayList<Product>();
 
     public User(String email, String displayName, String phone) {
         this.email = email;
@@ -37,5 +38,5 @@ public abstract class User {
 
     public UUID getUUID() { return uuid; }
 
-    public abstract ArrayList<Order> getOrders();
+    public abstract ArrayList<Product> getOrder();
 }
