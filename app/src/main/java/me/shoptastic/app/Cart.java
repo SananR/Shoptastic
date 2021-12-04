@@ -25,7 +25,7 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        order = new Order(this);
+        //order = new Order(this);
 
         initView();
         initList();
@@ -36,6 +36,7 @@ public class Cart extends AppCompatActivity {
         recyclerViewList.setLayoutManager(linearLayoutManager);
         //adapter =
                 recyclerViewList.setAdapter(adapter);
+                /*
         if(Order.getListCart().isEmpty()){
             emptyTxt.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
@@ -44,6 +45,8 @@ public class Cart extends AppCompatActivity {
             emptyTxt.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
+        */
+
 
     }
 

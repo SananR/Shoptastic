@@ -18,6 +18,10 @@ public class Product {
         this.Price = Price;
     }
 
+    public String getName(){
+        return this.product_name;
+    }
+
     public Integer getId(){
         return this.Id;
     }
