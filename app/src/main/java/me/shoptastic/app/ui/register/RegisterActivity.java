@@ -35,7 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
                 register(v);
             }
         });
-
     }
 
     public void error(boolean name, boolean email, boolean phone, boolean password) {
