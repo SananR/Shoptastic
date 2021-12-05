@@ -14,8 +14,7 @@ public class ProductDataSource {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference();
     }
-
-    public Result addtodatabase(Product p, String Store_Name) {
+    public Result<Product> addtodatabase(Product p, String Store_Name){
         dRef.child(Store_Name).child(p.getId().toString()).setValue(p);
         return null;
     }
