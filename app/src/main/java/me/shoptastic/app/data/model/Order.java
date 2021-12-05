@@ -1,5 +1,7 @@
 package me.shoptastic.app.data.model;
 
+import android.content.Context;
+
 import com.google.firebase.database.core.view.Change;
 
 import java.util.ArrayList;
@@ -9,6 +11,11 @@ import java.util.Iterator;
 import me.shoptastic.app.Interface.ChangeNumberItemListener;
 
 public class Order {
+    private Context context;
+
+    public Order(Context context){
+        this.context = context;
+    }
 
     public void insertProduct(Product product){
         ArrayList<Product> listProduct = getListCart();
@@ -37,12 +44,14 @@ public class Order {
     }
 
     public void plusNumberProduct(ArrayList<Product> listProduct, int position, ChangeNumberItemListener changeNumberItemListener){
+        //tinyDB.putListObject("Object", listfood); //Adding the databse would be necessary
         listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart() + 1);
         changeNumberItemListener.changed();
 
     }
 
     public void minusNumberProduct(ArrayList<Product> listProduct, int position, ChangeNumberItemListener changeNumberItemListener){
+        //tinyDB.putListObject("Object", listfood); //Adding the database would be necessary
         if(listProduct.get(position).getNumberInCart() == 1){
             listProduct.remove(position);
         }

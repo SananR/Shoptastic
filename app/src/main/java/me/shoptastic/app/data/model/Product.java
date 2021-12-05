@@ -22,6 +22,10 @@ public class Product {
         return this.product_name;
     }
 
+    public String getDescription(){
+        return this.description;
+    }
+
     public Integer getId(){
         return this.Id;
     }
@@ -39,8 +43,9 @@ public class Product {
     public void setNumberInCart(int newNumberInCart){
         this.numberInCart = newNumberInCart;
     }
-    public void changePrice(int Price){ this.Price = Price;}
-    public void changeDescription(String description){ this.description = description;}
+    public void setPrice(String Price){ this.Price = Integer.parseInt(Price);}
+    public void setProduct_name(String name){ this.product_name = name;}
+    public void setDescription(String description){ this.description = description; }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

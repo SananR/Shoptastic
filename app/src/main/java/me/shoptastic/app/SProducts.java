@@ -1,10 +1,15 @@
 package me.shoptastic.app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -21,6 +26,25 @@ public class SProducts extends AppCompatActivity {
         setContentView(R.layout.activity_sproducts);
 
         recyclerView();
+    }
+
+    private void bottomNavigation(){
+        FloatingActionButton floatingActionButton = findViewById(R.id.cart_btn);
+        LinearLayout homeBtn = findViewById(R.id.homeBtn);
+
+        floatingActionButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(SProducts.this, Cart.class));
+            }
+        }));
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(SProducts.this, Cart.class));
+            }
+        });
     }
 
     private void recyclerView(){

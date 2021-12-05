@@ -1,5 +1,6 @@
 package me.shoptastic.app.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -39,7 +40,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position){
         holder.title.setText(productDomains.get(position).getName());
         holder.feeEachItem.setText(String.valueOf(productDomains.get(position).getPrice()));
         holder.totalEachItem.setText(String.valueOf((productDomains.get(position).getNumberInCart() * productDomains.get(position).getPrice())));

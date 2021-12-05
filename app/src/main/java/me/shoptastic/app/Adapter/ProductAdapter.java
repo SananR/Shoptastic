@@ -42,6 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 Intent intent = new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
                 intent.putExtra("productName", productDomains.get(position).getName());
                 intent.putExtra("productPrice", productDomains.get(position).getPrice().toString());
+                intent.putExtra("description", productDomains.get(position).getDescription());
                 holder.itemView.getContext().startActivity(intent);
             }
 
