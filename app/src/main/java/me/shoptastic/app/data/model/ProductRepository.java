@@ -1,9 +1,6 @@
 package me.shoptastic.app.data.model;
 
 import me.shoptastic.app.data.Result;
-import me.shoptastic.app.data.register.RegisterDataSource;
-import me.shoptastic.app.data.model.ProductRepository;
-import me.shoptastic.app.data.model.Product;
 
 public class ProductRepository {
     private static volatile ProductRepository instance;
@@ -23,7 +20,7 @@ public class ProductRepository {
     }
 
 
-    public Result<Product> addtodatabase(Product p, String Store_Name) {
+    public Result<User> addtodatabase(Product p, String Store_Name) {
         // handle register
         return dataSource.addtodatabase(p, Store_Name);
     }
