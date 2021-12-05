@@ -27,6 +27,10 @@ public class Product {
         return this.numberInCart;
     }
 
+    public void setNumberInCart(int newNumberInCart){
+        this.numberInCart = newNumberInCart;
+    }
+
     public String getName() {
         return this.product_name;
     }
