@@ -6,7 +6,7 @@ import me.shoptastic.app.data.model.ProductRepository;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 import me.shoptastic.app.data.register.UserRepository;
-import me.shoptastic.app.ui.Product.ProductAddActivity;
+import me.shoptastic.app.ui.ProductAddActivity;
 
 public class ProductPresenter {
     private final ProductRepository productRepository;
