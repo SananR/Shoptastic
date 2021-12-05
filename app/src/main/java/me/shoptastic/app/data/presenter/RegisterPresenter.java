@@ -1,4 +1,4 @@
-package me.shoptastic.app.data.register.presenter;
+package me.shoptastic.app.data.presenter;
 
 import android.content.Intent;
 import android.util.Patterns;
@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.register.UserRepository;
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.ui.RegisterActivity;
 import me.shoptastic.app.ui.StoresActivity;
 

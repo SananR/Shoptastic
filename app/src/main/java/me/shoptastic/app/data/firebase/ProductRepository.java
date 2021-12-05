@@ -1,6 +1,7 @@
-package me.shoptastic.app.data.model;
+package me.shoptastic.app.data.firebase;
 
-import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.data.model.Result;
 
 public class ProductRepository {
     private static volatile ProductRepository instance;

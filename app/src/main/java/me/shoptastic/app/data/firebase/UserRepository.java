@@ -1,6 +1,4 @@
-package me.shoptastic.app.data.register;
-
-import android.util.Log;
+package me.shoptastic.app.data.firebase;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +12,7 @@ import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
+import me.shoptastic.app.data.presenter.RegisterPresenter;
 
 /**
  * Class that requests authentication and user information from the remote data source and

@@ -1,12 +1,12 @@
-package me.shoptastic.app.data.register.presenter;
+package me.shoptastic.app.data.presenter;
 
 import android.content.Intent;
 
 import java.util.HashSet;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.Result;
-import me.shoptastic.app.data.StoreRepository;
+import me.shoptastic.app.data.firebase.StoreRepository;
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.ui.OwnerRegisterActivity;
 import me.shoptastic.app.ui.StoresActivity;

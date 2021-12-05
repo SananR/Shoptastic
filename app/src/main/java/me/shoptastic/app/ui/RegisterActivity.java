@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
+import me.shoptastic.app.data.presenter.RegisterPresenter;
 
 public class RegisterActivity extends Activity {
 

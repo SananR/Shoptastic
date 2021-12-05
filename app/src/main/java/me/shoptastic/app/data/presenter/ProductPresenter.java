@@ -1,11 +1,11 @@
-package me.shoptastic.app.data.register.presenter;
+package me.shoptastic.app.data.presenter;
 
-import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.firebase.ProductRepository;
+import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Product;
-import me.shoptastic.app.data.model.ProductRepository;
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.register.UserRepository;
 import me.shoptastic.app.ui.ProductAddActivity;
 
 public class ProductPresenter {

@@ -11,10 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Customer;
-import me.shoptastic.app.data.register.UserRepository;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
+import me.shoptastic.app.data.model.Result;
+import me.shoptastic.app.data.presenter.RegisterPresenter;
 import me.shoptastic.app.ui.RegisterActivity;
 
 /**

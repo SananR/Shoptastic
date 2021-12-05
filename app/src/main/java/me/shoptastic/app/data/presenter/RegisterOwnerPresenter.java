@@ -1,10 +1,10 @@
-package me.shoptastic.app.data.register.presenter;
+package me.shoptastic.app.data.presenter;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.firebase.UserRepository;
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
-import me.shoptastic.app.data.register.UserRepository;
 import me.shoptastic.app.ui.OwnerRegisterActivity;
 
 public class RegisterOwnerPresenter extends RegisterPresenter {

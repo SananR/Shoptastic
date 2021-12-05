@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.register.presenter.ProductPresenter;
+import me.shoptastic.app.data.presenter.ProductPresenter;
 
 public class ProductAddActivity extends Activity {
 

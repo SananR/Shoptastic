@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.Result;
 
 public class LoginActivity extends Activity {
 

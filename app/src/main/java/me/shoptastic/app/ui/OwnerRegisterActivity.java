@@ -11,8 +11,7 @@ import java.util.HashSet;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Store;
-import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
-import me.shoptastic.app.data.register.presenter.RegisterStorePresenter;
+import me.shoptastic.app.data.presenter.RegisterOwnerPresenter;
 
 public class OwnerRegisterActivity extends Activity {
 

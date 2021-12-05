@@ -1,4 +1,4 @@
-package me.shoptastic.app.data;
+package me.shoptastic.app.data.firebase;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
 
 public class StoreDataSource {

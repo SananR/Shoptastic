@@ -1,5 +1,6 @@
-package me.shoptastic.app.data;
+package me.shoptastic.app.data.firebase;
 
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
 
 public class StoreRepository {

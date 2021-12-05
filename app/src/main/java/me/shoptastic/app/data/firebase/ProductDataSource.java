@@ -1,10 +1,11 @@
-package me.shoptastic.app.data.model;
+package me.shoptastic.app.data.firebase;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.data.model.Result;
 
 public class ProductDataSource {
     private final FirebaseAuth fAuth;
