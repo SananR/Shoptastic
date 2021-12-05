@@ -1,5 +1,6 @@
 package me.shoptastic.app.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -32,14 +33,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position){
         holder.title.setText(productDomains.get(position).getName());
         holder.fee.setText(String.valueOf(productDomains.get(position).getPrice()));
         holder.addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
-                intent.putExtra("object", (Parcelable) productDomains.get(position));
+                intent.putExtra("productName", productDomains.get(position).getName());
+                intent.putExtra("productPrice", productDomains.get(position).getPrice());
                 holder.itemView.getContext().startActivity(intent);
             }
 

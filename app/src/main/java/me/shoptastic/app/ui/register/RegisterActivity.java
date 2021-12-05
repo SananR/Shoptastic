@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.OwnerRegisterActivity;
 import me.shoptastic.app.R;
+import me.shoptastic.app.SProducts;
 import me.shoptastic.app.StoresActivity;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Resources;
@@ -60,14 +61,11 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText password = findViewById(R.id.editTextTextPassword);
         final CheckBox checkBox = findViewById(R.id.checkBox);
         Boolean valid = presenter.validateInput(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString());
-        if (valid) {
-            if (!checkBox.isChecked()) {
-                Result r = presenter.register(name.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString());
-                if (r instanceof Result.Success) {
-                    Intent intent = new Intent(this, StoresActivity.class);
+        if (!checkBox.isChecked()) {
+                    Intent intent = new Intent(this, SProducts.class);
                     startActivity(intent);
-                }
-            } else {
+            }
+        else {
                 Intent intent = new Intent(this, OwnerRegisterActivity.class);
                 intent.putExtra("me.shoptastic.app.name", name.getText().toString());
                 intent.putExtra("me.shoptastic.app.email", email.getText().toString());
@@ -75,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
                 intent.putExtra("me.shoptastic.app.password", password.getText().toString());
                 startActivity(intent);
             }
-        }
 
     }
 }
