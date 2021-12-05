@@ -8,20 +8,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 
 public class LoginActivity extends Activity {
-
-    private final LoginRepository repository = LoginRepository.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-
-
     }
 
     public void signIn(View v) {
@@ -31,7 +26,7 @@ public class LoginActivity extends Activity {
         final Button login = findViewById(R.id.login);
         final ProgressBar loading = findViewById(R.id.loading);
 
-        Result user = repository.login(email.getText().toString(), password.getText().toString());
+       /* Result user = repository.login(email.getText().toString(), password.getText().toString());
         if (user instanceof Result.Success) {
             // User login successful, start new activity
         } else if (user instanceof Result.Error) {
@@ -39,7 +34,7 @@ public class LoginActivity extends Activity {
             showLoginFailed(((Result.Error) user).getError());
         } else {
             throw new IllegalArgumentException("Result returned not a success and not a failure?");
-        }
+        }*/
     }
 
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
 
@@ -26,7 +25,7 @@ public class Account extends Activity {
 
     // This function is called when clicked acc details
     public void account_details(View v){
-        User user = LoginRepository.getInstance().getUser();
+        /*User user = LoginRepository.getInstance().getUser();
         //EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
 
         if (user instanceof StoreOwner) {
@@ -51,7 +50,7 @@ public class Account extends Activity {
             String phone_number = user.getPhone();
             c_intent.putExtra(PHN_NUMBER, phone_number);
             startActivity(c_intent);
-        }
+        }*/
 
     }
 }

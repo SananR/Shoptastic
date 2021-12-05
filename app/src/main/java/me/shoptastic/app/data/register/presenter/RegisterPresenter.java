@@ -7,52 +7,42 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.data.register.UserRepository;
 import me.shoptastic.app.ui.RegisterActivity;
 import me.shoptastic.app.ui.StoresActivity;
 
 public class RegisterPresenter {
 
-    private final RegisterActivity view;
-    private final RegisterRepository registerRepository;
-    private final LoginRepository loginRepository;
+    private RegisterActivity view;
+    private UserRepository userRepository;
+
+    public RegisterPresenter(){}
 
     public RegisterPresenter(RegisterActivity view) {
         this.view = view;
-        this.registerRepository = RegisterRepository.getInstance();
-        this.loginRepository = LoginRepository.getInstance();
+        this.userRepository = UserRepository.getInstance();
     }
 
-    public RegisterPresenter() {
-        this.view = null;
-        this.registerRepository = RegisterRepository.getInstance();
-        this.loginRepository = LoginRepository.getInstance();
-    }
-
-    public RegisterPresenter(RegisterActivity v, RegisterRepository registerRepository,
-                             LoginRepository loginRepository) {
-        this.registerRepository = registerRepository;
-        this.loginRepository = loginRepository;
+    public RegisterPresenter(RegisterActivity v, UserRepository userRepository) {
+        this.userRepository = userRepository;
         this.view = v;
     }
 
     public void register() {
         // can be launched in a separate asynchronous job
-        if (validateInput()) {
-            Result result = registerRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone()), view.getPassword());
+        userRepository.register(this, new Customer(view.getEmail(), view.getName(), view.getPhone()), view.getPassword());
+    }
 
-            if (result instanceof Result.Success) {
-                User data = ((Result.Success<User>) result).getData();
-                loginRepository.setLoggedInUser(data);
-                Intent intent = new Intent(this.view, StoresActivity.class);
-                this.view.startActivity(intent);
-            }
-        }
+    public void complete() {
+        Intent i = new Intent(view, StoresActivity.class);
+        view.startActivity(i);
+    }
+
+    public void error(String name, String email, String phone, String password) {
+        this.view.error(name, email, phone, password);
     }
 
     public boolean validateInput() {

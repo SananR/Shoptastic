@@ -22,6 +22,7 @@ public class OwnerRegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_owner);
         Button button = findViewById(R.id.button_owner_register);
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 register(v);
@@ -67,12 +68,11 @@ public class OwnerRegisterActivity extends Activity {
     }
 
     public void register(View v) {
-        final Button logo = findViewById(R.id.button4);
-        RegisterStorePresenter storePresenter = new RegisterStorePresenter(this);
-        storePresenter.register();
-        RegisterOwnerPresenter ownerPresenter = new RegisterOwnerPresenter(this);
-        ownerPresenter.register();
-        storePresenter.register();
+        RegisterOwnerPresenter presenter = new RegisterOwnerPresenter(this);
+        boolean valid = presenter.validateInput();
+        if (valid) {
+            presenter.register(new Store(getStoreName(), getAddress(), new HashSet<>()));
+        }
     }
 
 
