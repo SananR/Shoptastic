@@ -1,4 +1,4 @@
-package me.shoptastic.app.ui.Product;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.register.presenter.ProductPresenter;
-import me.shoptastic.app.ui.Activity;
 
 public class ProductAddActivity extends Activity {
 
