@@ -1,20 +1,20 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import me.shoptastic.app.R;
 
-public class ShowDetailActivity extends AppCompatActivity {
+public class ShowDetailActivity extends Activity {
     private TextView addToCardBtn;
     private TextView titleTxt, feeTxt, descriptionTxt, numberOrderTxt;
     private ImageView plusBtn, minusBtn, picFood;
     private int numberOrder = 1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_detail);
 

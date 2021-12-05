@@ -10,19 +10,21 @@ import javax.annotation.Nonnull;
  */
 public abstract class User {
 
-    private final String email;
-    private final String phone;
-    private final String displayName;
+    private String email;
+    private String phone;
+    private String displayName;
     @Nonnull
-    private final UUID uuid;
+    private String uuid;
     public ArrayList<Product> anOrder = new ArrayList<Product>();
 
     public User(String email, String displayName, String phone) {
         this.email = email;
         this.phone = phone;
         this.displayName = displayName;
-        this.uuid = UUID.randomUUID();
+        this.uuid = UUID.randomUUID().toString();
     }
+
+    public User(){}
 
     public String getEmail() {
         return email;
@@ -36,7 +38,7 @@ public abstract class User {
         return displayName;
     }
 
-    public UUID getUUID() { return uuid; }
+    public String getUUID() { return this.uuid; }
 
     public abstract ArrayList<Product> getOrder();
 }

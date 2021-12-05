@@ -11,12 +11,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
-import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.data.register.UserRepository;
 import me.shoptastic.app.data.register.presenter.RegisterPresenter;
-import me.shoptastic.app.ui.register.RegisterActivity;
+import me.shoptastic.app.ui.RegisterActivity;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -33,7 +32,7 @@ public class ExampleUnitTest {
     RegisterPresenter presenter;
 
     @Mock
-    RegisterRepository registerRepository;
+    UserRepository userRepository;
 
     @Mock
     LoginRepository loginRepository;
@@ -105,10 +104,10 @@ public class ExampleUnitTest {
         when(registerUser.getPhone()).thenReturn("+1234");
         when(registerUser.getPassword()).thenReturn("123456789###");
         Customer customer = new Customer("1@gmail.com", "hello", "+1234");
-        when(registerRepository.register(any(Customer.class), anyString())).thenReturn(new Result.Success(customer));
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, registerRepository, loginRepository);
+        when(userRepository.register(any(Customer.class), anyString())).thenReturn(new Result.Success(customer));
+        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, userRepository, loginRepository);
         customerPresenter.register();
-        verify(registerRepository).register(customer, "123456789###");
+        verify(userRepository).register(customer, "123456789###");
     }
 
     @Test
@@ -118,8 +117,8 @@ public class ExampleUnitTest {
         when(registerUser.getPhone()).thenReturn("+1234");
         when(registerUser.getPassword()).thenReturn("123456789###");
         Customer customer = new Customer("1@gmail.com", "hello", "+1234");
-        when(registerRepository.register(any(Customer.class), anyString())).thenReturn(new Result.Success(customer));
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, registerRepository, loginRepository);
+        when(userRepository.register(any(Customer.class), anyString())).thenReturn(new Result.Success(customer));
+        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, userRepository, loginRepository);
         customerPresenter.register();
         verify(loginRepository).setLoggedInUser(customer);
     }

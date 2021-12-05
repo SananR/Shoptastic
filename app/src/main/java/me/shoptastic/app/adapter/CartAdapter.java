@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.ShowDetailActivity;
 import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.ui.ShowDetailActivity;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     

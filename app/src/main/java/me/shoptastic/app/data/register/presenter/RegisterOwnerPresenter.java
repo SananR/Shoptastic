@@ -1,55 +1,64 @@
 package me.shoptastic.app.data.register.presenter;
 
-import android.content.Intent;
-
-import me.shoptastic.app.OwnerRegisterActivity;
-import me.shoptastic.app.StoresActivity;
-import me.shoptastic.app.data.LoginRepository;
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
-import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.data.register.UserRepository;
+import me.shoptastic.app.ui.OwnerRegisterActivity;
 
-public class RegisterOwnerPresenter extends RegisterStorePresenter {
+public class RegisterOwnerPresenter extends RegisterPresenter {
 
-    private final LoginRepository loginRepository;
-    private final RegisterRepository registerRepository;
+    private final UserRepository userRepository;
+    private final OwnerRegisterActivity view;
 
     public RegisterOwnerPresenter(OwnerRegisterActivity activity) {
-        super(activity);
-        this.loginRepository = LoginRepository.getInstance();
-        this.registerRepository = RegisterRepository.getInstance();
+        this.userRepository = UserRepository.getInstance();
+        this.view = activity;
     }
 
-    @Override
-    public void register() {
-        String name = activity.getName();
-        String email = activity.getEmail();
-        String phone = activity.getPhone();
-        String password = activity.getPassword();
-        Store store = activity.getStore();
+    public void register(Store store) {
+        String name = view.getName();
+        String email = view.getEmail();
+        String phone = view.getPhone();
+        String password = view.getPassword();
 
-        if (!validateInput()) {
-            return;
-        }
+        userRepository.register(this, new StoreOwner(email, name, phone,
+                new Store(store.getName(), store.getAddress(), store.getProducts())), password);
+    }
+    public boolean validateInput() {
+        String errorName = null, errorAddress = null;
 
-        Result result = registerRepository.register(
-                new StoreOwner(email, name, phone,
-                        store),
-                password);
+        Result result = validateStoreName(this.view.getStoreName());
+        if (result instanceof Result.Error) errorName = ((Result.Error) result).getError();
 
-        if (result instanceof Result.Success) {
-            User data = ((Result.Success<User>) result).getData();
-            if (data instanceof StoreOwner) {
-                loginRepository.setLoggedInUser(data);
-                Intent intent = new Intent(this.activity, StoresActivity.class);
-                this.activity.startActivity(intent);
-            } else {
-                throw new RuntimeException("Registered a store owner and got a customer back.");
-            }
-        }
+        result = validateAddress(this.view.getAddress());
+        if (result instanceof Result.Error) errorAddress = ((Result.Error) result).getError();
+
+        view.error(errorName, errorAddress);
+        return (errorName == null && errorAddress == null);
     }
 
 
+    /**
+     * Validates username
+     */
+    protected Result validateStoreName(String name) {
+        if (name.length() >= 3) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Store name too short"), R.string.register_invalid_name);
+        }
+    }
+
+    /**
+     * Validates address
+     */
+    protected Result validateAddress(String address) {
+        if (address.length() >= 5) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Address too short"), R.string.register_invalid_address);
+        }
+    }
 }

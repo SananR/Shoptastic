@@ -9,18 +9,18 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:background = "@drawable/img4"
-        tools:context=".ui.login.LoginActivity">
+        android:background="@drawable/img4"
+        tools:context=".ui.LoginActivity">
 
     <LinearLayout
-        android:layout_width="280dp"
-        android:layout_height="446dp"
-        android:id="@+id/linearlayout"
-        android:layout_marginRight="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="210dp"
-        android:layout_marginBottom="210dp"
-        android:background="@drawable/background_layout"
+            android:layout_width="280dp"
+            android:layout_height="446dp"
+            android:id="@+id/linearlayout"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginBottom="210dp"
+            android:background="@drawable/background_layout"
         android:orientation="vertical"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

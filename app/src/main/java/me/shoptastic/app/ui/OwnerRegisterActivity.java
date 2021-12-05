@@ -1,29 +1,28 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashSet;
 
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
 import me.shoptastic.app.data.register.presenter.RegisterStorePresenter;
-import me.shoptastic.app.ui.register.RegisterActivity;
 
-public class OwnerRegisterActivity extends AppCompatActivity {
+public class OwnerRegisterActivity extends Activity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_owner);
-        Button button = (Button) findViewById(R.id.button_owner_register);
+        Button button = findViewById(R.id.button_owner_register);
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 register(v);
@@ -60,8 +59,8 @@ public class OwnerRegisterActivity extends AppCompatActivity {
     }
 
     public void error(String name, String address) {
-        TextInputLayout tilName = (TextInputLayout) findViewById(R.id.tilStoreName);
-        TextInputLayout tilAddress = (TextInputLayout) findViewById(R.id.tilStoreAddress);
+        TextInputLayout tilName = findViewById(R.id.tilStoreName);
+        TextInputLayout tilAddress = findViewById(R.id.tilStoreAddress);
         if (name != null) tilName.setError(name);
         else tilName.setErrorEnabled(false);
         if (address != null) tilAddress.setError(address);
@@ -69,12 +68,11 @@ public class OwnerRegisterActivity extends AppCompatActivity {
     }
 
     public void register(View v) {
-        final Button logo = findViewById(R.id.button4);
-        RegisterStorePresenter storePresenter = new RegisterStorePresenter(this);
-        storePresenter.register();
-        RegisterOwnerPresenter ownerPresenter = new RegisterOwnerPresenter(this);
-        ownerPresenter.register();
-        storePresenter.register();
+        RegisterOwnerPresenter presenter = new RegisterOwnerPresenter(this);
+        boolean valid = presenter.validateInput();
+        if (valid) {
+            presenter.register(new Store(getStoreName(), getAddress(), new HashSet<>()));
+        }
     }
 
 
