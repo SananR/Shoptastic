@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
-import me.shoptastic.app.data.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button login = findViewById(R.id.login);
         final ProgressBar loading = findViewById(R.id.loading);
 
-        Result<User> user = repository.login(email.getText().toString(), password.getText().toString());
+        Result user = repository.login(email.getText().toString(), password.getText().toString());
         if (user instanceof Result.Success) {
             // User login successful, start new activity
         } else if (user instanceof Result.Error) {

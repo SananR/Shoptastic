@@ -8,8 +8,8 @@ public class Customer extends User {
     }
 
     @Override
-    public ArrayList<Order> getOrders() {
-        return null;
+    public ArrayList<Product> getOrder() {
+        return this.anOrder;
     }
 
 }

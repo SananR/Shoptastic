@@ -1,7 +1,5 @@
 package me.shoptastic.app.data.model;
 
-import android.graphics.Bitmap;
-
 import java.util.HashSet;
 
 public class Store {
@@ -17,16 +15,30 @@ public class Store {
         this.address = address;
     }
 
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public HashSet<Product> getStore_products() {
+        return store_products;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
-        return store_name.equals(store.store_name) && store_products==store.store_products;
+        return store_name.equals(store.store_name) && store_products == store.store_products;
     }
 
     @Override
     public int hashCode() {
         return store_name.hashCode()+store_products.hashCode();
     }
+
 }

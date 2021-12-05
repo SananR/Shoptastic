@@ -1,61 +1,55 @@
 package me.shoptastic.app.data.register.presenter;
 
-import android.graphics.Bitmap;
+import android.content.Intent;
 
-import androidx.lifecycle.ViewModel;
-
-import java.util.HashSet;
-
+import me.shoptastic.app.OwnerRegisterActivity;
+import me.shoptastic.app.StoresActivity;
 import me.shoptastic.app.data.LoginRepository;
-import me.shoptastic.app.data.register.RegisterRepository;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.data.register.RegisterRepository;
 
-public class RegisterOwnerPresenter {
+public class RegisterOwnerPresenter extends RegisterStorePresenter {
 
-    private final RegisterRepository registerRepository;
     private final LoginRepository loginRepository;
+    private final RegisterRepository registerRepository;
 
-    public RegisterOwnerPresenter() {
+    public RegisterOwnerPresenter(OwnerRegisterActivity activity) {
+        super(activity);
         this.loginRepository = LoginRepository.getInstance();
         this.registerRepository = RegisterRepository.getInstance();
     }
 
+    @Override
+    public void register() {
+        String name = activity.getName();
+        String email = activity.getEmail();
+        String phone = activity.getPhone();
+        String password = activity.getPassword();
+        Store store = activity.getStore();
 
-    public Result<User> register(String email, String name, String phone, String password, String storeName, String address, Bitmap Image) {
-        // can be launched in a separate asynchronous job
-        Result<User> result = registerRepository.register(
+        if (!validateInput()) {
+            return;
+        }
+
+        Result result = registerRepository.register(
                 new StoreOwner(email, name, phone,
-                        new Store(storeName, address, new HashSet<>())),
+                        store),
                 password);
 
         if (result instanceof Result.Success) {
             User data = ((Result.Success<User>) result).getData();
             if (data instanceof StoreOwner) {
-                loginRepository.login(data.getEmail(), "");
-                return result;
+                loginRepository.setLoggedInUser(data);
+                Intent intent = new Intent(this.activity, StoresActivity.class);
+                this.activity.startActivity(intent);
             } else {
                 throw new RuntimeException("Registered a store owner and got a customer back.");
             }
-        } else {
-            return result;
         }
     }
 
-    /**
-     * Validates store name
-     */
-    public boolean validateName(String name) {
-        return true;
-    }
-
-    /**
-     * Validates store address
-     */
-    public boolean validateAddress(String address) {
-        return true;
-    }
 
 }

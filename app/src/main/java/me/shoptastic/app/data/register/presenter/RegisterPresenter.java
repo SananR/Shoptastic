@@ -1,47 +1,134 @@
 package me.shoptastic.app.data.register.presenter;
 
+import android.content.Intent;
 import android.util.Patterns;
 
 import java.util.Arrays;
 import java.util.Locale;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.StoresActivity;
+import me.shoptastic.app.data.LoginRepository;
 import me.shoptastic.app.data.Result;
+import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.ui.register.RegisterActivity;
 
-public abstract class RegisterPresenter {
+public class RegisterPresenter {
 
-    public abstract Result<User> register(String name, String email, String phone, String password);
+    private final RegisterActivity view;
+    private final RegisterRepository registerRepository;
+    private final LoginRepository loginRepository;
+
+    public RegisterPresenter(RegisterActivity view) {
+        this.view = view;
+        this.registerRepository = RegisterRepository.getInstance();
+        this.loginRepository = LoginRepository.getInstance();
+    }
+
+    public RegisterPresenter() {
+        this.view = null;
+        this.registerRepository = RegisterRepository.getInstance();
+        this.loginRepository = LoginRepository.getInstance();
+    }
+
+    public RegisterPresenter(RegisterActivity v, RegisterRepository registerRepository,
+                             LoginRepository loginRepository) {
+        this.registerRepository = registerRepository;
+        this.loginRepository = loginRepository;
+        this.view = v;
+    }
+
+    public void register() {
+        // can be launched in a separate asynchronous job
+        if (validateInput()) {
+            Result result = registerRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone()), view.getPassword());
+
+            if (result instanceof Result.Success) {
+                User data = ((Result.Success<User>) result).getData();
+                loginRepository.setLoggedInUser(data);
+                Intent intent = new Intent(this.view, StoresActivity.class);
+                this.view.startActivity(intent);
+            }
+        }
+    }
+
+    public boolean validateInput() {
+        String errorName = null, errorEmail = null, errorPhone = null, errorPassword = null;
+
+        Result result = validateName(this.view.getName());
+        if (result instanceof Result.Error) errorName = ((Result.Error) result).getError();
+
+        result = validateEmail(this.view.getEmail());
+        if (result instanceof Result.Error) errorEmail = ((Result.Error) result).getError();
+
+        result = validatePhone(this.view.getPhone());
+        if (result instanceof Result.Error) errorPhone = ((Result.Error) result).getError();
+
+        result = validatePassword(this.view.getPassword());
+        if (result instanceof Result.Error) errorPassword = ((Result.Error) result).getError();
+
+        view.error(errorName, errorEmail, errorPhone, errorPassword);
+        return (errorName == null && errorEmail == null && errorPhone == null && errorPassword == null);
+    }
 
     /**
      * Validates username
      */
-    protected boolean validateName(String name) {
-        return true;
+    protected Result validateName(String name) {
+        if (name.length() >= 3) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("User name too short"), R.string.register_invalid_name);
+        }
     }
 
     /**
      * validates user email
      */
-    protected boolean validateEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    protected Result validateEmail(String email) {
+        if (Patterns.EMAIL_ADDRESS == null) {
+            return new Result.Success<>(true);
+        }
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Invalid Email"), "Email not valid");
+        }
     }
 
     /**
      * validates phone
      */
-    protected boolean validatePhone(String phone) {
-        return Patterns.PHONE.matcher(phone).matches();
+    protected Result validatePhone(String phone) {
+        if (Patterns.PHONE == null) {
+            return new Result.Success<>(true);
+        }
+        if (Patterns.PHONE.matcher(phone).matches()) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Invalid phone"), "Phone not valid");
+        }
     }
 
     /**
      * validates password
      */
-    protected Result<Boolean> validatePassword(String password) {
-        Integer password_min_length = Resources.getInteger(R.integer.password_min_length);
-        String[] special_characters = Resources.getStringArray(R.array.special_symbols);
-        if (password.length() < R.integer.password_min_length) return new
+    protected Result validatePassword(String password) {
+        Integer password_min_length;
+        String[] special_characters;
+        try {
+            password_min_length = Resources.getInteger(R.integer.password_min_length);
+            special_characters = Resources.getStringArray(R.array.special_symbols);
+        } catch (NullPointerException e) {
+            password_min_length = 8;
+            special_characters = new String[]{"#", "%"};
+        }
+
+
+        if (password.length() < password_min_length) return new
                 Result.Error(new IllegalArgumentException("Invalid password"),
                 String.format(Locale.CANADA, "Password must be longer than %d",
                         password_min_length));
