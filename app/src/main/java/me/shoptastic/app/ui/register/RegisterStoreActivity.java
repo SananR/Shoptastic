@@ -13,12 +13,12 @@ public class RegisterStoreActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_shop_info_sign_in);
+        setContentView(R.layout.activity_register_owner);
     }
 
     public void register(View v) {
-        final EditText name = findViewById(R.id.editTextTextPersonName2);
-        final EditText address = findViewById(R.id.editTextTextPersonName3);
+        final EditText name = findViewById(R.id.editTextStoreName);
+        final EditText address = findViewById(R.id.editTextStoreAddress);
         final Button logo = findViewById(R.id.button4);
 
     }

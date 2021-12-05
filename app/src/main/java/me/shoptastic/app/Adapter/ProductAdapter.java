@@ -56,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            title = itemView.findViewById(R.id.title);
+            title = itemView.findViewById(R.id.title2Txt);
             fee = itemView.findViewById(R.id.fee);
             addBtn = itemView.findViewById(R.id.addBtn);
 
