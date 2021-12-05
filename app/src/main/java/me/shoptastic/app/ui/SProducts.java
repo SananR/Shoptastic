@@ -29,7 +29,7 @@ public class SProducts extends Activity {
 
         ArrayList<Product> products = new ArrayList<>();
         //demo
-        products.add(new Product("", "", 1,1));
+        products.add(new Product("", "", 1f, 1));
 
 
     }

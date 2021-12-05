@@ -3,12 +3,12 @@ package me.shoptastic.app.data.model;
 public class Product {
     private final String product_name;
     private final Integer Id;
-    private Integer Price;
+    private Float Price;
     private String description;
     private int numberInCart;
 
 
-    public Product(String name, String description, Integer Price, Integer Id) {
+    public Product(String name, String description, Float Price, Integer Id) {
         product_name = name;
         this.description = description;
         this.Id = Id;
@@ -19,7 +19,7 @@ public class Product {
         return this.Id;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return this.Price;
     }
 
@@ -31,7 +31,7 @@ public class Product {
         return this.product_name;
     }
 
-    public void changePrice(int Price) {
+    public void changePrice(Float Price) {
         this.Price = Price;
     }
 

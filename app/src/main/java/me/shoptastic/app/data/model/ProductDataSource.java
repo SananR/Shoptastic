@@ -3,15 +3,6 @@ package me.shoptastic.app.data.model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import me.shoptastic.app.data.model.Product;
-import me.shoptastic.app.data.model.Customer;
-import me.shoptastic.app.data.model.Product;
-import me.shoptastic.app.data.model.Store;
-import me.shoptastic.app.data.model.StoreOwner;
-import me.shoptastic.app.data.model.User;
-
-
-import java.io.IOException;
 
 import me.shoptastic.app.data.Result;
 
@@ -23,8 +14,9 @@ public class ProductDataSource {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference();
     }
-    public Result<User> addtodatabase(Product p, String Store_Name){
-        dRef.child(Store_Name).child(p.ID().toString()).setValue(p);
+
+    public Result addtodatabase(Product p, String Store_Name) {
+        dRef.child(Store_Name).child(p.getId().toString()).setValue(p);
         return null;
     }
 

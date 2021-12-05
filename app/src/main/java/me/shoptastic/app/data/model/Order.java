@@ -1,8 +1,6 @@
 package me.shoptastic.app.data.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 
 public class Order {
 
@@ -24,8 +22,8 @@ public class Order {
 
     public ArrayList<Product> getListCart(){
         //Testing(demo)
-        Product p1 = new Product("Pizza", "delicous", 1, 1);
-        Product p2 = new Product("Apple", "fresh", 1,2);
+        Product p1 = new Product("Pizza", "delicous", 1.0f, 1);
+        Product p2 = new Product("Apple", "fresh", 1.0f, 2);
         ArrayList<Product> anOrder = new ArrayList<Product>();
         anOrder.add(p1);
         anOrder.add(p2);
@@ -38,10 +36,10 @@ public class Order {
     */
 
 
-    public int getSumPrice(){
+    public Float getSumPrice() {
         ArrayList<Product> listProduct2 = getListCart();
-        int fee = 0;
-        for(int i = 0; i < listProduct2.size(); i ++){
+        Float fee = 0.0f;
+        for (int i = 0; i < listProduct2.size(); i++) {
             fee = fee + (listProduct2.get(i).getPrice() * listProduct2.get(i).getNumberInCart());
         }
         return fee;
@@ -59,6 +57,6 @@ public class Order {
 
     @Override
     public int hashCode(){
-        return getSumPrice();
+        return (int) getSumPrice().floatValue();
     }
 }
