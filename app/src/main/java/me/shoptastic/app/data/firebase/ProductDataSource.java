@@ -40,7 +40,6 @@ public class ProductDataSource {
                     ProductRepository repository = ProductRepository.getInstance();
                     repository.addProduct(p,store);
                 }
-
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     Product p = snapshot.getValue(Product.class);
@@ -48,7 +47,6 @@ public class ProductDataSource {
                     repository.removeProduct(p, store);
                     repository.addProduct(p,store);
                 }
-
                 @Override
                 public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                     Product p = snapshot.getValue(Product.class);
@@ -57,13 +55,10 @@ public class ProductDataSource {
                 }
 
                 @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                }
-
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    System.out.println("The read has failed");
+                    System.out.println("The read has failed because of errors");
                 }
             };
             listeners.put(store, listener);
