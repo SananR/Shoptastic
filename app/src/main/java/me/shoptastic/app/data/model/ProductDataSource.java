@@ -1,14 +1,17 @@
 package me.shoptastic.app.data.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 import me.shoptastic.app.data.Result;
@@ -16,6 +19,7 @@ import me.shoptastic.app.data.Result;
 public class ProductDataSource {
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
+    private HashMap<String, ChildEventListener> listeners;
 
     public ProductDataSource() {
         fAuth = FirebaseAuth.getInstance();
@@ -25,21 +29,44 @@ public class ProductDataSource {
         dRef.child(Store_Name).child(p.getId().toString()).setValue(p);
         return null;
     }
-    public HashSet<Product> retrieve(){
-        final HashSet<Product> a = new HashSet<>();
-        dRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Product p = snapshot.getValue(Product.class);
-                a.add(p);
-            }
+    public void retrieve(String store){
+        if(!listeners.containsKey(store)){
+            ChildEventListener listener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    Product p = snapshot.getValue(Product.class);
+                    ProductRepository repository = ProductRepository.getInstance();
+                    repository.addProduct(p,store);
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("The read failed:");
-            }
-        });
-                return a;
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    Product p = snapshot.getValue(Product.class);
+                    ProductRepository repository = ProductRepository.getInstance();
+                    repository.removeProduct(p, store);
+                    repository.addProduct(p,store);
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                    Product p = snapshot.getValue(Product.class);
+                    ProductRepository repository = ProductRepository.getInstance();
+                    repository.removeProduct(p, store);
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    System.out.println("The read has failed");
+                }
+            };
+            listeners.put(store, listener);
+            dRef.child(store).addChildEventListener(listener);
+        }
     }
 
 
