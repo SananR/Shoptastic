@@ -1,22 +1,17 @@
-package me.shoptastic.app.data.model;
+package me.shoptastic.app.data.firebase;
 
-import androidx.annotation.NonNull;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import me.shoptastic.app.data.Result;
-import me.shoptastic.app.data.model.Product;
-import java.util.HashSet;
 import java.util.HashMap;
-import java.util.HashSet.*;
+import java.util.HashSet;
+
+import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.data.model.Result;
 
 
 public class ProductRepository {
     private static volatile ProductRepository instance;
     private final ProductDataSource dataSource;
-    public HashMap<Store,HashSet<Product>> products = new HashMap<>();
+    public HashMap<String, HashSet<Product>> products = new HashMap<>();
 
     // private constructor : singleton access
     private ProductRepository() {
