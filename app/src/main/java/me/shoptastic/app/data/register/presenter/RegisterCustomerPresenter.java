@@ -1,6 +1,7 @@
 package me.shoptastic.app.data.register.presenter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.util.Patterns;
 
 import java.util.Arrays;
@@ -11,38 +12,48 @@ import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.register.UserRepository;
+import me.shoptastic.app.ui.OwnerRegisterActivity;
 import me.shoptastic.app.ui.RegisterActivity;
 import me.shoptastic.app.ui.StoresActivity;
 
-public class RegisterPresenter {
+public class RegisterCustomerPresenter {
 
     private RegisterActivity view;
     private UserRepository userRepository;
 
-    public RegisterPresenter(){}
+    public RegisterCustomerPresenter(){}
 
-    public RegisterPresenter(RegisterActivity view) {
+    public RegisterCustomerPresenter(RegisterActivity view) {
         this.view = view;
         this.userRepository = UserRepository.getInstance();
     }
 
-    public RegisterPresenter(RegisterActivity v, UserRepository userRepository) {
+    public RegisterCustomerPresenter(RegisterActivity v, UserRepository userRepository) {
         this.userRepository = userRepository;
         this.view = v;
     }
 
-    public void register() {
-        // can be launched in a separate asynchronous job
-        userRepository.register(this, new Customer(view.getEmail(), view.getName(), view.getPhone()), view.getPassword());
+    public void validateUserRegister(boolean owner) {
+        userRepository.validateUserRegister(this, view.getEmail(), owner);
     }
 
-    public void complete() {
-        Intent i = new Intent(view, StoresActivity.class);
-        view.startActivity(i);
+    public void errorUserExists() {
+        this.view.error(null, "Email already in use", null, null);
     }
 
-    public void error(String name, String email, String phone, String password) {
-        this.view.error(name, email, phone, password);
+    public void complete(boolean owner) {
+        if (!owner) {
+            userRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone()));
+            Intent i = new Intent(view, StoresActivity.class);
+            view.startActivity(i);
+        } else {
+            Intent intent = new Intent(view, OwnerRegisterActivity.class);
+            intent.putExtra(RegisterActivity.name, view.getName());
+            intent.putExtra(RegisterActivity.email, view.getEmail());
+            intent.putExtra(RegisterActivity.phone, view.getPhone());
+            intent.putExtra(RegisterActivity.password, view.getPassword());
+            view.startActivity(intent);
+        }
     }
 
     public boolean validateInput() {

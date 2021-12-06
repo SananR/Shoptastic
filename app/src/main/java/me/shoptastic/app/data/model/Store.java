@@ -1,17 +1,17 @@
 package me.shoptastic.app.data.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Store {
+
     private final String storeName;
-    HashSet<Product> storeProducts;
+    ArrayList<Product> storeProducts;
     String address;
 
-    public Store(String name, String address, HashSet<Product> products) {
+    public Store(String name, String address, ArrayList<Product> products) {
         storeName = name;
-        for (Product s : products) {
-            storeProducts.add(s);
-        }
+        this.storeProducts = products;
         this.address = address;
     }
 
@@ -19,7 +19,7 @@ public class Store {
         return storeName;
     }
 
-    public HashSet<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return storeProducts;
     }
 

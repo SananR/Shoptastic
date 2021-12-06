@@ -7,7 +7,7 @@ import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.register.UserRepository;
 import me.shoptastic.app.ui.OwnerRegisterActivity;
 
-public class RegisterOwnerPresenter extends RegisterPresenter {
+public class RegisterOwnerPresenter {
 
     private final UserRepository userRepository;
     private final OwnerRegisterActivity view;
@@ -23,9 +23,14 @@ public class RegisterOwnerPresenter extends RegisterPresenter {
         String phone = view.getPhone();
         String password = view.getPassword();
 
-        userRepository.register(this, new StoreOwner(email, name, phone,
-                new Store(store.getName(), store.getAddress(), store.getProducts())), password);
+        userRepository.register(new StoreOwner(email, name, phone, store));
+        complete();
     }
+
+    public void complete() {
+
+    }
+
     public boolean validateInput() {
         String errorName = null, errorAddress = null;
 
@@ -38,7 +43,6 @@ public class RegisterOwnerPresenter extends RegisterPresenter {
         view.error(errorName, errorAddress);
         return (errorName == null && errorAddress == null);
     }
-
 
     /**
      * Validates username

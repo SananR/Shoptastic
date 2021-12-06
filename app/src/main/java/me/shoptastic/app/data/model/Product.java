@@ -4,8 +4,10 @@ import android.graphics.Bitmap;
 
 
 public class Product {
+  
     private String product_name;
     private Integer Id;
+  
     private Integer Price;
     private String description;
     private int numberInCart;

@@ -1,20 +1,17 @@
 package me.shoptastic.app.data.register;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -60,42 +57,33 @@ public class UserRepository {
         //TODO handle login
     }
 
-
-
-    public void register(RegisterPresenter presenter, User user, String password) {
-        // handle register
-        dRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void validateUserRegister(RegisterCustomerPresenter presenter, String email, boolean owner) {
+        dRef.child("users").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snap : snapshot.child("users").getChildren()) {
-                    Customer c = snap.getValue(Customer.class);
-                    if (c.getEmail().equals(user.getEmail())) {
-                        //User already exists as a customer
-                        presenter.error(null, "Email address is in use.", null, null);
-                        return;
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DataSnapshot snap : task.getResult().getChildren()) {
+                        Customer c = snap.getValue(Customer.class);
+                        if (email.equals(c.getEmail())) {
+                            //User exists already
+                            presenter.errorUserExists();
+                            return;
+                        }
                     }
+                    presenter.complete(owner);
+                } else {
+                    throw new RuntimeException(task.getException());
                 }
-                for (DataSnapshot snap : snapshot.child("owners").getChildren()) {
-                    StoreOwner o = snap.getValue(StoreOwner.class);
-                    if (o.getEmail().equals(user.getEmail())) {
-                        //User already exists as a store owner
-                        presenter.error(null, "Email address is in use.", null, null);
-                        return;
-                    }
-                }
-                //Email is not in use
-                String child;
-                if (user instanceof Customer) child = "users";
-                else child = "owners";
-                dRef.child(child).child(user.getUUID()).setValue(user);
-                setLoggedInUser(user);
-                presenter.complete();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                throw new RuntimeException(error.getMessage());
             }
         });
+    }
+
+    public void register(User user) {
+        // handle register
+        String child;
+        if (user instanceof Customer) child = "users";
+        else child = "owners";
+        dRef.child(child).child(user.getUUID()).setValue(user);
     }
 
 

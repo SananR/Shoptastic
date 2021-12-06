@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.register.UserRepository;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
 import me.shoptastic.app.ui.RegisterActivity;
 
 /**
@@ -29,7 +29,7 @@ public class ExampleUnitTest {
     RegisterActivity registerUser;
 
     @Mock
-    RegisterPresenter presenter;
+    RegisterCustomerPresenter presenter;
 
     @Mock
     UserRepository userRepository;
@@ -48,7 +48,7 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, null, null);
         customerPresenter.register();
         verify(registerUser).error(null, null, null, "Password must be longer than 8");
     }
@@ -59,7 +59,7 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, null, null);
         customerPresenter.register();
         verify(registerUser).getName();
     }
@@ -70,7 +70,7 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, null, null);
         customerPresenter.register();
         verify(registerUser).getEmail();
     }
@@ -81,7 +81,7 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, null, null);
         customerPresenter.register();
         verify(registerUser).getPhone();
     }
@@ -92,7 +92,7 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, null, null);
         customerPresenter.register();
         verify(registerUser).getPassword();
     }
@@ -105,7 +105,7 @@ public class ExampleUnitTest {
         when(registerUser.getPassword()).thenReturn("123456789###");
         Customer customer = new Customer("1@gmail.com", "hello", "+1234");
         when(userRepository.register(any(Customer.class), anyString())).thenReturn(new Result.Success(customer));
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, userRepository, loginRepository);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, userRepository, loginRepository);
         customerPresenter.register();
         verify(userRepository).register(customer, "123456789###");
     }
@@ -118,7 +118,7 @@ public class ExampleUnitTest {
         when(registerUser.getPassword()).thenReturn("123456789###");
         Customer customer = new Customer("1@gmail.com", "hello", "+1234");
         when(userRepository.register(any(Customer.class), anyString())).thenReturn(new Result.Success(customer));
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, userRepository, loginRepository);
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, userRepository, loginRepository);
         customerPresenter.register();
         verify(loginRepository).setLoggedInUser(customer);
     }

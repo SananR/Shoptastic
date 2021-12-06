@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.register.presenter.RegisterPresenter;
+import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
 
 public class RegisterActivity extends Activity {
 
@@ -68,20 +68,11 @@ public class RegisterActivity extends Activity {
     }
 
     public void register(View v) {
-        RegisterPresenter presenter = new RegisterPresenter(this);
+        RegisterCustomerPresenter presenter = new RegisterCustomerPresenter(this);
         boolean valid = presenter.validateInput();
         if (valid) {
             final boolean checkBox = ((CheckBox) findViewById(R.id.checkBox)).isChecked();
-            if (!checkBox) {
-                presenter.register();
-            } else {
-                Intent intent = new Intent(this, OwnerRegisterActivity.class);
-                intent.putExtra(RegisterActivity.name, getName());
-                intent.putExtra(RegisterActivity.email, getEmail());
-                intent.putExtra(RegisterActivity.phone, getPhone());
-                intent.putExtra(RegisterActivity.password, getPassword());
-                startActivity(intent);
-            }
+            presenter.validateUserRegister(checkBox);
         }
     }
 }
