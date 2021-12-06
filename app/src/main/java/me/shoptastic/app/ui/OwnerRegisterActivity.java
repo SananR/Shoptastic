@@ -7,12 +7,12 @@ import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.register.presenter.RegisterOwnerPresenter;
-import me.shoptastic.app.data.register.presenter.RegisterStorePresenter;
 
 public class OwnerRegisterActivity extends Activity {
 
@@ -54,10 +54,6 @@ public class OwnerRegisterActivity extends Activity {
         return ((EditText) findViewById(R.id.editTextStoreName)).getText().toString();
     }
 
-    public Store getStore() {
-        return new Store(getStoreName(), getAddress(), new HashSet<>());
-    }
-
     public void error(String name, String address) {
         TextInputLayout tilName = findViewById(R.id.tilStoreName);
         TextInputLayout tilAddress = findViewById(R.id.tilStoreAddress);
@@ -71,7 +67,7 @@ public class OwnerRegisterActivity extends Activity {
         RegisterOwnerPresenter presenter = new RegisterOwnerPresenter(this);
         boolean valid = presenter.validateInput();
         if (valid) {
-            presenter.register(new Store(getStoreName(), getAddress(), new HashSet<>()));
+            presenter.register(new Store(getStoreName(), getAddress(), new ArrayList<>()));
         }
     }
 

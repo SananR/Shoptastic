@@ -2,6 +2,7 @@ package me.shoptastic.app.data.register.presenter;
 
 import android.content.Intent;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import me.shoptastic.app.R;
@@ -69,7 +70,7 @@ public class RegisterStorePresenter {
         }
 
 
-        Store store = new Store(name, location, new HashSet<>());
+        Store store = new Store(name, location, new ArrayList<>());
         Result result = storeRepository.register(store);
         if (result instanceof Result.Error) {
             Intent intent = new Intent(this.activity, StoresActivity.class);
