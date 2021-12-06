@@ -9,6 +9,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.data.model.Customer;
+import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.data.model.Store;
+import me.shoptastic.app.data.model.StoreOwner;
+import me.shoptastic.app.data.model.User;
+
+
+import java.io.IOException;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -25,8 +34,8 @@ public class ProductDataSource {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference(Resources.FireBaseLink);
     }
-    public Result addtodatabase(Product p, String Store_Name){
-        dRef.child(Store_Name).child(p.getId().toString()).setValue(p);
+    public Result<User> addtodatabase(Product p, String Store_Name){
+        dRef.child(Store_Name).child(p.ID().toString()).setValue(p);
         return null;
     }
     public void retrieve(String store){

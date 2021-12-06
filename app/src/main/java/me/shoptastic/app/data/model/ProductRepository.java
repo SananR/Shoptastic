@@ -31,7 +31,7 @@ public class ProductRepository {
     }
 
 
-    public Result addtodatabase(Product p, String Store_Name) {
+    public Result<User> addtodatabase(Product p, String Store_Name) {
         // handle register
         return dataSource.addtodatabase(p, Store_Name);
     }
