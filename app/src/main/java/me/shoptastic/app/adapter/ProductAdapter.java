@@ -1,4 +1,4 @@
-package me.shoptastic.app.Adapter;
+package me.shoptastic.app.adapter;
 
 import android.content.Intent;
 import android.os.Parcelable;
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import me.shoptastic.app.R;
-import me.shoptastic.app.ShowDetailActivity;
 import me.shoptastic.app.data.model.Product;
+import me.shoptastic.app.ui.ShowDetailActivity;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
     ArrayList<Product> productDomains;

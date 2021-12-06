@@ -3,6 +3,7 @@ package me.shoptastic.app.data.model;
 import java.util.ArrayList;
 
 public class StoreOwner extends User {
+
     private Store store;
 
     public StoreOwner(String email, String displayName, String phone, Store store) {

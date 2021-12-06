@@ -1,10 +1,10 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import me.shoptastic.app.R;
 
-public class Products extends AppCompatActivity {
+public class Products extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

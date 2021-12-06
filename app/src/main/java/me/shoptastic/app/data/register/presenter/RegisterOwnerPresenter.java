@@ -1,53 +1,64 @@
 package me.shoptastic.app.data.register.presenter;
 
-import android.graphics.Bitmap;
-
-import androidx.lifecycle.ViewModel;
-
-import java.util.HashSet;
-
-import me.shoptastic.app.OwnerRegisterActivity;
-import me.shoptastic.app.data.LoginRepository;
-import me.shoptastic.app.data.register.RegisterRepository;
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
-import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.data.register.UserRepository;
+import me.shoptastic.app.ui.OwnerRegisterActivity;
 
 public class RegisterOwnerPresenter extends RegisterPresenter {
 
-    private final RegisterRepository repo;
+    private final UserRepository userRepository;
     private final OwnerRegisterActivity view;
 
-    public RegisterOwnerPresenter(OwnerRegisterActivity view) {
-        this.view = view;
-        this.repo = RegisterRepository.getInstance();
+    public RegisterOwnerPresenter(OwnerRegisterActivity activity) {
+        this.userRepository = UserRepository.getInstance();
+        this.view = activity;
     }
 
-    public Result<User> register(String name, String email, String phone, String password, String storeName, String address, Bitmap image) {
-        // can be launched in a separate asynchronous job
-        if (validateInput(storeName, address)) {
-            Result<User> result = repo.register(
-                    new StoreOwner(email, name, phone,
-                            new Store(storeName, address, image, new HashSet<>())),
-                    password);
-            return result;
-        } else return new Result.Error(new IllegalArgumentException("Invalid store information"));
-    }
+    public void register(Store store) {
+        String name = view.getName();
+        String email = view.getEmail();
+        String phone = view.getPhone();
+        String password = view.getPassword();
 
-    public boolean validateInput(String storeName, String address) {
-        boolean errorName = false, errorAddress = false;
-        if (!validateName(storeName)) errorName = true;
-        if (!validateAddress(address)) errorAddress = true;
+        userRepository.register(this, new StoreOwner(email, name, phone,
+                new Store(store.getName(), store.getAddress(), store.getProducts())), password);
+    }
+    public boolean validateInput() {
+        String errorName = null, errorAddress = null;
+
+        Result result = validateStoreName(this.view.getStoreName());
+        if (result instanceof Result.Error) errorName = ((Result.Error) result).getError();
+
+        result = validateAddress(this.view.getAddress());
+        if (result instanceof Result.Error) errorAddress = ((Result.Error) result).getError();
+
         view.error(errorName, errorAddress);
-        return !(errorName || errorAddress);
+        return (errorName == null && errorAddress == null);
+    }
+
+
+    /**
+     * Validates username
+     */
+    protected Result validateStoreName(String name) {
+        if (name.length() >= 3) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Store name too short"), R.string.register_invalid_name);
+        }
     }
 
     /**
-     * Validates store address
+     * Validates address
      */
-    public boolean validateAddress(String address) {
-        return address.length() >= 5;
+    protected Result validateAddress(String address) {
+        if (address.length() >= 5) {
+            return new Result.Success<>(true);
+        } else {
+            return new Result.Error(new IllegalArgumentException("Address too short"), R.string.register_invalid_address);
+        }
     }
-
 }
