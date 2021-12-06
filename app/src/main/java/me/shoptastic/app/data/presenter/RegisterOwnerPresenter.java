@@ -24,7 +24,7 @@ public class RegisterOwnerPresenter extends RegisterPresenter {
         String password = view.getPassword();
 
         userRepository.register(this, new StoreOwner(email, name, phone,
-                new Store(store.getName(), store.getAddress(), store.getProducts())), password);
+                new Store(store.getName(), store.getAddress())), password);
     }
     public boolean validateInput() {
         String errorName = null, errorAddress = null;

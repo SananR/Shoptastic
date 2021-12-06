@@ -7,8 +7,6 @@ import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.HashSet;
-
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.presenter.RegisterOwnerPresenter;
@@ -54,7 +52,7 @@ public class OwnerRegisterActivity extends Activity {
     }
 
     public Store getStore() {
-        return new Store(getStoreName(), getAddress(), new HashSet<>());
+        return new Store(getStoreName(), getAddress());
     }
 
     public void error(String name, String address) {
@@ -70,7 +68,7 @@ public class OwnerRegisterActivity extends Activity {
         RegisterOwnerPresenter presenter = new RegisterOwnerPresenter(this);
         boolean valid = presenter.validateInput();
         if (valid) {
-            presenter.register(new Store(getStoreName(), getAddress(), new HashSet<>()));
+            presenter.register(new Store(getStoreName(), getAddress()));
         }
     }
 
