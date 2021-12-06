@@ -1,12 +1,16 @@
 package me.shoptastic.app.data.firebase;
 
+import me.shoptastic.app.data.firebase.ProductDataSource;
 import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Result;
+import me.shoptastic.app.data.model.Product;
+import java.util.HashSet;
+
 
 public class ProductRepository {
     private static volatile ProductRepository instance;
     private final ProductDataSource dataSource;
-
+    private HashSet<Product> productset = new HashSet<>();
 
     // private constructor : singleton access
     private ProductRepository() {
@@ -25,6 +29,12 @@ public class ProductRepository {
         // handle register
         return dataSource.addtodatabase(p, Store_Name);
     }
+
+    public void retrieve(){
+        this.productset = dataSource.retrieve();
+    }
+
+
 }
 
 
