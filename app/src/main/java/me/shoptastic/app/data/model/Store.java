@@ -7,11 +7,8 @@ public class Store {
     HashSet<Product> storeProducts;
     String address;
 
-    public Store(String name, String address, HashSet<Product> products) {
-        storeName = name;
-        for (Product s : products) {
-            storeProducts.add(s);
-        }
+    public Store(String name, String address) {
+        this.storeName = name;
         this.address = address;
     }
 
@@ -38,7 +35,7 @@ public class Store {
 
     @Override
     public int hashCode() {
-        return storeName.hashCode()+storeProducts.hashCode();
+        return storeName.hashCode();
     }
 
 }
