@@ -2,8 +2,6 @@ package me.shoptastic.app.data.presenter;
 
 import android.content.Intent;
 
-import java.util.HashSet;
-
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.model.Result;
@@ -69,8 +67,8 @@ public class RegisterStorePresenter {
         }
 
 
-        Store store = new Store(name, location, new HashSet<>());
-        Result result = storeRepository.register(store);
+        Store store = new Store(name, location);
+        Result result = storeRepository.addtodatabase(store);
         if (result instanceof Result.Error) {
             Intent intent = new Intent(this.activity, StoresActivity.class);
             this.activity.startActivity(intent);
