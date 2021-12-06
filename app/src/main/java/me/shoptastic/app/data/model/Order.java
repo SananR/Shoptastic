@@ -1,8 +1,12 @@
 package me.shoptastic.app.data.model;
 
+import com.google.firebase.database.core.view.Change;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+
+import me.shoptastic.app.Interface.ChangeNumberItemListener;
 
 public class Order {
 
@@ -31,12 +35,22 @@ public class Order {
         anOrder.add(p2);
         return anOrder;
     }
-/*
-    public void plusNumberFood(ArrayList<Product> listProduct, int position, ){
+
+    public void plusNumberProduct(ArrayList<Product> listProduct, int position, ChangeNumberItemListener changeNumberItemListener){
+        listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart() + 1);
+        changeNumberItemListener.changed();
 
     }
-    */
 
+    public void minusNumberProduct(ArrayList<Product> listProduct, int position, ChangeNumberItemListener changeNumberItemListener){
+        if(listProduct.get(position).getNumberInCart() == 1){
+            listProduct.remove(position);
+        }
+        else{
+            listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart() - 1);
+        }
+        changeNumberItemListener.changed();
+    }
 
     public int getSumPrice(){
         ArrayList<Product> listProduct2 = getListCart();
