@@ -1,18 +1,13 @@
-package me.shoptastic.app;
+package me.shoptastic.app.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
-import me.shoptastic.app.Adapter.ProductAdapter;
+import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Product;
 
@@ -31,29 +26,26 @@ public class ShowDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_detail);
 
         String productName = "";
-        String productPrice = "";
+        Float productPrice = 0f;
         String productDescription = "";
 
         Bundle extra = getIntent().getExtras();
         if(extra != null){
             productName = extra.getString("productName");
-            productPrice = extra.getString("productPrice");
+            productPrice = extra.getFloat("productPrice");
             productDescription = extra.getString("description");
         }
 
-        TextView pName = (TextView) findViewById(R.id.titleTxt);
+        TextView pName = findViewById(R.id.titleTxt);
         pName.setText(productName);
 
-        TextView pPrice = (TextView) findViewById(R.id.feeTxt);
+        TextView pPrice = findViewById(R.id.feeTxt);
         pPrice.setText("$" + productPrice);
 
-        TextView pDesc = (TextView) findViewById(R.id.descriptionTxt);
+        TextView pDesc = findViewById(R.id.descriptionTxt);
         pDesc.setText(productDescription);
 
-        aProduct.setProduct_name(productName);
-        aProduct.setDescription(productDescription);
-        aProduct.setPrice(productPrice);
-        order = new Order(this);
+        aProduct = new Product(productName, productDescription, productPrice, null);
 
         initView();
         getBundle();
@@ -80,9 +72,10 @@ public class ShowDetailActivity extends AppCompatActivity {
 
         addToCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                aProduct.setNumberInCart(numberOrder);
-                order.insertProduct(aProduct);
+            public void onClick(View v) {
+                for (int i = 0; i < numberOrder; i++) {
+                    order.addProduct(aProduct);
+                }
             }
         });
     }
