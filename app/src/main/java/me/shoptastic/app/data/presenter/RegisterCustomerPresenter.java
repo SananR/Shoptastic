@@ -1,7 +1,6 @@
 package me.shoptastic.app.data.presenter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.util.Patterns;
 
 import java.util.Arrays;
@@ -18,8 +17,8 @@ import me.shoptastic.app.ui.StoresActivity;
 
 public class RegisterCustomerPresenter {
 
-    private RegisterActivity view;
-    private UserRepository userRepository;
+    private final RegisterActivity view;
+    private final UserRepository userRepository;
 
     public RegisterCustomerPresenter(RegisterActivity view) {
         this.view = view;
@@ -41,9 +40,11 @@ public class RegisterCustomerPresenter {
 
     public void complete(boolean owner) {
         if (!owner) {
-            userRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone(), view.getPassword()));
-            Intent i = new Intent(view, StoresActivity.class);
-            view.startActivity(i);
+            if (validateInput()) {
+                userRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone(), view.getPassword()));
+                Intent i = new Intent(view, StoresActivity.class);
+                view.startActivity(i);
+            }
         } else {
             Intent intent = new Intent(view, OwnerRegisterActivity.class);
             intent.putExtra(RegisterActivity.name, view.getName());

@@ -3,7 +3,6 @@ package me.shoptastic.app.ui;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -18,7 +17,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        ((Button) findViewById(R.id.login)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn(view);
