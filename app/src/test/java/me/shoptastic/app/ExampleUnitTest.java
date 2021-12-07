@@ -13,7 +13,12 @@ import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Result;
-import me.shoptastic.app.data.presenter.RegisterPresenter;
+import me.shoptastic.app.data.model.Store;
+import me.shoptastic.app.data.presenter.LoginPresenter;
+import me.shoptastic.app.data.presenter.RegisterCustomerPresenter;
+import me.shoptastic.app.data.presenter.RegisterOwnerPresenter;
+import me.shoptastic.app.ui.LoginActivity;
+import me.shoptastic.app.ui.OwnerRegisterActivity;
 import me.shoptastic.app.ui.RegisterActivity;
 
 /**
@@ -39,9 +44,6 @@ public class ExampleUnitTest {
     @Mock
     UserRepository userRepository;
 
-    @Mock
-    LoginRepository loginRepository;
-
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
@@ -53,8 +55,8 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
-        customerPresenter.register();
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, null);
+        customerPresenter.validateInput();
         verify(registerUser).error(null, null, null, "Password must be longer than 8");
     }
 
@@ -86,9 +88,9 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
-        customerPresenter.register();
-        verify(registerUser).getName();
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, userRepository);
+        customerPresenter.validateUserRegister(false);
+        verify(registerUser).getEmail();
     }
 
     @Test
@@ -119,8 +121,8 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
-        customerPresenter.register();
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, userRepository);
+        customerPresenter.complete(false);
         verify(registerUser).getEmail();
     }
 
@@ -141,8 +143,8 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
-        customerPresenter.register();
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, userRepository);
+        customerPresenter.complete(false);
         verify(registerUser).getPhone();
     }
 
@@ -164,8 +166,8 @@ public class ExampleUnitTest {
         when(registerUser.getEmail()).thenReturn("1@gmail.com");
         when(registerUser.getPhone()).thenReturn("+12324");
         when(registerUser.getPassword()).thenReturn("1234");
-        RegisterPresenter customerPresenter = new RegisterPresenter(registerUser, null, null);
-        customerPresenter.register();
+        RegisterCustomerPresenter customerPresenter = new RegisterCustomerPresenter(registerUser, userRepository);
+        customerPresenter.complete(false);
         verify(registerUser).getPassword();
     }
 
