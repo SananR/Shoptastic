@@ -1,6 +1,5 @@
 package me.shoptastic.app.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,66 +10,56 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
-import me.shoptastic.app.Interface.ChangeNumberItemListener;
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.firebase.CartRepository;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Product;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
-    private final ArrayList<Product> productDomains;
-    private Order order;
-    private final ChangeNumberItemListener changeNumberItemsListener;
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+    private final Order order = CartRepository.getInstance().getOrder();
+    private final Context context;
 
-    public CartAdapter (ArrayList<Product> productDomains, Context context, ChangeNumberItemListener changeNumberItemListener){
-        this.productDomains = productDomains;
-        this.changeNumberItemsListener = changeNumberItemListener;
+    public CartAdapter(Context ct) {
+        this.context = ct;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cart, parent, false);
-
-        return new ViewHolder(inflate);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(this.context);
+        View view = inflater.inflate(R.layout.activity_cart, parent, false);
+        return new CartAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position){
-        holder.title.setText(productDomains.get(position).getName());
-        holder.feeEachItem.setText(String.valueOf(productDomains.get(position).getPrice()));
-        holder.totalEachItem.setText(String.valueOf((productDomains.get(position).getNumberInCart() * productDomains.get(position).getPrice())));
-        holder.num.setText(String.valueOf(productDomains.get(position).getNumberInCart()));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        position = holder.getAdapterPosition();
+        Product product = order.get(position);
+        holder.title.setText(product.getName());
+        holder.feeEachItem.setText(String.valueOf(product.getPrice()));
+        holder.totalEachItem.setText(String.valueOf((product.getPrice() * order.getQuantity(product))));
+        holder.num.setText(String.valueOf(order.getQuantity(product)));
 
         holder.plusItem.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                order.plusNumberProduct(productDomains, position, new ChangeNumberItemListener() {
-                    @Override
-                    public void changed() {
-                        changeNumberItemsListener.changed();
-                    }
-                });
+            public void onClick(View v) {
+                order.addProduct(product);
+                holder.num.setText(String.valueOf(order.getQuantity(product)));
             }
         });
 
-        holder.minusItem.setOnClickListener( new View.OnClickListener() {
+        holder.minusItem.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                order.minusNumberProduct(productDomains, position, new ChangeNumberItemListener() {
-                    @Override
-                    public void changed() {
-                        changeNumberItemsListener.changed();
-                    }
-                });
+            public void onClick(View v) {
+                order.addProduct(product);
+                holder.num.setText(String.valueOf(order.getQuantity(product)));
             }
         });
     }
 
     @Override
     public int getItemCount(){
-        return productDomains.size();
+        return order.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
