@@ -43,7 +43,7 @@ public class RegisterCustomerPresenter {
 
     public void complete(boolean owner) {
         if (!owner) {
-            userRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone()));
+            userRepository.register(new Customer(view.getEmail(), view.getName(), view.getPhone(), view.getPassword()));
             Intent i = new Intent(view, StoresActivity.class);
             view.startActivity(i);
         } else {

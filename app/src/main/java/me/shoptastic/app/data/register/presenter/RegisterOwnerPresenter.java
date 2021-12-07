@@ -23,7 +23,7 @@ public class RegisterOwnerPresenter {
         String phone = view.getPhone();
         String password = view.getPassword();
 
-        userRepository.register(new StoreOwner(email, name, phone, store));
+        userRepository.register(new StoreOwner(email, name, phone, password, store));
         complete();
     }
 
