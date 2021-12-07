@@ -38,7 +38,7 @@ public class Store {
 
     @Override
     public int hashCode() {
-        return storeName.hashCode()+storeProducts.hashCode();
+        return storeName.hashCode();
     }
 
 }

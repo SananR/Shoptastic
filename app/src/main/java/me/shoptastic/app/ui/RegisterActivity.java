@@ -1,6 +1,5 @@
 package me.shoptastic.app.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.register.presenter.RegisterCustomerPresenter;
+import me.shoptastic.app.data.presenter.RegisterCustomerPresenter;
 
 public class RegisterActivity extends Activity {
 

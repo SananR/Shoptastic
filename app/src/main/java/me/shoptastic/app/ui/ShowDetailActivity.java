@@ -18,6 +18,22 @@ public class ShowDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_detail);
 
+        String productName = "";
+        String productPrice = "";
+
+        Bundle extra = getIntent().getExtras();
+        if(extra != null){
+            productName = extra.getString("productName");
+            productPrice = extra.getString("productPrice");
+        }
+
+        TextView pName = (TextView) findViewById(R.id.titleTxt);
+        pName.setText(productName);
+
+        TextView pPrice = (TextView) findViewById(R.id.feeTxt);
+        pPrice.setText(productPrice);
+
+
         initView();
         getBundle();
     }

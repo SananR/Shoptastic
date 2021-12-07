@@ -40,7 +40,9 @@ public abstract class User {
         return displayName;
     }
 
-    public String getUUID() { return this.uuid; }
+    public String getUUID() {
+        return this.uuid;
+    }
 
     public String getPassword() { return password; }
 
