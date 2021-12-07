@@ -5,10 +5,8 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
@@ -62,47 +60,30 @@ public class UserRepository {
     }
 
     public void login(String email, String password, LoginPresenter presenter) {
-        DatabaseReference ref = dRef.child(customersKey);
-        ref.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+        dRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    System.out.println("exists");
-                    for (DataSnapshot snap :
-                            snapshot.getChildren()) {
-                        String userPassword = snap.child("password").getValue(String.class);
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DataSnapshot snapshot : task.getResult().child(customersKey).getChildren()) {
+                        String userPassword = snapshot.child("password").getValue(String.class);
                         if (userPassword != null && userPassword.equals(password)) {
-                            presenter.onLoginSuccess(snap.getValue(Customer.class));
+                            presenter.onLoginSuccess(snapshot.getValue(Customer.class));
+                            return;
+                        }
+                    }
+                    for (DataSnapshot snapshot : task.getResult().child(ownersKey).getChildren()) {
+                        String userPassword = snapshot.child("password").getValue(String.class);
+                        if (userPassword != null && userPassword.equals(password)) {
+                            presenter.onLoginSuccess(snapshot.getValue(StoreOwner.class));
+                            return;
                         }
                     }
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                presenter.onLoginFailed(new Result.Error(new IllegalArgumentException("Password or username incorrect"),
+                        "Password or email incorrect"));
             }
         });
-        ref = dRef.child(ownersKey);
-        ref.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot snap :
-                            snapshot.getChildren()) {
-                        String userPassword = snap.child("password").getValue(String.class);
-                        if (userPassword != null && userPassword.equals(password)) {
-                            presenter.onLoginSuccess(snap.getValue(StoreOwner.class));
-                        }
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        presenter.onLoginFailed(new Result.Error(new IllegalArgumentException("Password or username incorrect"),
-                "Password or email incorrect"));
     }
 
 
