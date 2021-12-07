@@ -1,5 +1,7 @@
 package me.shoptastic.app.data.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -50,6 +52,7 @@ public abstract class User {
         return password;
     }
 
+    @Exclude
     public Order getOrder() {
         return CartRepository.getInstance().getOrder();
     }
