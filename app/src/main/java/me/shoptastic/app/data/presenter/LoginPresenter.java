@@ -10,7 +10,6 @@ import me.shoptastic.app.ui.StoresActivity;
 
 public class LoginPresenter {
     LoginActivity activity;
-
     public LoginPresenter(LoginActivity activity) {
         this.activity = activity;
     }

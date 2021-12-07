@@ -51,6 +51,10 @@ public class RegisterActivity extends Activity {
         return ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
     }
 
+    public boolean getCheckbox() {
+        return ((CheckBox) findViewById(R.id.checkBox)).isChecked();
+    }
+
     public void error(String name, String email, String phone, String password) {
         TextInputLayout tilEmail = findViewById(R.id.tilEmail);
         TextInputLayout tilName = findViewById(R.id.tilName);
@@ -68,10 +72,8 @@ public class RegisterActivity extends Activity {
 
     public void register(View v) {
         RegisterCustomerPresenter presenter = new RegisterCustomerPresenter(this);
-        boolean valid = presenter.validateInput();
-        if (valid) {
-            final boolean checkBox = ((CheckBox) findViewById(R.id.checkBox)).isChecked();
-            presenter.validateUserRegister(checkBox);
+        if (presenter.validateInput()) {
+            presenter.validateUserRegister(getCheckbox());
         }
     }
 }
