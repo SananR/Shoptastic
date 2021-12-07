@@ -15,8 +15,8 @@ import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.presenter.RegisterCustomerPresenter;
 import me.shoptastic.app.data.presenter.LoginPresenter;
+import me.shoptastic.app.data.presenter.RegisterCustomerPresenter;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -111,7 +111,7 @@ public class UserRepository {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (DataSnapshot snap : task.getResult().child("users").getChildren()) {
+                    for (DataSnapshot snap : task.getResult().child(customersKey).getChildren()) {
                         Customer c = snap.getValue(Customer.class);
                         if (email.equals(c.getEmail())) {
                             //User exists already
@@ -119,7 +119,7 @@ public class UserRepository {
                             return;
                         }
                     }
-                    for (DataSnapshot snap : task.getResult().child("owners").getChildren()) {
+                    for (DataSnapshot snap : task.getResult().child(ownersKey).getChildren()) {
                         Customer c = snap.getValue(Customer.class);
                         if (email.equals(c.getEmail())) {
                             //User exists already

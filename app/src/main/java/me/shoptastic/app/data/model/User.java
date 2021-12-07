@@ -26,7 +26,8 @@ public abstract class User {
         this.password = password;
     }
 
-    public User() {}
+    public User() {
+    }
 
     public String getEmail() {
         return email;

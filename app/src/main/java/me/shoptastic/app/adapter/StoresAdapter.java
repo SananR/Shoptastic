@@ -11,18 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.firebase.StoreRepository;
+import me.shoptastic.app.data.model.Store;
 
 public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresViewHolder> {
 
     private final Context context;
-    private final StoreRepository repository;
+    private final ArrayList<Store> stores;
 
     public StoresAdapter(Context ct) {
         this.context = ct;
-        this.repository = StoreRepository.getInstance();
-        Log.d("test", "THIS MANY " + this.repository.getStores().size());
+        this.stores = StoreRepository.getInstance().getStores();
+        Log.d("test", "THIS MANY " + this.stores.size());
     }
 
     @NonNull
@@ -35,15 +38,15 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
 
     @Override
     public void onBindViewHolder(@NonNull StoresViewHolder holder, int position) {
-        holder.storeTitle.setText(this.repository.getStores().get(position).getName());
-        Log.d("test", this.repository.getStores().get(position).getDescription());
-        holder.storeDescription.setText(this.repository.getStores().get(position).getDescription());
+        holder.storeTitle.setText(this.stores.get(position).getName());
+        Log.d("test", this.stores.get(position).getDescription());
+        holder.storeDescription.setText(this.stores.get(position).getDescription());
         holder.storeIcon.setImageResource(R.drawable.img3);
     }
 
     @Override
     public int getItemCount() {
-        return this.repository.getStores().size();
+        return this.stores.size();
     }
 
     public class StoresViewHolder extends RecyclerView.ViewHolder {
