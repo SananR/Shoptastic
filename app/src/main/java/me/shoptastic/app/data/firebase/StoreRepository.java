@@ -1,24 +1,19 @@
 package me.shoptastic.app.data.firebase;
 
-import me.shoptastic.app.data.firebase.ProductDataSource;
-import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Result;
-import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Store;
 
-import java.util.HashMap;
-import java.util.HashSet;
-
+import java.util.ArrayList;
 
 public class StoreRepository {
+
     private static volatile StoreRepository instance;
     private final StoreDataSource dataSource;
-    private HashSet<Store> stores = new HashSet<Store>();
+    private ArrayList<Store> stores = new ArrayList<>();
 
     // private constructor : singleton access
     private StoreRepository() {
-        this.dataSource = new StoreDataSource();
-        dataSource.getStores();
+        this.dataSource = new StoreDataSource(this);
     }
 
     public static StoreRepository getInstance() {
@@ -28,25 +23,21 @@ public class StoreRepository {
         return instance;
     }
 
-
-    public Result addtodatabase(Store store) {
+    public Result addToDatabase(Store store) {
         // handle register
-        return dataSource.addtodatabase(store);
+        return dataSource.addToDatabase(store);
     }
 
-
-
-    public HashSet<Store> getStores(String store){
+    public ArrayList<Store> getStores(){
         return stores;
     }
 
-
-    public void addStore(Store store){
-        stores.add(store);
+    public void addStore(Store s){
+        if (!stores.contains(s)) stores.add(s);
     }
 
     public void removeStore(Store s){
-        stores.remove(s);
+        if (stores.contains(s)) stores.remove(s);
     }
 
 
