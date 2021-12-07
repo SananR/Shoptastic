@@ -13,18 +13,21 @@ public abstract class User {
     private String email;
     private String phone;
     private String displayName;
+    private String password;
     @Nonnull
     private String uuid;
     public ArrayList<Product> anOrder = new ArrayList<Product>();
 
-    public User(String email, String displayName, String phone) {
+    public User(String email, String displayName, String phone, String password) {
         this.email = email;
         this.phone = phone;
         this.displayName = displayName;
         this.uuid = UUID.randomUUID().toString();
+        this.password = password;
     }
 
-    public User(){}
+    public User() {
+    }
 
     public String getEmail() {
         return email;
@@ -38,7 +41,11 @@ public abstract class User {
         return displayName;
     }
 
-    public String getUUID() { return this.uuid; }
+    public String getUUID() {
+        return this.uuid;
+    }
+
+    public String getPassword() { return password; }
 
     public abstract ArrayList<Product> getOrder();
 }

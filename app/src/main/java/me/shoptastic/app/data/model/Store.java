@@ -1,44 +1,49 @@
 package me.shoptastic.app.data.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Store {
-    private final String storeName;
-    HashSet<Product> storeProducts;
-    String address;
 
-    public Store(String name, String address, HashSet<Product> products) {
-        storeName = name;
-        for (Product s : products) {
-            storeProducts.add(s);
-        }
+    private String name;
+    private String description;
+    private ArrayList<Product> products;
+    private String address;
+
+    public Store(String name, String address, String description, ArrayList<Product> products) {
+        this.name = name;
+        this.products = products;
         this.address = address;
+        this.description = description;
     }
+
+    public Store() {};
 
     public String getName() {
-        return storeName;
+        return name;
     }
 
-    public HashSet<Product> getProducts() {
-        return storeProducts;
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public String getDescription() { return description; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
-        return storeName.equals(store.storeName) && storeProducts == store.storeProducts;
+        if ((name == null) ? (store.getName() != null) : !name.equals(store.getName())) return false;
+        return name.equals(store.name) && products == store.products;
     }
 
     @Override
     public int hashCode() {
-        return storeName.hashCode()+storeProducts.hashCode();
+        return name.hashCode();
     }
 
 }

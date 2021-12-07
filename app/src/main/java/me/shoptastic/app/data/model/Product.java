@@ -1,6 +1,7 @@
 package me.shoptastic.app.data.model;
 
 public class Product {
+
     private final String product_name;
     private final Integer Id;
     private Float Price;

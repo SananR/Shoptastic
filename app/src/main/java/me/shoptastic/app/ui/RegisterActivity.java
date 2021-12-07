@@ -1,6 +1,5 @@
 package me.shoptastic.app.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Resources;
-import me.shoptastic.app.data.presenter.RegisterPresenter;
+import me.shoptastic.app.data.presenter.RegisterCustomerPresenter;
 
 public class RegisterActivity extends Activity {
 
@@ -52,6 +51,10 @@ public class RegisterActivity extends Activity {
         return ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
     }
 
+    public boolean getCheckbox() {
+        return ((CheckBox) findViewById(R.id.checkBox)).isChecked();
+    }
+
     public void error(String name, String email, String phone, String password) {
         TextInputLayout tilEmail = findViewById(R.id.tilEmail);
         TextInputLayout tilName = findViewById(R.id.tilName);
@@ -68,20 +71,9 @@ public class RegisterActivity extends Activity {
     }
 
     public void register(View v) {
-        RegisterPresenter presenter = new RegisterPresenter(this);
-        boolean valid = presenter.validateInput();
-        if (valid) {
-            final boolean checkBox = ((CheckBox) findViewById(R.id.checkBox)).isChecked();
-            if (!checkBox) {
-                presenter.register();
-            } else {
-                Intent intent = new Intent(this, OwnerRegisterActivity.class);
-                intent.putExtra(RegisterActivity.name, getName());
-                intent.putExtra(RegisterActivity.email, getEmail());
-                intent.putExtra(RegisterActivity.phone, getPhone());
-                intent.putExtra(RegisterActivity.password, getPassword());
-                startActivity(intent);
-            }
+        RegisterCustomerPresenter presenter = new RegisterCustomerPresenter(this);
+        if (presenter.validateInput()) {
+            presenter.validateUserRegister(getCheckbox());
         }
     }
 }
