@@ -1,9 +1,7 @@
-package me.shoptastic.app.Adapter;
+package me.shoptastic.app.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +15,13 @@ import java.util.ArrayList;
 
 import me.shoptastic.app.Interface.ChangeNumberItemListener;
 import me.shoptastic.app.R;
-import me.shoptastic.app.ShowDetailActivity;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Product;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
-    private ArrayList<Product> productDomains;
+    private final ArrayList<Product> productDomains;
     private Order order;
-    private ChangeNumberItemListener changeNumberItemsListener;
+    private final ChangeNumberItemListener changeNumberItemsListener;
 
     public CartAdapter (ArrayList<Product> productDomains, Context context, ChangeNumberItemListener changeNumberItemListener){
         this.productDomains = productDomains;
