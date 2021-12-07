@@ -1,31 +1,54 @@
 package me.shoptastic.app.data.model;
 
-import android.graphics.Bitmap;
-
-
 public class Product {
-    private final String product_name;
-    Integer Id;
-    Integer Price;
-    String description;
-    Bitmap image;
 
-    public Product(String name, String description, Bitmap image, Integer Price, Integer Id) {
+    private final String product_name;
+    private final Integer Id;
+    private Float Price;
+    private String description;
+    private int numberInCart;
+
+
+    public Product(String name, String description, Float Price, Integer Id) {
         product_name = name;
         this.description = description;
-        this.image = image;
         this.Id = Id;
         this.Price = Price;
     }
-    public Integer ID(Product p){ return p.Id;}
-    public Integer price(Product p){ return p.Price;}
-    public void changePrice(Product p, int Price){ p.Price = Price;}
-    public void changeDescription(Product p, String description){ p.description = description;}
+
+    public Integer getId(){
+        return this.Id;
+    }
+
+    public Float getPrice() {
+        return this.Price;
+    }
+
+    public int getNumberInCart() {
+        return this.numberInCart;
+    }
+
+    public void setNumberInCart(int newNumberInCart){
+        this.numberInCart = newNumberInCart;
+    }
+
+    public String getName() {
+        return this.product_name;
+    }
+
+    public void changePrice(Float Price) {
+        this.Price = Price;
+    }
+
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-       Product product = (Product) o;
+        Product product = (Product) o;
         return Id.equals(product.Id);
     }
 

@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.10234375" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/activity_caccount.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2046875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/activity_products.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.36616147335118665" />
@@ -14,7 +16,8 @@
         <entry key="app/src/main/res/layout/activity_shop_info_sign_in.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2833190703639564" />
         <entry key="app/src/main/res/layout/activity_sproducts.xml" value="0.1359375" />
-        <entry key="app/src/main/res/layout/activity_stores.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_stores.xml" value="0.23921491511998844" />
+        <entry key="app/src/main/res/layout/stores_row.xml" value="0.25639768150253883" />
       </map>
     </option>
   </component>
