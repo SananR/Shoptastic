@@ -66,10 +66,7 @@ public class OwnerRegisterActivity extends Activity {
 
     public void register(View v) {
         RegisterOwnerPresenter presenter = new RegisterOwnerPresenter(this);
-        boolean valid = presenter.validateInput();
-        if (valid) {
-            presenter.register(new Store(getStoreName(), getAddress()));
-        }
+        presenter.register();
     }
 
 

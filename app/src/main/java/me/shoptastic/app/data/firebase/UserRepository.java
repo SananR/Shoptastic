@@ -10,8 +10,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import me.shoptastic.app.data.model.Customer;
 import me.shoptastic.app.data.model.Resources;
+import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.data.presenter.LoginPresenter;
 import me.shoptastic.app.data.presenter.RegisterPresenter;
 
 /**
@@ -19,6 +21,8 @@ import me.shoptastic.app.data.presenter.RegisterPresenter;
  * maintains an in-memory cache of login status and user credentials information.
  */
 public class UserRepository {
+    public static final String customersKey = "users";
+    public static final String ownersKey = "owners";
 
     private static volatile UserRepository instance;
 
@@ -50,14 +54,53 @@ public class UserRepository {
         user = null;
     }
 
-    private void setLoggedInUser(User user) {
+    public void setLoggedInUser(User user) {
         this.user = user;
     }
 
-    public void login(String email, String password) {
-        //TODO handle login
-    }
+    public void login(String email, String password, LoginPresenter presenter) {
+        DatabaseReference ref = dRef.child(customersKey);
+        ref.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    System.out.println("exists");
+                    for (DataSnapshot snap :
+                            snapshot.getChildren()) {
+                        String userPassword = snap.child("password").getValue(String.class);
+                        if (userPassword != null && userPassword.equals(password)) {
+                            presenter.onLoginSuccess(snap.getValue(Customer.class));
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        ref = dRef.child(ownersKey);
+        ref.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot snap :
+                            snapshot.getChildren()) {
+                        String userPassword = snap.child("password").getValue(String.class);
+                        if (userPassword != null && userPassword.equals(password)) {
+                            presenter.onLoginSuccess(snap.getValue(StoreOwner.class));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        presenter.onLoginFailed(new Result.Error(new IllegalArgumentException("Password or username incorrect"),
+                "Password or email incorrect"));
+    }
 
 
     public void register(RegisterPresenter presenter, User user, String password) {
@@ -86,6 +129,7 @@ public class UserRepository {
                 if (user instanceof Customer) child = "users";
                 else child = "owners";
                 dRef.child(child).child(user.getUUID()).setValue(user);
+                dRef.child(child).child(user.getUUID()).child("password").setValue(password);
                 setLoggedInUser(user);
                 presenter.complete();
             }

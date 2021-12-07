@@ -1,13 +1,15 @@
 package me.shoptastic.app.ui;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.presenter.LoginPresenter;
 
 public class LoginActivity extends Activity {
 
@@ -16,28 +18,35 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+        ((Button) findViewById(R.id.login)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn(view);
+            }
+        });
+    }
+
+    public String getEmail() {
+        Editable email = ((TextInputEditText) findViewById(R.id.loginEmail)).getText();
+        if (email == null) return "";
+        return email.toString();
+    }
+
+    public String getPassword() {
+        Editable password = (((TextInputEditText) findViewById(R.id.loginPassword))).getText();
+        if (password == null) return "";
+        return password.toString();
     }
 
     public void signIn(View v) {
-        // User has clicked sign in
-        final EditText email = findViewById(R.id.username);
-        final EditText password = findViewById(R.id.password);
-        final Button login = findViewById(R.id.login);
-        final ProgressBar loading = findViewById(R.id.loading);
-
-       /* Result user = repository.login(email.getText().toString(), password.getText().toString());
-        if (user instanceof Result.Success) {
-            // User login successful, start new activity
-        } else if (user instanceof Result.Error) {
-            // User login failed, display error
-            showLoginFailed(((Result.Error) user).getError());
-        } else {
-            throw new IllegalArgumentException("Result returned not a success and not a failure?");
-        }*/
+        LoginPresenter presenter = new LoginPresenter(this);
+        presenter.login();
     }
 
-
-    private void showLoginFailed(String errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    public void error(String err) {
+        TextInputLayout emailLayout = findViewById(R.id.loginEmailLayout);
+        TextInputLayout passwordLayout = findViewById(R.id.loginPasswordLayout);
+        emailLayout.setError(err);
+        passwordLayout.setError(err);
     }
 }

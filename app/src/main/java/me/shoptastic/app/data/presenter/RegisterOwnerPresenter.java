@@ -1,6 +1,7 @@
 package me.shoptastic.app.data.presenter;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
@@ -10,22 +11,29 @@ import me.shoptastic.app.ui.OwnerRegisterActivity;
 public class RegisterOwnerPresenter extends RegisterPresenter {
 
     private final UserRepository userRepository;
+    private final StoreRepository storeRepository;
     private final OwnerRegisterActivity view;
 
     public RegisterOwnerPresenter(OwnerRegisterActivity activity) {
         this.userRepository = UserRepository.getInstance();
+        this.storeRepository = StoreRepository.getInstance();
         this.view = activity;
     }
 
-    public void register(Store store) {
+    public void register() {
         String name = view.getName();
         String email = view.getEmail();
         String phone = view.getPhone();
         String password = view.getPassword();
-
-        userRepository.register(this, new StoreOwner(email, name, phone,
-                new Store(store.getName(), store.getAddress())), password);
+        Store store = view.getStore();
+        if (validateInput()) {
+            userRepository.register(this, new StoreOwner(email, name, phone,
+                    store), password);
+            storeRepository.addtodatabase(store);
+        }
     }
+
+
     public boolean validateInput() {
         String errorName = null, errorAddress = null;
 
