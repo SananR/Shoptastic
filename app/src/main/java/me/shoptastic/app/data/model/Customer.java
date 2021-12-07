@@ -1,6 +1,5 @@
 package me.shoptastic.app.data.model;
 
-import java.util.ArrayList;
 
 public class Customer extends User {
 
@@ -10,11 +9,6 @@ public class Customer extends User {
 
     public Customer() {
         super();
-    }
-
-    @Override
-    public ArrayList<Product> getOrder() {
-        return this.anOrder;
     }
 
 }

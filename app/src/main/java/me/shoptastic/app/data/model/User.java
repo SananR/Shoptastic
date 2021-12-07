@@ -1,9 +1,11 @@
 package me.shoptastic.app.data.model;
 
-import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
+
+import me.shoptastic.app.data.firebase.CartRepository;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
@@ -16,7 +18,6 @@ public abstract class User {
     private String password;
     @Nonnull
     private String uuid;
-    public ArrayList<Product> anOrder = new ArrayList<Product>();
 
     public User(String email, String displayName, String phone, String password) {
         this.email = email;
@@ -45,7 +46,35 @@ public abstract class User {
         return this.uuid;
     }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
-    public abstract ArrayList<Product> getOrder();
+    public Order getOrder() {
+        return CartRepository.getInstance().getOrder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email.equals(user.email) && phone.equals(user.phone) && displayName.equals(user.displayName) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, phone, displayName, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", password='" + password + '\'' +
+                ", uuid='" + uuid + '\'' +
+                '}';
+    }
 }
