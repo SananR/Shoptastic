@@ -29,7 +29,7 @@ public class RegisterOwnerPresenter {
         if (validateInput()) {
             userRepository.register(new StoreOwner(email, name, phone, password,
                     store));
-            storeRepository.addtodatabase(store);
+            storeRepository.addToDatabase(store);
         }
     }
 

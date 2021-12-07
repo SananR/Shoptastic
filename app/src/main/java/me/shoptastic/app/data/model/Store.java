@@ -1,29 +1,30 @@
 package me.shoptastic.app.data.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+
+import me.shoptastic.app.data.firebase.ProductRepository;
 
 public class Store {
-
-    private String name;
+    private final String name;
     private String description;
-    private ArrayList<Product> products;
-    private String address;
+    String address;
 
-    public Store(String name, String address, String description, ArrayList<Product> products) {
+    public Store(String name, String address, String description) {
         this.name = name;
-        this.products = products;
         this.address = address;
         this.description = description;
     }
 
-    public Store() {};
+    public Store() {
+        name = "";
+    }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public HashSet<Product> getProducts() {
+        return ProductRepository.getInstance().getProducts(this.name);
     }
 
     public String getAddress() {
@@ -38,7 +39,7 @@ public class Store {
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
         if ((name == null) ? (store.getName() != null) : !name.equals(store.getName())) return false;
-        return name.equals(store.name) && products == store.products;
+        return name.equals(store.name);
     }
 
     @Override
