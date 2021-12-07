@@ -1,5 +1,7 @@
 package me.shoptastic.app.data.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashSet;
 
 import me.shoptastic.app.data.firebase.ProductRepository;
@@ -23,6 +25,7 @@ public class Store {
         return name;
     }
 
+    @Exclude
     public HashSet<Product> getProducts() {
         return ProductRepository.getInstance().getProducts(this.name);
     }
