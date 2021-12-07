@@ -81,7 +81,7 @@ public class RegisterCustomerPresenter {
         if (name.length() >= 3) {
             return new Result.Success<>(true);
         } else {
-            return new Result.Error(new IllegalArgumentException("User name too short"), R.string.register_invalid_name);
+            return new Result.Error(new IllegalArgumentException("User name too short"), "Invalid name");
         }
     }
 

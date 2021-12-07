@@ -138,9 +138,10 @@ public class UserRepository {
     public void register(User user) {
         // handle register
         String child;
-        if (user instanceof Customer) child = "users";
-        else child = "owners";
+        if (user instanceof Customer) child = customersKey;
+        else child = ownersKey;
         dRef.child(child).child(user.getUUID()).setValue(user);
+        setLoggedInUser(user);
     }
 
 

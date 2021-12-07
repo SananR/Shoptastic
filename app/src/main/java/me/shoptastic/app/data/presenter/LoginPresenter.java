@@ -9,18 +9,26 @@ import me.shoptastic.app.ui.LoginActivity;
 import me.shoptastic.app.ui.StoresActivity;
 
 public class LoginPresenter {
+    private final UserRepository instance;
     LoginActivity activity;
+
     public LoginPresenter(LoginActivity activity) {
         this.activity = activity;
+        instance = UserRepository.getInstance();
+    }
+
+    public LoginPresenter(LoginActivity activity, UserRepository repository) {
+        this.activity = activity;
+        instance = repository;
     }
 
     //TODO
     public void login() {
-        UserRepository.getInstance().login(activity.getEmail(), activity.getPassword(), this);
+        instance.login(activity.getEmail(), activity.getPassword(), this);
     }
 
     public void onLoginSuccess(User user) {
-        UserRepository.getInstance().setLoggedInUser(user);
+        instance.setLoggedInUser(user);
         Intent i = new Intent(activity, StoresActivity.class);
         activity.startActivity(i);
     }

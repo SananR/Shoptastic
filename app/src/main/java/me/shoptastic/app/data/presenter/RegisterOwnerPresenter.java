@@ -1,5 +1,7 @@
 package me.shoptastic.app.data.presenter;
 
+import android.content.Intent;
+
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.firebase.UserRepository;
@@ -7,6 +9,7 @@ import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.ui.OwnerRegisterActivity;
+import me.shoptastic.app.ui.StoresActivity;
 
 public class RegisterOwnerPresenter {
 
@@ -20,6 +23,12 @@ public class RegisterOwnerPresenter {
         this.view = activity;
     }
 
+    public RegisterOwnerPresenter(OwnerRegisterActivity activity, UserRepository userRepository, StoreRepository storeRepository) {
+        this.view = activity;
+        this.userRepository = userRepository;
+        this.storeRepository = storeRepository;
+    }
+
     public void register() {
         String name = view.getName();
         String email = view.getEmail();
@@ -31,6 +40,8 @@ public class RegisterOwnerPresenter {
                     store));
             storeRepository.addToDatabase(store);
         }
+        Intent i = new Intent(view, StoresActivity.class);
+        view.startActivity(i);
     }
 
 
