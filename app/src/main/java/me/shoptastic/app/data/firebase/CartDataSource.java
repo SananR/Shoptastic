@@ -10,12 +10,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.HashSet;
 
 import me.shoptastic.app.data.model.Order;
-import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Resources;
 
 public class CartDataSource {
@@ -26,7 +24,7 @@ public class CartDataSource {
 
     public CartDataSource() {
         fAuth = FirebaseAuth.getInstance();
-        dRef = FirebaseDatabase.getInstance().getReference(Resources.FireBaseLink);
+        dRef = FirebaseDatabase.getInstance(Resources.FireBaseLink).getReference();
     }
 
 

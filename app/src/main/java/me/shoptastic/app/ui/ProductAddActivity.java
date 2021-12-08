@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.presenter.ProductPresenter;
@@ -14,7 +15,7 @@ public class ProductAddActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_addproduct);
+        setContentView(R.layout.activity_owner_post_dish);
         Button button = findViewById(R.id.post);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -22,22 +23,43 @@ public class ProductAddActivity extends Activity {
             }
         });
 
+        initProduct();
+
+    }
+
+    private void initProduct() {
+        Bundle extras = getIntent().getExtras();
+        ((EditText) findViewById(R.id.addProductName)).setText(extras.getString(Products.productName, ""));
+        ((EditText) findViewById(R.id.addProductPrice)).setText(extras.getString(Products.productPrice, ""));
+        ((EditText) findViewById(R.id.addProductID)).setText(extras.getString(Products.productID, ""));
+        ((EditText) findViewById(R.id.addProductDescription)).setText(extras.getString(Products.productDescription, ""));
     }
 
     public String getProductName() {
-        return ((EditText) findViewById(R.id.qt2)).getText().toString();
+        return ((TextView) findViewById(R.id.addProductName)).getText().toString();
     }
 
     public String getProductDescription() {
-        return ((EditText) findViewById(R.id.Description)).getText().toString();
+        return ((EditText) findViewById(R.id.addProductDescription)).getText().toString();
     }
 
     public Float getProductPrice() {
-        return Float.valueOf(((EditText) findViewById(R.id.qt4)).getText().toString());
+        return Float.valueOf(((EditText) findViewById(R.id.addProductPrice)).getText().toString());
     }
 
     public Integer getProductID() {
-        return Integer.valueOf(((EditText) findViewById(R.id.qt)).getText().toString());
+        return Integer.valueOf(((EditText) findViewById(R.id.addProductID)).getText().toString());
+    }
+
+    public String getStoreName() {
+        return getIntent().getStringExtra(Products.productStore);
+    }
+
+    public void clear() {
+        ((EditText) findViewById(R.id.addProductName)).setText("");
+        ((EditText) findViewById(R.id.addProductPrice)).setText("");
+        ((EditText) findViewById(R.id.addProductID)).setText("");
+        ((EditText) findViewById(R.id.addProductDescription)).setText("");
     }
 
     public void register(View v) {

@@ -1,13 +1,17 @@
 package me.shoptastic.app.data.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
     private final String storeName;
     private final ArrayList<Product> products;
-    private final HashMap<Product, Integer> quantities;
-    private boolean done;
+    private final HashMap<String, Integer> quantities;
+    private boolean checkout = false;
+    private boolean pickup = false;
+
 
     public Order(String storeName) {
         this.storeName = storeName;
@@ -16,41 +20,32 @@ public class Order {
     }
 
     public void addProduct(Product product) {
-        if (quantities.containsKey(product)) {
-            quantities.put(product, quantities.get(product) + 1);
+        if (quantities.containsKey(product.getName())) {
+            quantities.put(product.getName(), quantities.get(product.getName()) + 1);
         } else {
             products.add(product);
-            quantities.put(product, 1);
+            quantities.put(product.getName(), 1);
         }
     }
 
     public void removeProduct(Product product) {
-        if (quantities.containsKey(product)) {
-            if (quantities.get(product) == 1) {
-                quantities.remove(product);
+        if (quantities.containsKey(product.getName())) {
+            if (quantities.get(product.getName()) == 1) {
+                quantities.remove(product.getName());
                 products.remove(product);
             } else {
-                quantities.put(product, quantities.get(product) - 1);
+                quantities.put(product.getName(), quantities.get(product.getName()) - 1);
             }
         }
     }
 
-    public ArrayList<Product> getListCart() {
-        //Testing(demo)
-        Product p1 = new Product("Pizza", "delicous", 1.0f, 1);
-        Product p2 = new Product("Apple", "fresh", 1.0f, 2);
-        ArrayList<Product> anOrder = new ArrayList<Product>();
-        anOrder.add(p1);
-        anOrder.add(p2);
-        return anOrder;
-    }
 
-
+    @Exclude
     public Float getSumPrice() {
         Float sum = 0f;
         for (Product product :
                 products) {
-            sum += product.getPrice() * quantities.getOrDefault(product, 0);
+            sum += product.getPrice() * quantities.getOrDefault(product.getName(), 0);
         }
         return sum;
     }
@@ -60,8 +55,9 @@ public class Order {
         return products.get(position);
     }
 
+    @Exclude
     public Integer getQuantity(Product product) {
-        return quantities.getOrDefault(product, 0);
+        return quantities.getOrDefault(product.getName(), 0);
     }
 
     public Integer size() {
@@ -81,11 +77,39 @@ public class Order {
         return storeName;
     }
 
-    public boolean isDone() {
-        return done;
+    public boolean getCheckout() {
+        return checkout;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setCheckout(boolean done) {
+        this.checkout = done;
+    }
+
+    public boolean getPickup() {
+        return pickup;
+    }
+
+    public void setPickup(boolean pickup) {
+        this.pickup = pickup;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public HashMap<String, Integer> getQuantities() {
+        return quantities;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "storeName='" + storeName + '\'' +
+                ", products=" + products +
+                ", quantities=" + quantities +
+                ", checkout=" + checkout +
+                ", pickup=" + pickup +
+                '}';
     }
 }
