@@ -2,6 +2,7 @@ package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +27,8 @@ public class Products extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        Log.d("test", getIntent().getStringExtra("me.shoptastic.app.storeName"));
+        ((TextView)findViewById(R.id.productsTitleTextView)).setText(String.format("%s's Products", getIntent().getStringExtra(productStore)));
+
         recyclerView();
     }
 
@@ -38,7 +40,6 @@ public class Products extends AppCompatActivity {
         RecyclerView recyclerViewList = findViewById(R.id.productsRecylerView);
         recyclerViewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        Log.d("test2", getStoreName());
         ProductAdapter adapter = new ProductAdapter(this, new ArrayList<>(ProductRepository.getInstance().getProducts(getStoreName())));
         recyclerViewList.setAdapter(adapter);
 
