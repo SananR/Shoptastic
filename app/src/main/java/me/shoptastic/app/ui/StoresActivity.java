@@ -3,7 +3,6 @@ package me.shoptastic.app.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,7 +11,7 @@ import me.shoptastic.app.adapter.StoresAdapter;
 import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.model.Store;
 
-public class StoresActivity extends AppCompatActivity implements StoresAdapter.StoreClickListener {
+public class StoresActivity extends Activity implements StoresAdapter.StoreClickListener {
 
     private RecyclerView recyclerView;
 
@@ -32,9 +31,10 @@ public class StoresActivity extends AppCompatActivity implements StoresAdapter.S
     public void onStoreClick(int position) {
         Store s = StoreRepository.getInstance().getStores().get(position);
         Intent i = new Intent(this, Products.class);
-        i.putExtra("me.shoptastic.app.storeName", s.getName());
+        i.putExtra(Products.productStore, s.getName());
         i.putExtra("me.shoptastic.app.storeDescription", s.getDescription());
         i.putExtra("me.shoptastic.app.storeAddress", s.getAddress());
+
         //i.putExtra("me.shoptastic.app.storeProducts", s.getProducts());
         startActivity(i);
     }

@@ -33,6 +33,7 @@ public class ProductRepository {
 
     public HashSet<Product> getProducts(String store){
         if(!products.containsKey(store)){
+            products.put(store, new HashSet<>());
             retrieveProducts(store);
         }
         return products.get(store);
