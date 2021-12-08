@@ -28,7 +28,7 @@ public class ShowDetailActivity extends Activity {
         if (extra != null) {
             aProduct = new Product(extra.getString(ProductsActivity.productName),
                     extra.getString(ProductsActivity.productDescription),
-                    extra.getFloat(ProductsActivity.productPrice), extra.getInt(ProductsActivity.productID),
+                    Float.valueOf(extra.getFloat(ProductsActivity.productPrice)), extra.getInt(ProductsActivity.productID),
                     extra.getString(ProductsActivity.productStore));
         }
 

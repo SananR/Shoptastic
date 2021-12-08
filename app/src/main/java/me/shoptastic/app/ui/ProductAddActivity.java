@@ -29,10 +29,10 @@ public class ProductAddActivity extends Activity {
 
     private void initProduct() {
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras != null && extras.containsKey(ProductsActivity.productName)) {
             ((EditText) findViewById(R.id.addProductName)).setText(extras.getString(ProductsActivity.productName, ""));
-            ((EditText) findViewById(R.id.addProductPrice)).setText(extras.getString(ProductsActivity.productPrice, ""));
-            ((EditText) findViewById(R.id.addProductID)).setText(extras.getString(ProductsActivity.productID, ""));
+            ((EditText) findViewById(R.id.addProductPrice)).setText(String.valueOf(extras.getFloat(ProductsActivity.productPrice, 0f)));
+            ((EditText) findViewById(R.id.addProductID)).setText(String.valueOf(extras.getInt(ProductsActivity.productID, 0)));
             ((EditText) findViewById(R.id.addProductDescription)).setText(extras.getString(ProductsActivity.productDescription, ""));
         }
     }
