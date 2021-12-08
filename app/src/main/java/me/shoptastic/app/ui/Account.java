@@ -22,11 +22,9 @@ public class Account extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        String a_name = intent.getStringExtra(Account.NAME);
-        TextView name = findViewById(R.id.textView13);
-        name.setText(a_name);
         setContentView(R.layout.activity_account);
+        TextView name = findViewById(R.id.textView13);
+        name.setText(UserRepository.getInstance().getUser().getDisplayName());
     }
 
     // This function is called when clicked acc details
@@ -59,28 +57,5 @@ public class Account extends Activity {
             startActivity(c_intent);
         }
 
-    }
-    public void cart(View v){
-        User user = UserRepository.getInstance().getUser();
-        //EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
-
-        if (user instanceof StoreOwner) {
-            Intent s_intent = new Intent(this, SProducts.class);
-            startActivity(s_intent);
-        }else{
-            Intent c_intent = new Intent(this, Cart.class);
-            startActivity(c_intent);
-        }
-
-
-    }
-
-    public void account_b(View v) {
-        User user = UserRepository.getInstance().getUser();
-        //EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
-        Intent intent = new Intent(this, Account.class);
-        String name = user.getDisplayName();
-        intent.putExtra(NAME, name);
-        startActivity(intent);
     }
 }

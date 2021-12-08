@@ -30,8 +30,7 @@ public class LoginPresenter {
 
     public void onLoginSuccess(User user) {
         instance.setLoggedInUser(user);
-        //Intent i = new Intent(activity, StoresActivity.class);
-        Intent i = new Intent(activity, Account.class);
+        Intent i = new Intent(activity, StoresActivity.class);
         activity.startActivity(i);
     }
 
