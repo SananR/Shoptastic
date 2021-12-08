@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
+
     private final String storeName;
     private final ArrayList<Product> products;
     private final HashMap<String, Integer> quantities;

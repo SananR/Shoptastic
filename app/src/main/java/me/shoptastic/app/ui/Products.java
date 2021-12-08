@@ -12,6 +12,7 @@ import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.firebase.ProductRepository;
 
 public class Products extends Activity {
+
     public static String productName = "me.shoptastic.app.productName";
     public static String productDescription = "me.shoptastic.app.productDescription";
     public static String productPrice = "me.shoptastic.app.productPrice";
@@ -27,7 +28,7 @@ public class Products extends Activity {
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra("store");
+        return getIntent().getStringExtra(Products.productStore);
     }
 
     private void recyclerView() {

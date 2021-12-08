@@ -48,7 +48,10 @@
                 android:name=".ui.ShowDetailActivity"
                 android:exported="false" />
         <activity
-                android:name=".ui.SProducts"
+                android:name=".ui.SignIn"
+                android:exported="false" />
+        <activity
+                android:name=".ui.StoreProductsActivity"
                 android:exported="false" />
         <activity
                 android:name=".ui.StoresActivity"
