@@ -20,10 +20,98 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storeRecyclerView"
-        android:layout_width="411dp"
-        android:layout_height="657dp"
+        android:layout_width="413dp"
+        android:layout_height="656dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_alignParentBottom="true"
+        android:background="#9DC209"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/account"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="205dp"
+            android:layout_marginBottom="18dp"
+            android:onClick="account_b"
+            android:text="Account"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.355" />
+
+        <Button
+            android:id="@+id/cart"
+            android:layout_width="58dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="317dp"
+            android:layout_marginTop="9dp"
+            android:onClick="cart"
+            android:text="Cart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.355" />
+
+        <Button
+            android:id="@+id/store"
+            android:layout_width="58dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="103dp"
+            android:layout_marginTop="10dp"
+            android:onClick="display_store"
+            android:text="Store"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.355" />
+
+        <Button
+            android:id="@+id/StoreOwnerOrders"
+            android:layout_width="58dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="9dp"
+            android:onClick="list_of_orders"
+            android:text="Orders"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.355" />
+
+
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

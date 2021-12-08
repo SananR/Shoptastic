@@ -6,6 +6,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.Account">
 
+
     <Button
             android:id="@+id/button5"
             android:layout_width="176dp"
@@ -78,5 +79,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.087"
-        tools:srcCompat="@drawable/DefaultProfile" />
+        tools:srcCompat="@drawable/default_profile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
