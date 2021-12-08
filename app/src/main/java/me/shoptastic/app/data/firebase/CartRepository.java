@@ -1,7 +1,5 @@
 package me.shoptastic.app.data.firebase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import me.shoptastic.app.data.model.Order;
@@ -38,19 +36,32 @@ public class CartRepository {
         return new Result.Success<>(order);
     }
 
-    public Result addProduct(Product p){
+    public Result addProduct(Product p) {
+        if (order == null) {
+            addOrder(new Order(p.getStoreName()));
+        }
         order.addProduct(p);
         dataSource.changeOrder(order);
         return new Result.Success<>(p);
     }
 
-    public void getCustomerOrder(){
-        if (order == null){
+    public void checkoutOrder() {
+        order.setCheckout(true);
+        dataSource.changeOrder(order);
+    }
+
+    public void pickupOrder() {
+        order.setPickup(true);
+        dataSource.changeOrder(order);
+    }
+
+    public void getCustomerOrder() {
+        if (order == null) {
             dataSource.getCustomerOrder();
         }
     }
 
-    public void getStoreOrders(String storename, HashSet<Order> orders){
+    public void getStoreOrders(String storename, HashSet<Order> orders) {
         dataSource.getStoreOrders(storename, orders);
     }
 

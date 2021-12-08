@@ -9,10 +9,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Resources;
@@ -22,13 +20,14 @@ public class ProductDataSource {
     private final FirebaseAuth fAuth;
     private final DatabaseReference dRef;
     private HashMap<String, ChildEventListener> listeners;
+    public static String productsKey;
 
     public ProductDataSource() {
         fAuth = FirebaseAuth.getInstance();
         dRef = FirebaseDatabase.getInstance().getReference(Resources.FireBaseLink);
     }
     public Result addtodatabase(Product p, String Store_Name){
-        dRef.child(Store_Name).child(p.getId().toString()).setValue(p);
+        dRef.child(productsKey).child(Store_Name).child(p.getId().toString()).setValue(p);
         return null;
     }
     public void retrieve(String store){
@@ -62,7 +61,7 @@ public class ProductDataSource {
                 }
             };
             listeners.put(store, listener);
-            dRef.child(store).addChildEventListener(listener);
+            dRef.child(productsKey).child(store).addChildEventListener(listener);
         }
     }
 
