@@ -50,7 +50,6 @@ public class UserRepository {
         return user != null;
     }
 
-    //TODO
     public void logout() {
         user = null;
     }
@@ -60,20 +59,25 @@ public class UserRepository {
     }
 
     public void login(String email, String password, LoginPresenter presenter) {
+        if (isLoggedIn()) return;
         dRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
                     for (DataSnapshot snapshot : task.getResult().child(customersKey).getChildren()) {
                         String userPassword = snapshot.child("password").getValue(String.class);
-                        if (userPassword != null && userPassword.equals(password)) {
+                        String userEmail = snapshot.child("email").getValue(String.class);
+                        if (userPassword != null && userEmail != null
+                                && userPassword.equals(password) && userEmail.equals(email)) {
                             presenter.onLoginSuccess(snapshot.getValue(Customer.class));
                             return;
                         }
                     }
                     for (DataSnapshot snapshot : task.getResult().child(ownersKey).getChildren()) {
                         String userPassword = snapshot.child("password").getValue(String.class);
-                        if (userPassword != null && userPassword.equals(password)) {
+                        String userEmail = snapshot.child("email").getValue(String.class);
+                        if (userPassword != null && userEmail != null
+                                && userPassword.equals(password) && userEmail.equals(email)) {
                             presenter.onLoginSuccess(snapshot.getValue(StoreOwner.class));
                             return;
                         }

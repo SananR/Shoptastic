@@ -40,6 +40,17 @@ public class ProductAddActivity extends Activity {
         return Integer.valueOf(((EditText) findViewById(R.id.qt)).getText().toString());
     }
 
+    public String getStoreName() {
+        return getIntent().getStringExtra("store");
+    }
+
+    public void clear() {
+        ((EditText) findViewById(R.id.qt2)).setText("");
+        ((EditText) findViewById(R.id.Description)).setText("");
+        ((EditText) findViewById(R.id.qt4)).setText("");
+        ((EditText) findViewById(R.id.qt)).setText("");
+    }
+
     public void register(View v) {
         ProductPresenter presenter = new ProductPresenter(this);
         presenter.register();
