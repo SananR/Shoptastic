@@ -38,7 +38,7 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
         //EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
 
         if (user instanceof StoreOwner) {
-            Intent s_intent = new Intent(this, SProducts.class);
+            Intent s_intent = new Intent(this, Products.class);
             startActivity(s_intent);
         }else{
             Intent c_intent = new Intent(this, Cart.class);
@@ -59,7 +59,7 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
     }
 
     public void display_store(View v){
-        Intent intent = new Intent(this, SProducts.class);
+        Intent intent = new Intent(this, Products.class);
         startActivity(intent);
     }
 
