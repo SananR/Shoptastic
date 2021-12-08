@@ -8,6 +8,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.presenter.LoginPresenter;
 
 public class LoginActivity extends Activity {
@@ -15,7 +16,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        UserRepository.getInstance().logout();
         setContentView(R.layout.activity_login);
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
