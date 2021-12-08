@@ -23,6 +23,16 @@ public class ProductAddActivity extends Activity {
             }
         });
 
+        initProduct();
+
+    }
+
+    private void initProduct() {
+        Bundle extras = getIntent().getExtras();
+        ((EditText) findViewById(R.id.addProductName)).setText(extras.getString(Products.productName, ""));
+        ((EditText) findViewById(R.id.addProductPrice)).setText(extras.getString(Products.productPrice, ""));
+        ((EditText) findViewById(R.id.addProductID)).setText(extras.getString(Products.productID, ""));
+        ((EditText) findViewById(R.id.addProductDescription)).setText(extras.getString(Products.productDescription, ""));
     }
 
     public String getProductName() {
@@ -42,7 +52,7 @@ public class ProductAddActivity extends Activity {
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra("store");
+        return getIntent().getStringExtra(Products.productStore);
     }
 
     public void clear() {
