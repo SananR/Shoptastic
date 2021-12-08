@@ -1,22 +1,14 @@
 package me.shoptastic.app.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
-import me.shoptastic.app.data.firebase.ProductRepository;
-import me.shoptastic.app.data.firebase.UserRepository;
-import me.shoptastic.app.data.model.StoreOwner;
 
 public class ProductsActivity extends AppCompatActivity {
 
@@ -33,23 +25,7 @@ public class ProductsActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.productsTitleTextView)).setText(String.format("%s's Products", getIntent().getStringExtra(productStore)));
 
-        if (UserRepository.getInstance().getUser() instanceof StoreOwner) {
-            Button b = findViewById(R.id.addProductButton);
-            b.setVisibility(View.VISIBLE);
-            b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addProductView();
-                }
-            });
-        }
-
         recyclerView();
-    }
-
-    private void addProductView() {
-        Intent i = new Intent(this, ProductAddActivity.class);
-        startActivity(i);
     }
 
     public String getStoreName() {
@@ -59,8 +35,7 @@ public class ProductsActivity extends AppCompatActivity {
     private void recyclerView() {
         RecyclerView recyclerViewList = findViewById(R.id.productsRecylerView);
         recyclerViewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        ProductAdapter adapter = new ProductAdapter(this, new ArrayList<>(ProductRepository.getInstance().getProducts(getStoreName())));
+        ProductAdapter adapter = new ProductAdapter(this, getStoreName());
         recyclerViewList.setAdapter(adapter);
 
 

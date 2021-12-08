@@ -2,8 +2,9 @@ package me.shoptastic.app.data.model;
 
 import com.google.firebase.database.Exclude;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
+import me.shoptastic.app.Interface.Callback;
 import me.shoptastic.app.data.firebase.ProductRepository;
 
 public class Store {
@@ -26,8 +27,12 @@ public class Store {
     }
 
     @Exclude
-    public HashSet<Product> getProducts() {
-        return ProductRepository.getInstance().getProducts(this.name);
+    public ArrayList<Product> getProducts() {
+        return ProductRepository.getInstance().getProducts(this.name, new Callback() {
+            @Override
+            public void callback() {
+            }
+        });
     }
 
     public String getAddress() {

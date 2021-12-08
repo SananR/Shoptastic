@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import me.shoptastic.app.Interface.Callback;
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.firebase.ProductRepository;
 import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.ui.ProductAddActivity;
 import me.shoptastic.app.ui.ProductsActivity;
@@ -22,8 +24,13 @@ public class EditProductAdapter extends RecyclerView.Adapter<EditProductAdapter.
     ArrayList<Product> productDomains;
     StoreProductsActivity view;
 
-    public EditProductAdapter(StoreProductsActivity view, ArrayList<Product> productDomains) {
-        this.productDomains = productDomains;
+    public EditProductAdapter(StoreProductsActivity view, String store) {
+        this.productDomains = ProductRepository.getInstance().getProducts(store, new Callback() {
+            @Override
+            public void callback() {
+                notifyDataSetChanged();
+            }
+        });
         this.view = view;
     }
 
@@ -45,7 +52,7 @@ public class EditProductAdapter extends RecyclerView.Adapter<EditProductAdapter.
             public void onClick(View v) {
                 Intent intent = new Intent(view, ProductAddActivity.class);
                 intent.putExtra(ProductsActivity.productName, product.getName());
-                intent.putExtra(ProductsActivity.productPrice, product.getPrice().toString());
+                intent.putExtra(ProductsActivity.productPrice, product.getPrice());
                 intent.putExtra(ProductsActivity.productDescription, product.getDescription());
                 intent.putExtra(ProductsActivity.productID, product.getId());
                 intent.putExtra(ProductsActivity.productStore, product.getStoreName());
