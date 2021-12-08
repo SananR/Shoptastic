@@ -18,13 +18,17 @@ public class ProductPresenter {
     }
 
     public void register() {
-        // TODO Update UI
         Product product = new Product(activity.getProductName(), activity.getProductDescription(),
-                activity.getProductPrice(), activity.getProductID());
+                activity.getProductPrice(), activity.getProductID(), activity.getStoreName());
         User user = UserRepository.getInstance().getUser();
         if (!(user instanceof StoreOwner)) {
             throw new IllegalArgumentException("Customer attempting to put product");
         }
         Result result = productRepository.addtodatabase(product, ((StoreOwner) user).getStore().getName());
+        if (result instanceof Result.Success) {
+            activity.clear();
+        } else {
+            throw new RuntimeException("Adding product failed");
+        }
     }
 }
