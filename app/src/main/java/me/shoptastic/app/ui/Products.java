@@ -28,7 +28,7 @@ public class Products extends Activity {
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra("me.shoptastic.app.storeName");
+        return getIntent().getStringExtra(Products.productStore);
     }
 
     private void recyclerView() {
