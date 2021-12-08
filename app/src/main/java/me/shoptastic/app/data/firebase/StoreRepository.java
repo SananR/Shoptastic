@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class StoreRepository {
 
     private static volatile StoreRepository instance;
-    private final StoreDataSource dataSource;
+    private StoreDataSource dataSource;
     private ArrayList<Store> stores = new ArrayList<>();
 
     // private constructor : singleton access
     private StoreRepository() {
-        this.dataSource = new StoreDataSource(this);
+        //this.dataSource = new StoreDataSource(this);
     }
 
     public static StoreRepository getInstance() {
@@ -21,6 +21,10 @@ public class StoreRepository {
             instance = new StoreRepository();
         }
         return instance;
+    }
+
+    public void setup() {
+        this.dataSource = new StoreDataSource(this);
     }
 
     public Result addToDatabase(Store store) {

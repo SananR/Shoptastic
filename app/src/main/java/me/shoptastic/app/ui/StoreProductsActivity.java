@@ -12,8 +12,9 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.model.Product;
 
-public class SProducts extends AppCompatActivity {
-    private RecyclerView.Adapter adapter, adapter2;
+public class StoreProductsActivity extends AppCompatActivity {
+
+    private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
 
     @Override
