@@ -3,7 +3,6 @@ package me.shoptastic.app.data.firebase;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,18 +18,20 @@ import me.shoptastic.app.data.model.Result;
 public class ProductDataSource {
 
     private final DatabaseReference dRef;
-    private HashMap<String, ChildEventListener> listeners;
-    public static String productsKey;
+    public static String productsKey = "products";
+    private final HashMap<String, ChildEventListener> listeners = new HashMap<>();
 
     public ProductDataSource() {
         dRef = FirebaseDatabase.getInstance(Resources.FireBaseLink).getReference();
     }
-    public Result addtodatabase(Product p, String Store_Name){
+
+    public Result addtodatabase(Product p, String Store_Name) {
         dRef.child(productsKey).child(Store_Name).child(p.getId().toString()).setValue(p);
         return null;
     }
-    public void retrieve(String store){
-        if(!listeners.containsKey(store)){
+
+    public void retrieve(String store) {
+        if (!listeners.containsKey(store)) {
             ChildEventListener listener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
