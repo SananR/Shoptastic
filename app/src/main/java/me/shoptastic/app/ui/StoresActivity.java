@@ -12,8 +12,10 @@ import me.shoptastic.app.adapter.StoresAdapter;
 import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.data.firebase.StoreRepository;
+import me.shoptastic.app.data.model.Store;
 
-public class StoresActivity extends Activity {
+public class StoresActivity extends Activity implements StoresAdapter.StoreClickListener {
 
     private static final String NAME = "me.Shoptastic.app.NAME";
     private RecyclerView recyclerView;
@@ -25,7 +27,7 @@ public class StoresActivity extends Activity {
 
         this.recyclerView = findViewById(R.id.storeRecyclerView);
 
-        StoresAdapter adapter = new StoresAdapter(this);
+        StoresAdapter adapter = new StoresAdapter(this, this);
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -66,4 +68,16 @@ public class StoresActivity extends Activity {
         startActivity(intent);
     }
 
+    @Override
+    public void onStoreClick(int position) {
+        Store s = StoreRepository.getInstance().getStores().get(position);
+        Intent i = new Intent(this, Products.class);
+        i.putExtra(Products.productStore, s.getName());
+        i.putExtra("me.shoptastic.app.storeDescription", s.getDescription());
+        i.putExtra("me.shoptastic.app.storeAddress", s.getAddress());
+
+        //i.putExtra("me.shoptastic.app.storeProducts", s.getProducts());
+        startActivity(i);
+    }
+  
 }

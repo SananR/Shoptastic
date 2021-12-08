@@ -12,7 +12,7 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.model.Product;
 
-public class SProducts extends AppCompatActivity {
+public class StoreProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

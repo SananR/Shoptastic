@@ -20,12 +20,13 @@ import me.shoptastic.app.data.model.Store;
 public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresViewHolder> {
 
     private final Context context;
-    private final ArrayList<Store> stores;
+    private final StoreRepository repository;
+    private StoreClickListener clickListener;
 
-    public StoresAdapter(Context ct) {
+    public StoresAdapter(Context ct, StoreClickListener clickListener) {
         this.context = ct;
-        this.stores = StoreRepository.getInstance().getStores();
-        Log.d("test", "THIS MANY " + this.stores.size());
+        this.repository = StoreRepository.getInstance();
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -33,34 +34,45 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
     public StoresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(this.context);
         View view = inflater.inflate(R.layout.stores_row, parent, false);
-        return new StoresViewHolder(view);
+        return new StoresViewHolder(view, this.clickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoresViewHolder holder, int position) {
-        holder.storeTitle.setText(this.stores.get(position).getName());
-        Log.d("test", this.stores.get(position).getDescription());
-        holder.storeDescription.setText(this.stores.get(position).getDescription());
+        holder.storeTitle.setText(repository.getStores().get(position).getName());
+        holder.storeDescription.setText(repository.getStores().get(position).getDescription());
         holder.storeIcon.setImageResource(R.drawable.img3);
     }
 
     @Override
     public int getItemCount() {
-        return this.stores.size();
+        return repository.getStores().size();
     }
 
-    public class StoresViewHolder extends RecyclerView.ViewHolder {
+    public class StoresViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView storeTitle, storeDescription;
         ImageView storeIcon;
+        StoreClickListener clickListener;
 
-        public StoresViewHolder(@NonNull View itemView) {
+        public StoresViewHolder(@NonNull View itemView, StoreClickListener clickListener) {
             super(itemView);
             this.storeTitle = itemView.findViewById(R.id.storeTitleTextView);
             this.storeDescription = itemView.findViewById(R.id.storeDescriptionTextView);
             this.storeIcon = itemView.findViewById(R.id.storeImageView);
+            this.clickListener = clickListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            this.clickListener.onStoreClick(getAdapterPosition());
         }
     }
 
+    public interface StoreClickListener {
+        void onStoreClick(int position);
+    }
 
 }
