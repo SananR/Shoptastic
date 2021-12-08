@@ -4,58 +4,57 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.firebase.CartRepository;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Product;
 
-public class ShowDetailActivity extends AppCompatActivity {
-    private TextView addToCardBtn;
-    private TextView titleTxt, feeTxt, descriptionTxt, numberOrderTxt;
-    private ImageView plusBtn, minusBtn, picFood;
+public class ShowDetailActivity extends Activity {
+    private final CartRepository repository = CartRepository.getInstance();
+    private final Order order = repository.getOrder();
     private int numberOrder = 1;
-
-    private Order order;
+    private TextView addToCardBtn, numberOrderTxt;
+    private ImageView plusBtn, minusBtn;
     private Product aProduct;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_detail);
 
-        String productName = "";
-        Float productPrice = 0f;
-        String productDescription = "";
-
         Bundle extra = getIntent().getExtras();
-        if(extra != null){
-            productName = extra.getString("productName");
-            productPrice = extra.getFloat("productPrice");
-            productDescription = extra.getString("description");
+        if (extra != null) {
+            aProduct = new Product(extra.getString(Products.productName),
+                    extra.getString(Products.productDescription),
+                    extra.getFloat(Products.productPrice), extra.getInt(Products.productID),
+                    extra.getString(Products.productStore));
         }
 
         TextView pName = findViewById(R.id.titleTxt);
-        pName.setText(productName);
+        pName.setText(aProduct.getName());
 
         TextView pPrice = findViewById(R.id.feeTxt);
-        pPrice.setText("$" + productPrice);
+        pPrice.setText("$" + aProduct.getPrice());
 
         TextView pDesc = findViewById(R.id.descriptionTxt);
-        pDesc.setText(productDescription);
+        pDesc.setText(aProduct.getDescription());
 
-        aProduct = new Product(productName, productDescription, productPrice, null);
-
-        initView();
-        getBundle();
+        intiView();
     }
 
-    private void getBundle(){
 
+    private void intiView() {
+        addToCardBtn = findViewById(R.id.addToCartBtn);
+        numberOrderTxt = findViewById(R.id.numberOrdersTxt);
+        plusBtn = findViewById(R.id.plusBtn);
+        minusBtn = findViewById(R.id.minusBtn);
+
+        ShowDetailActivity activity = this;
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 numberOrder = numberOrder + 1;
                 numberOrderTxt.setText(String.valueOf(numberOrder));
             }
@@ -73,24 +72,15 @@ public class ShowDetailActivity extends AppCompatActivity {
         addToCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (order != null && !order.getStoreName().equals(aProduct.getStoreName())) {
+                    Toast.makeText(activity, "There already exists a current order from a different store.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 for (int i = 0; i < numberOrder; i++) {
-                    order.addProduct(aProduct);
+                    repository.addProduct(aProduct);
                 }
             }
         });
-    }
-
-    private void initView(){
-        addToCardBtn = findViewById(R.id.addToCartBtn);
-        titleTxt = findViewById(R.id.titleTxt);
-        feeTxt = findViewById(R.id.feeTxt);
-        descriptionTxt = findViewById(R.id.descriptionTxt);
-        numberOrderTxt = findViewById(R.id.numberOrdersTxt);
-        plusBtn = findViewById(R.id.plusBtn);
-        minusBtn = findViewById(R.id.minusBtn);
-        picFood = findViewById(R.id.foodPic);
-
-
     }
 
 }

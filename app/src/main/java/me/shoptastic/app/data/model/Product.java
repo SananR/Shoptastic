@@ -6,13 +6,15 @@ public class Product {
     private final Integer Id;
     private Float Price;
     private String description;
+    private final String storeName;
 
 
-    public Product(String name, String description, Float Price, Integer Id) {
+    public Product(String name, String description, Float Price, Integer Id, String storeName) {
         product_name = name;
         this.description = description;
         this.Id = Id;
         this.Price = Price;
+        this.storeName = storeName;
     }
 
     public Integer getId(){
@@ -50,6 +52,10 @@ public class Product {
     @Override
     public int hashCode() {
         return Id;
+    }
+
+    public String getStoreName() {
+        return storeName;
     }
 }
 

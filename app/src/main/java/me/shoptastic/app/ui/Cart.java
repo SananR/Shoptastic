@@ -10,72 +10,57 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import me.shoptastic.app.R;
+import me.shoptastic.app.adapter.CartAdapter;
+import me.shoptastic.app.data.firebase.CartRepository;
 import me.shoptastic.app.data.model.Order;
 
 public class Cart extends AppCompatActivity {
 
-    private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewList;
-    private Order order;
-    private TextView totalFeeTxt, emptyTxt;
-    private ScrollView scrollView;
+
+    private final CartRepository repository = CartRepository.getInstance();
+    private final Order order = repository.getOrder();
+    private CartAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_cart);
-
-        order = new Order("");
-
-        initView();
-        initList();
+        adapter = new CartAdapter(this);
+        extracted();
         calculateCart();
+
+        findViewById(R.id.textView17).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                repository.checkoutOrder();
+                adapter.checkout();
+            }
+        });
     }
 
-//    private void bottomNavigation(){
-//        FloatingActionButton floatingActionButton = findViewById(R.id.cart_btn);
-//        LinearLayout homeBtn = findViewById(R.id.homeBtn);
-//
-//        floatingActionButton.setOnClickListener((new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v){
-//                startActivity(new Intent(Cart.this, Cart.class));
-//            }
-//        }));
-//
-//        homeBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v){
-//                startActivity(new Intent(Cart.this, Cart.class));
-//            }
-//        });
-//    }
+    private void extracted() {
+        RecyclerView recyclerViewList = findViewById(R.id.recyclerview);
+        TextView emptyTxt = findViewById(R.id.emptyTxt);
+        ScrollView scrollView = findViewById(R.id.scrollView2);
 
-    private void initList() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerViewList.setLayoutManager(linearLayoutManager);
-        //adapter =
+        recyclerViewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerViewList.setAdapter(adapter);
-        if (order.getListCart().isEmpty()) {
+        if (order == null || order.size() == 0) {
             emptyTxt.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
         } else {
             emptyTxt.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
-
     }
 
-    private void calculateCart(){
+
+    public void calculateCart() {
+        TextView totalFeeTxt = findViewById(R.id.totalFeeTxt);
         Float itemTotal = order.getSumPrice();
         totalFeeTxt.setText("$" + itemTotal);
     }
 
-    private void initView(){
-        recyclerViewList = findViewById(R.id.recyclerview);
-        totalFeeTxt = findViewById(R.id.totalFeeTxt);
-        emptyTxt = findViewById(R.id.emptyTxt);
-        scrollView = findViewById(R.id.scrollView2);
-    }
 }
