@@ -5,6 +5,7 @@ import android.content.Intent;
 import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.ui.Account;
 import me.shoptastic.app.ui.LoginActivity;
 import me.shoptastic.app.ui.StoresActivity;
 
