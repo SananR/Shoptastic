@@ -27,7 +27,7 @@ public class ProductDataSource {
 
     public Result addtodatabase(Product p, String Store_Name) {
         dRef.child(productsKey).child(Store_Name).child(p.getId().toString()).setValue(p);
-        return null;
+        return new Result.Success<>(null);
     }
 
     public void retrieve(String store) {

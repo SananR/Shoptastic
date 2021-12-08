@@ -3,40 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout-w936dp/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_account.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_addproduct.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_caccount.xml" value="0.25" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_cart.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_list_of_orders.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_login.xml" value="0.5" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_owner_post_dish.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_products.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_register_owner.xml" value="0.5" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_saccount.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_show_detail.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_sproducts.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/activity_stores.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/stores_row.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/viewholder_cart.xml" value="0.67" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/eMagasin/app/src/main/res/layout/viewholder_products.xml" value="0.5" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/drawable/ic_menu_account.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_menu_cart.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_menu_home.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_menu_store.xml" value="0.14270833333333333" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.10234375" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.1359375" />
-        <entry key="app/src/main/res/layout/activity_caccount.xml" value="0.1359375" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2046875" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1359375" />
-        <entry key="app/src/main/res/layout/activity_products.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_caccount.xml" value="0.15430978631353107" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/activity_list_of_orders.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.21855481276625524" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2456452784713349" />
+        <entry key="app/src/main/res/layout/activity_owner_post_dish.xml" value="0.2357469818808584" />
+        <entry key="app/src/main/res/layout/activity_products.xml" value="0.3678828336369567" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.36616147335118665" />
         <entry key="app/src/main/res/layout/activity_saccount.xml" value="0.25670795074281033" />
         <entry key="app/src/main/res/layout/activity_shop_info_sign_in.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_show_detail.xml" value="0.2366668672496019" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2833190703639564" />
-        <entry key="app/src/main/res/layout/activity_sproducts.xml" value="0.1359375" />
+        <entry key="app/src/main/res/layout/activity_sproducts.xml" value="0.2085679808373939" />
         <entry key="app/src/main/res/layout/activity_stores.xml" value="0.23921491511998844" />
         <entry key="app/src/main/res/layout/stores_row.xml" value="0.4300286149897112" />
+        <entry key="app/src/main/res/layout/viewholder_cart.xml" value="0.23224401275113227" />
+        <entry key="app/src/main/res/layout/viewholder_products.xml" value="0.2874247808765851" />
+        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.1859375" />
       </map>
     </option>
   </component>

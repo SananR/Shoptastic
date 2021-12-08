@@ -6,6 +6,17 @@
         android:layout_height="wrap_content"
         tools:context=".ui.StoresActivity">
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/storeRecyclerView"
+        app:menu="@menu/bottom_navigation" />
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
@@ -20,8 +31,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storeRecyclerView"
-        android:layout_width="413dp"
-        android:layout_height="656dp"
+        android:layout_width="408dp"
+        android:layout_height="521dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="60sp"
@@ -112,6 +123,6 @@
             app:layout_constraintVertical_bias="0.355" />
 
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

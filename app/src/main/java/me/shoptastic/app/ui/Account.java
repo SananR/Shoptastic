@@ -13,11 +13,11 @@ import me.shoptastic.app.data.model.User;
 
 public class Account extends Activity {
 
-    public static final String NAME = "me.Shoptastic.app.NAME";
-    public static final String EMAIL = "me.Shoptastic.app.EMAIL";
-    public static final String PHN_NUMBER = "me.Shoptastic.app.PHN_NUMBER";
-    public static final String STORE_NAME = "me.Shoptastic.app.STORE_NAME";
-    public static final String ADDRESS = "me.Shoptastic.app.ADDRESS";
+    public static final String NAME = "me.shoptastic.app.NAME";
+    public static final String EMAIL = "me.shoptastic.app.EMAIL";
+    public static final String PHN_NUMBER = "me.shoptastic.app.PHN_NUMBER";
+    public static final String STORE_NAME = "me.shoptastic.app.STORE_NAME";
+    public static final String ADDRESS = "me.shoptastic.app.ADDRESS";
 
 
     @Override
@@ -31,8 +31,6 @@ public class Account extends Activity {
     // This function is called when clicked acc details
     public void account_details(View v){
         User user = UserRepository.getInstance().getUser();
-        //System.out.println(user);
-        //EditText editText = (EditText) findViewById(R.id.editTextTextPersonName);
 
         if (user instanceof StoreOwner) {
             Intent s_intent = new Intent(this, SAccount.class);

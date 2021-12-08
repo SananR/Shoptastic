@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Product;
-import me.shoptastic.app.ui.Products;
+import me.shoptastic.app.ui.ProductsActivity;
 import me.shoptastic.app.ui.ShowDetailActivity;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
     ArrayList<Product> productDomains;
-    Products view;
+    ProductsActivity view;
 
-    public ProductAdapter(Products view, ArrayList<Product> productDomains) {
+    public ProductAdapter(ProductsActivity view, ArrayList<Product> productDomains) {
         this.productDomains = productDomains;
         this.view = view;
     }
@@ -43,11 +43,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view, ShowDetailActivity.class);
-                intent.putExtra(Products.productName, product.getName());
-                intent.putExtra(Products.productPrice, product.getPrice().toString());
-                intent.putExtra(Products.productDescription, product.getDescription());
-                intent.putExtra(Products.productID, product.getId());
-                intent.putExtra(Products.productStore, product.getStoreName());
+                intent.putExtra(ProductsActivity.productName, product.getName());
+                intent.putExtra(ProductsActivity.productPrice, product.getPrice().toString());
+                intent.putExtra(ProductsActivity.productDescription, product.getDescription());
+                intent.putExtra(ProductsActivity.productID, product.getId());
+                intent.putExtra(ProductsActivity.productStore, product.getStoreName());
                 view.startActivity(intent);
             }
 

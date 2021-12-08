@@ -22,7 +22,7 @@ public class StoreProductsActivity extends AppCompatActivity {
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra(Products.productStore);
+        return getIntent().getStringExtra(ProductsActivity.productStore);
     }
 
     private void recyclerView() {

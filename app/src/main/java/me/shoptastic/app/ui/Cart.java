@@ -59,7 +59,7 @@ public class Cart extends AppCompatActivity {
 
     public void calculateCart() {
         TextView totalFeeTxt = findViewById(R.id.totalFeeTxt);
-        Float itemTotal = order.getSumPrice();
+        Float itemTotal = order == null ? 0 : order.getSumPrice();
         totalFeeTxt.setText("$" + itemTotal);
     }
 

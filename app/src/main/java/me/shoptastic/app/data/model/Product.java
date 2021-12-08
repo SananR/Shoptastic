@@ -17,6 +17,12 @@ public class Product {
         this.storeName = storeName;
     }
 
+    public Product(){
+        this.storeName = "";
+        this.Id = 0;
+        this.product_name = "";
+    }
+
     public Integer getId(){
         return this.Id;
     }

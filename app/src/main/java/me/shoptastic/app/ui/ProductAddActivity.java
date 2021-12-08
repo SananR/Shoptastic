@@ -29,10 +29,12 @@ public class ProductAddActivity extends Activity {
 
     private void initProduct() {
         Bundle extras = getIntent().getExtras();
-        ((EditText) findViewById(R.id.addProductName)).setText(extras.getString(Products.productName, ""));
-        ((EditText) findViewById(R.id.addProductPrice)).setText(extras.getString(Products.productPrice, ""));
-        ((EditText) findViewById(R.id.addProductID)).setText(extras.getString(Products.productID, ""));
-        ((EditText) findViewById(R.id.addProductDescription)).setText(extras.getString(Products.productDescription, ""));
+        if (extras != null) {
+            ((EditText) findViewById(R.id.addProductName)).setText(extras.getString(ProductsActivity.productName, ""));
+            ((EditText) findViewById(R.id.addProductPrice)).setText(extras.getString(ProductsActivity.productPrice, ""));
+            ((EditText) findViewById(R.id.addProductID)).setText(extras.getString(ProductsActivity.productID, ""));
+            ((EditText) findViewById(R.id.addProductDescription)).setText(extras.getString(ProductsActivity.productDescription, ""));
+        }
     }
 
     public String getProductName() {
@@ -52,7 +54,7 @@ public class ProductAddActivity extends Activity {
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra(Products.productStore);
+        return getIntent().getStringExtra(ProductsActivity.productStore);
     }
 
     public void clear() {

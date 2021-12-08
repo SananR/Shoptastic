@@ -36,7 +36,7 @@
                 android:name=".ui.ProductAddActivity"
                 android:exported="false" />
         <activity
-                android:name=".ui.Products"
+                android:name=".ui.ProductsActivity"
                 android:exported="false" />
         <activity
                 android:name=".ui.RegisterActivity"

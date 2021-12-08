@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.ui.ProductAddActivity;
-import me.shoptastic.app.ui.Products;
+import me.shoptastic.app.ui.ProductsActivity;
 import me.shoptastic.app.ui.StoreProductsActivity;
 
 public class EditProductAdapter extends RecyclerView.Adapter<EditProductAdapter.ViewHolder> {
@@ -44,11 +44,11 @@ public class EditProductAdapter extends RecyclerView.Adapter<EditProductAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view, ProductAddActivity.class);
-                intent.putExtra(Products.productName, product.getName());
-                intent.putExtra(Products.productPrice, product.getPrice().toString());
-                intent.putExtra(Products.productDescription, product.getDescription());
-                intent.putExtra(Products.productID, product.getId());
-                intent.putExtra(Products.productStore, product.getStoreName());
+                intent.putExtra(ProductsActivity.productName, product.getName());
+                intent.putExtra(ProductsActivity.productPrice, product.getPrice().toString());
+                intent.putExtra(ProductsActivity.productDescription, product.getDescription());
+                intent.putExtra(ProductsActivity.productID, product.getId());
+                intent.putExtra(ProductsActivity.productStore, product.getStoreName());
                 view.startActivity(intent);
             }
 

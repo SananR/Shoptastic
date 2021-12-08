@@ -1,7 +1,9 @@
 package me.shoptastic.app.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +15,10 @@ import java.util.ArrayList;
 import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.firebase.ProductRepository;
+import me.shoptastic.app.data.firebase.UserRepository;
+import me.shoptastic.app.data.model.StoreOwner;
 
-public class Products extends AppCompatActivity {
+public class ProductsActivity extends AppCompatActivity {
 
     public static String productName = "me.shoptastic.app.productName";
     public static String productDescription = "me.shoptastic.app.productDescription";
@@ -29,11 +33,27 @@ public class Products extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.productsTitleTextView)).setText(String.format("%s's Products", getIntent().getStringExtra(productStore)));
 
+        if (UserRepository.getInstance().getUser() instanceof StoreOwner) {
+            Button b = findViewById(R.id.addProductButton);
+            b.setVisibility(View.VISIBLE);
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addProductView();
+                }
+            });
+        }
+
         recyclerView();
     }
 
+    private void addProductView() {
+        Intent i = new Intent(this, ProductAddActivity.class);
+        startActivity(i);
+    }
+
     public String getStoreName() {
-        return getIntent().getStringExtra(Products.productStore);
+        return getIntent().getStringExtra(ProductsActivity.productStore);
     }
 
     private void recyclerView() {
