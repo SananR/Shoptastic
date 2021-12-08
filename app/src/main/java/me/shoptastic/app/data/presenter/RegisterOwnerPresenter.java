@@ -23,18 +23,11 @@ public class RegisterOwnerPresenter {
         this.view = activity;
     }
 
-    public RegisterOwnerPresenter(OwnerRegisterActivity activity, UserRepository userRepository, StoreRepository storeRepository) {
-        this.view = activity;
-        this.userRepository = userRepository;
-        this.storeRepository = storeRepository;
-    }
-
-    public void register() {
+    public void register(Store store) {
         String name = view.getName();
         String email = view.getEmail();
         String phone = view.getPhone();
         String password = view.getPassword();
-        Store store = view.getStore();
         if (validateInput()) {
             userRepository.register(new StoreOwner(email, name, phone, password,
                     store));

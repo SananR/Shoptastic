@@ -16,13 +16,13 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.ui.ProductAddActivity;
 import me.shoptastic.app.ui.Products;
-import me.shoptastic.app.ui.SProducts;
+import me.shoptastic.app.ui.StoreProductsActivity;
 
 public class EditProductAdapter extends RecyclerView.Adapter<EditProductAdapter.ViewHolder> {
     ArrayList<Product> productDomains;
-    SProducts view;
+    StoreProductsActivity view;
 
-    public EditProductAdapter(SProducts view, ArrayList<Product> productDomains) {
+    public EditProductAdapter(StoreProductsActivity view, ArrayList<Product> productDomains) {
         this.productDomains = productDomains;
         this.view = view;
     }
