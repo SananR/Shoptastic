@@ -23,7 +23,7 @@ public class StoresActivity extends AppCompatActivity implements StoresAdapter.S
 
         this.recyclerView = findViewById(R.id.storeRecyclerView);
 
-        StoresAdapter adapter = new StoresAdapter(this);
+        StoresAdapter adapter = new StoresAdapter(this, this);
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -31,8 +31,11 @@ public class StoresActivity extends AppCompatActivity implements StoresAdapter.S
     @Override
     public void onStoreClick(int position) {
         Store s = StoreRepository.getInstance().getStores().get(position);
-        Intent i = new Intent(this, StoreProductsActivity.class);
-        i.putExtra("me.shoptastic.app.store_name", s.getName());
-        i.putExtra("me.shoptastic.app.store_description", s.getDescription());
+        Intent i = new Intent(this, Products.class);
+        i.putExtra("me.shoptastic.app.storeName", s.getName());
+        i.putExtra("me.shoptastic.app.storeDescription", s.getDescription());
+        i.putExtra("me.shoptastic.app.storeAddress", s.getAddress());
+        //i.putExtra("me.shoptastic.app.storeProducts", s.getProducts());
+        startActivity(i);
     }
 }

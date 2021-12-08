@@ -17,14 +17,13 @@ import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.Result;
 
 public class ProductDataSource {
-    private final FirebaseAuth fAuth;
+
     private final DatabaseReference dRef;
     private HashMap<String, ChildEventListener> listeners;
     public static String productsKey;
 
     public ProductDataSource() {
-        fAuth = FirebaseAuth.getInstance();
-        dRef = FirebaseDatabase.getInstance().getReference(Resources.FireBaseLink);
+        dRef = FirebaseDatabase.getInstance(Resources.FireBaseLink).getReference();
     }
     public Result addtodatabase(Product p, String Store_Name){
         dRef.child(productsKey).child(Store_Name).child(p.getId().toString()).setValue(p);
