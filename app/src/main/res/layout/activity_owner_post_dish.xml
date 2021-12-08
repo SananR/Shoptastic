@@ -20,35 +20,14 @@
         app:layout_constraintHorizontal_bias="0.493"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear_layout"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_upload"
-        app:layout_constraintVertical_bias="0.15"
-        app:layout_constraintHorizontal_bias="0.53">
-
-        <TextView
-            android:layout_width="105dp"
-            android:layout_height="30dp"
-            android:id="@+id/textView"
-            android:text="Name"
-            android:textColor="@color/black"
-            android:layout_marginLeft="5dp"
-            android:textSize="18sp" />
-
-        <Spinner
-            android:id="@+id/dishes"
-            android:layout_width="162dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="12dp"
-            android:background="#D0FFFFFF"
-            />
-
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_layout"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_upload"
+            app:layout_constraintVertical_bias="0.15"
+            tools:layout_editor_absoluteX="411dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="280dp"
@@ -63,12 +42,13 @@
         app:layout_constraintHorizontal_bias="0.53">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ID"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:textSize="18sp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ID"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/addProductID" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,12 +65,13 @@
         app:layout_constraintHorizontal_bias="0.53">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantity"
-            android:inputType="number"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:id="@+id/addProductDescription" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,12 +88,13 @@
         app:layout_constraintHorizontal_bias="0.53">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Price"
-            android:inputType="number"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:id="@+id/addProductPrice" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,18 +103,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/post"
         android:background="@drawable/btngreen"
-        app:layout_constraintTop_toBottomOf="@id/price"
-        android:text="Post"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.30"
-        app:layout_constraintHorizontal_bias="0.498"
-        android:textSize="20sp"/>
+            app:layout_constraintTop_toBottomOf="@id/price"
+            android:text="Post"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.30"
+            app:layout_constraintHorizontal_bias="0.498"
+            android:textSize="20sp" />
 
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/ID"
+            app:layout_constraintTop_toBottomOf="@+id/image_upload">
 
-
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="hint"
+                android:id="@+id/addProductName" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,10 @@
 package me.shoptastic.app.ui;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,7 +14,8 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.firebase.ProductRepository;
 
-public class Products extends Activity {
+public class Products extends AppCompatActivity {
+
     public static String productName = "me.shoptastic.app.productName";
     public static String productDescription = "me.shoptastic.app.productDescription";
     public static String productPrice = "me.shoptastic.app.productPrice";
@@ -23,11 +27,13 @@ public class Products extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
+        ((TextView)findViewById(R.id.productsTitleTextView)).setText(String.format("%s's Products", getIntent().getStringExtra(productStore)));
+
         recyclerView();
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra("store");
+        return getIntent().getStringExtra(Products.productStore);
     }
 
     private void recyclerView() {

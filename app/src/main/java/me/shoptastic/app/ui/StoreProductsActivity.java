@@ -12,8 +12,9 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.model.Product;
 
-public class SProducts extends AppCompatActivity {
-    private RecyclerView.Adapter adapter, adapter2;
+public class StoreProductsActivity extends AppCompatActivity {
+
+    private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
 
     @Override
@@ -50,13 +51,13 @@ public class SProducts extends AppCompatActivity {
 
         ArrayList<Product> products = new ArrayList<>();
         //demo
-        products.add(new Product("Apple", "Good", 2f, 87));
+        /*products.add(new Product("Apple", "Good", 2f, 87));
         products.add(new Product("Pineapple", "Fresh", 1f, 28));
         products.add(new Product("Phone", "New", 374f, 28));
         products.add(new Product("Onion", "Veggies", 47f, 28));
-        products.add(new Product("Notes", "Useful", 21f, 28));
-        adapter = new ProductAdapter(products);
-        recyclerViewList.setAdapter(adapter);
+        products.add(new Product("Notes", "Useful", 21f, 28));*/
+        //adapter = new ProductAdapter(products);
+        //recyclerViewList.setAdapter(adapter);
 
 
     }
