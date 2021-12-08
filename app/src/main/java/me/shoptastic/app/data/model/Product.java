@@ -2,31 +2,37 @@ package me.shoptastic.app.data.model;
 
 public class Product {
 
-    private final String product_name;
-    private final Integer Id;
-    private Float Price;
+    private final String name;
+    private final Integer id;
+    private Float price;
     private String description;
     private final String storeName;
 
 
     public Product(String name, String description, Float Price, Integer Id, String storeName) {
-        product_name = name;
+        this.name = name;
         this.description = description;
-        this.Id = Id;
-        this.Price = Price;
+        this.id = Id;
+        this.price = Price;
         this.storeName = storeName;
     }
 
+    public Product() {
+        this.storeName = "";
+        this.id = 0;
+        this.name = "";
+    }
+
     public Integer getId(){
-        return this.Id;
+        return this.id;
     }
 
     public Float getPrice() {
-        return this.Price;
+        return this.price;
     }
 
     public String getName() {
-        return this.product_name;
+        return this.name;
     }
 
     public String getDescription() {
@@ -34,7 +40,7 @@ public class Product {
     }
 
     public void changePrice(Float Price) {
-        this.Price = Price;
+        this.price = Price;
     }
 
     public void changeDescription(String description) {
@@ -46,16 +52,27 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Id.equals(product.Id);
+        return id.equals(product.id);
     }
 
     @Override
     public int hashCode() {
-        return Id;
+        return id;
     }
 
     public String getStoreName() {
         return storeName;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "product_name='" + name + '\'' +
+                ", Id=" + id +
+                ", Price=" + price +
+                ", description='" + description + '\'' +
+                ", storeName='" + storeName + '\'' +
+                '}';
     }
 }
 

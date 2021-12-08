@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Description"
                 android:inputType="number"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:id="@+id/addProductDescription" />
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Price"
                 android:inputType="number"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:id="@+id/addProductPrice" />
 

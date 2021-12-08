@@ -26,10 +26,10 @@ public class ShowDetailActivity extends Activity {
 
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
-            aProduct = new Product(extra.getString(Products.productName),
-                    extra.getString(Products.productDescription),
-                    extra.getFloat(Products.productPrice), extra.getInt(Products.productID),
-                    extra.getString(Products.productStore));
+            aProduct = new Product(extra.getString(ProductsActivity.productName),
+                    extra.getString(ProductsActivity.productDescription),
+                    Float.valueOf(extra.getFloat(ProductsActivity.productPrice)), extra.getInt(ProductsActivity.productID),
+                    extra.getString(ProductsActivity.productStore));
         }
 
         TextView pName = findViewById(R.id.titleTxt);

@@ -12,17 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import me.shoptastic.app.Interface.Callback;
 import me.shoptastic.app.R;
+import me.shoptastic.app.data.firebase.ProductRepository;
 import me.shoptastic.app.data.model.Product;
-import me.shoptastic.app.ui.Products;
+import me.shoptastic.app.ui.ProductsActivity;
 import me.shoptastic.app.ui.ShowDetailActivity;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>{
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     ArrayList<Product> productDomains;
-    Products view;
+    ProductsActivity view;
 
-    public ProductAdapter(Products view, ArrayList<Product> productDomains) {
-        this.productDomains = productDomains;
+    public ProductAdapter(ProductsActivity view, String store) {
+        this.productDomains = ProductRepository.getInstance().getProducts(store, new Callback() {
+            @Override
+            public void callback() {
+                notifyDataSetChanged();
+            }
+        });
         this.view = view;
     }
 
@@ -37,17 +44,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Product product = productDomains.get(position);
+        System.out.println(product);
         holder.title.setText(product.getName());
         holder.fee.setText(String.valueOf(product.getPrice()));
         holder.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view, ShowDetailActivity.class);
-                intent.putExtra(Products.productName, product.getName());
-                intent.putExtra(Products.productPrice, product.getPrice().toString());
-                intent.putExtra(Products.productDescription, product.getDescription());
-                intent.putExtra(Products.productID, product.getId());
-                intent.putExtra(Products.productStore, product.getStoreName());
+                intent.putExtra(ProductsActivity.productName, product.getName());
+                intent.putExtra(ProductsActivity.productPrice, product.getPrice());
+                intent.putExtra(ProductsActivity.productDescription, product.getDescription());
+                intent.putExtra(ProductsActivity.productID, product.getId());
+                intent.putExtra(ProductsActivity.productStore, product.getStoreName());
                 view.startActivity(intent);
             }
 

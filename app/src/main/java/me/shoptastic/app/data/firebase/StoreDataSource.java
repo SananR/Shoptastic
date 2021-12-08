@@ -5,18 +5,12 @@ import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.HashSet;
-
-import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Resources;
 import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
@@ -87,7 +81,7 @@ public class StoreDataSource {
 
     public Result addToDatabase(Store store){
         dRef.child("stores").child(store.getName()).setValue(store);
-        return null;
+        return new Result.Success<>(store);
     }
 
 

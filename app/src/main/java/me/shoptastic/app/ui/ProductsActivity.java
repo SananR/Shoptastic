@@ -1,20 +1,16 @@
 package me.shoptastic.app.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
-import me.shoptastic.app.data.firebase.ProductRepository;
 
-public class Products extends AppCompatActivity {
+public class ProductsActivity extends AppCompatActivity {
 
     public static String productName = "me.shoptastic.app.productName";
     public static String productDescription = "me.shoptastic.app.productDescription";
@@ -33,14 +29,13 @@ public class Products extends AppCompatActivity {
     }
 
     public String getStoreName() {
-        return getIntent().getStringExtra(Products.productStore);
+        return getIntent().getStringExtra(ProductsActivity.productStore);
     }
 
     private void recyclerView() {
         RecyclerView recyclerViewList = findViewById(R.id.productsRecylerView);
         recyclerViewList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        ProductAdapter adapter = new ProductAdapter(this, new ArrayList<>(ProductRepository.getInstance().getProducts(getStoreName())));
+        ProductAdapter adapter = new ProductAdapter(this, getStoreName());
         recyclerViewList.setAdapter(adapter);
 
 

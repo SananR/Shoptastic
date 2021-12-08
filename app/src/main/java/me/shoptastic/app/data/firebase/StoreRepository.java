@@ -1,19 +1,19 @@
 package me.shoptastic.app.data.firebase;
 
+import java.util.ArrayList;
+
 import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.Store;
-
-import java.util.ArrayList;
 
 public class StoreRepository {
 
     private static volatile StoreRepository instance;
-    private StoreDataSource dataSource;
-    private ArrayList<Store> stores = new ArrayList<>();
+    private final StoreDataSource dataSource;
+    private final ArrayList<Store> stores = new ArrayList<>();
 
     // private constructor : singleton access
     private StoreRepository() {
-        //this.dataSource = new StoreDataSource(this);
+        this.dataSource = new StoreDataSource(this);
     }
 
     public static StoreRepository getInstance() {
@@ -23,9 +23,6 @@ public class StoreRepository {
         return instance;
     }
 
-    public void setup() {
-        this.dataSource = new StoreDataSource(this);
-    }
 
     public Result addToDatabase(Store store) {
         // handle register
@@ -41,7 +38,7 @@ public class StoreRepository {
     }
 
     public void removeStore(Store s){
-        if (stores.contains(s)) stores.remove(s);
+        stores.remove(s);
     }
 
 
