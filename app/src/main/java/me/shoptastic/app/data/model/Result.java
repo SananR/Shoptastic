@@ -90,7 +90,7 @@ public class Result {
 
         public String getError() {
             if (this.error == null) {
-                this.exception.getMessage();
+                return this.exception.getMessage();
             }
             return this.error;
         }

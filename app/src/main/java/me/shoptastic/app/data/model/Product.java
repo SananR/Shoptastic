@@ -27,6 +27,10 @@ public class Product {
         return this.product_name;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void changePrice(Float Price) {
         this.Price = Price;
     }
