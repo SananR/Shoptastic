@@ -8,7 +8,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent i = new Intent(this, RegisterActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import me.shoptastic.app.data.firebase.UserRepository;
 import me.shoptastic.app.data.model.Result;
 import me.shoptastic.app.data.model.User;
+import me.shoptastic.app.ui.Account;
 import me.shoptastic.app.ui.LoginActivity;
 import me.shoptastic.app.ui.StoresActivity;
 
@@ -29,7 +30,8 @@ public class LoginPresenter {
 
     public void onLoginSuccess(User user) {
         instance.setLoggedInUser(user);
-        Intent i = new Intent(activity, StoresActivity.class);
+        //Intent i = new Intent(activity, StoresActivity.class);
+        Intent i = new Intent(activity, Account.class);
         activity.startActivity(i);
     }
 
