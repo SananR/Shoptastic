@@ -1,5 +1,7 @@
 package me.shoptastic.app.data.firebase;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -25,11 +27,14 @@ public class ProductDataSource {
     public ProductDataSource() {
         dRef = FirebaseDatabase.getInstance(Resources.FireBaseLink).getReference();
     }
-    public Result addtodatabase(Product p, String Store_Name){
+
+    public Result addtodatabase(Product p, String Store_Name) {
         dRef.child(productsKey).child(Store_Name).child(p.getId().toString()).setValue(p);
         return null;
     }
-    public void retrieve(String store){
+
+    public void retrieve(String store) {
+        Log.d("test3", store);
         if(!listeners.containsKey(store)){
             ChildEventListener listener = new ChildEventListener() {
                 @Override
