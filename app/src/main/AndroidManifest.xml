@@ -10,43 +10,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shoptastic" >
         <activity
-            android:name=".ui.RegisterActivity"
-                android:exported="false" />
-        <activity
-                android:name=".ui.ShowDetailActivity"
-                android:exported = "false"/>
-        <activity
-                android:name=".ui.SProducts"
-                android:exported="false" />
-        <activity
-                android:name=".ui.SAccount"
+                android:name=".ui.Account"
                 android:exported="false" />
         <activity
                 android:name=".ui.CAccount"
                 android:exported="false" />
         <activity
-                android:name=".ui.Account"
+                android:name=".ui.Cart"
                 android:exported="false" />
         <activity
-                android:name=".ui.Products"
-                android:exported="false" />
-        <activity
-                android:name=".ui.StoresActivity"
-                android:exported="false" />
-        <activity
-                android:name=".ui.OwnerRegisterActivity"
-                android:exported="false" />
-        <activity
-                android:name=".ui.SignIn"
+                android:name=".ui.LoginActivity"
                 android:exported="false" />
         <activity
                 android:name=".ui.MainActivity"
-                android:exported="true" >
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+                android:name=".ui.OwnerRegisterActivity"
+                android:exported="false" />
+        <activity
+                android:name=".ui.ProductAddActivity"
+                android:exported="false" />
+        <activity
+                android:name=".ui.Products"
+                android:exported="false" />
+        <activity
+                android:name=".ui.RegisterActivity"
+                android:exported="false" />
+        <activity
+                android:name=".ui.SAccount"
+                android:exported="false" />
+        <activity
+                android:name=".ui.ShowDetailActivity"
+                android:exported="false" />
+        <activity
+                android:name=".ui.SignIn"
+                android:exported="false" />
+        <activity
+                android:name=".ui.SProducts"
+                android:exported="false" />
+        <activity
+                android:name=".ui.StoresActivity"
+                android:exported="false" />
     </application>
 
 </manifest>

@@ -5,13 +5,14 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.model.Order;
 
-public class Cart extends Activity {
+public class Cart extends AppCompatActivity {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
@@ -25,25 +26,50 @@ public class Cart extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        order = new Order();
+        order = new Order("");
 
         initView();
         initList();
+        calculateCart();
     }
 
-    private void initList(){
+//    private void bottomNavigation(){
+//        FloatingActionButton floatingActionButton = findViewById(R.id.cart_btn);
+//        LinearLayout homeBtn = findViewById(R.id.homeBtn);
+//
+//        floatingActionButton.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v){
+//                startActivity(new Intent(Cart.this, Cart.class));
+//            }
+//        }));
+//
+//        homeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v){
+//                startActivity(new Intent(Cart.this, Cart.class));
+//            }
+//        });
+//    }
+
+    private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewList.setLayoutManager(linearLayoutManager);
         //adapter =
-                recyclerViewList.setAdapter(adapter);
-        /*if (order.getListCart().isEmpty()) {
+        recyclerViewList.setAdapter(adapter);
+        if (order.getListCart().isEmpty()) {
             emptyTxt.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
         } else {
             emptyTxt.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
-        */
+
+    }
+
+    private void calculateCart(){
+        Float itemTotal = order.getSumPrice();
+        totalFeeTxt.setText("$" + itemTotal);
     }
 
     private void initView(){

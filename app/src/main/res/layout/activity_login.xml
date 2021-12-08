@@ -30,20 +30,20 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/loginEmailLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:paddingBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginEmail"
-                android:layout_width="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/prompt_email"
 
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/loginEmail" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -55,17 +55,17 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
-                android:hint="Password"
-                android:imeActionLabel="Sign in"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="Password"
+                    android:imeActionLabel="Sign in"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/loginEmailLayout"
+                    android:id="@+id/loginPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -78,36 +78,35 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button_shape"
-            android:enabled="true"
-            android:onClick="signIn"
-            android:text="@string/action_sign_in"
-            android:textColor="#FFFF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_shape"
+                android:enabled="true"
+                android:text="@string/action_sign_in"
+                android:textColor="#FFFF"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPasswordLayout" />
 
         <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="64dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintHorizontal_bias="0.715"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="64dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/loginPasswordLayout"
+                app:layout_constraintHorizontal_bias="0.715"
+                app:layout_constraintStart_toStartOf="@+id/loginPasswordLayout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.499" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

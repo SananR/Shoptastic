@@ -1,7 +1,5 @@
 package me.shoptastic.app.data.model;
 
-import java.util.ArrayList;
-
 public class StoreOwner extends User {
 
     private Store store;
@@ -11,16 +9,11 @@ public class StoreOwner extends User {
         this.store = store;
     }
 
-    @Override
-    public ArrayList<Product> getOrder() {
-        return null;
+    public StoreOwner() {
+        super();
     }
 
     public Store getStore() {
-        if (store == null) {
-            // Get store
-            store = null;
-        }
         return store;
     }
 

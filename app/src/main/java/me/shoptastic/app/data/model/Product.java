@@ -6,7 +6,6 @@ public class Product {
     private final Integer Id;
     private Float Price;
     private String description;
-    private int numberInCart;
 
 
     public Product(String name, String description, Float Price, Integer Id) {
@@ -24,16 +23,12 @@ public class Product {
         return this.Price;
     }
 
-    public int getNumberInCart() {
-        return this.numberInCart;
-    }
-
-    public void setNumberInCart(int newNumberInCart){
-        this.numberInCart = newNumberInCart;
-    }
-
     public String getName() {
         return this.product_name;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public void changePrice(Float Price) {

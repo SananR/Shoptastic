@@ -29,6 +29,14 @@ public class OwnerRegisterActivity extends Activity {
         });
     }
 
+    public String getStoreDescription(){
+        return null;
+    }
+
+    public Store getStore() {
+        return new Store(getStoreName(), getAddress(), getStoreDescription());
+    }
+
     public String getName() {
         return getIntent().getStringExtra(RegisterActivity.name);
     }
@@ -69,5 +77,6 @@ public class OwnerRegisterActivity extends Activity {
             presenter.register(new Store(getStoreName(), getAddress(), "Placeholder description for stores", new ArrayList<>()));
         }
     }
+
 
 }

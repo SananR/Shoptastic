@@ -2,6 +2,7 @@ package me.shoptastic.app.ui;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,7 +12,7 @@ import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.ProductAdapter;
 import me.shoptastic.app.data.model.Product;
 
-public class SProducts extends Activity {
+public class SProducts extends AppCompatActivity {
     private RecyclerView.Adapter adapter, adapter2;
     private RecyclerView recyclerViewList;
 
@@ -23,9 +24,28 @@ public class SProducts extends Activity {
         recyclerView();
     }
 
+//    private void bottomNavigation(){
+//        FloatingActionButton floatingActionButton = findViewById(R.id.cart_btn);
+//        LinearLayout homeBtn = findViewById(R.id.homeBtn);
+//
+//        floatingActionButton.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v){
+//                startActivity(new Intent(SProducts.this, Cart.class));
+//            }
+//        }));
+//
+//        homeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v){
+//                startActivity(new Intent(SProducts.this, Cart.class));
+//            }
+//        });
+//    }
+
     private void recyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewList = findViewById(R.id.recyclerview);
+        recyclerViewList = findViewById(R.id.recyclerView);
         recyclerViewList.setLayoutManager(linearLayoutManager);
 
         ArrayList<Product> products = new ArrayList<>();

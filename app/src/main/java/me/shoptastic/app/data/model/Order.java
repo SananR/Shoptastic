@@ -1,30 +1,41 @@
 package me.shoptastic.app.data.model;
 
-import com.google.firebase.database.core.view.Change;
-
 import java.util.ArrayList;
-
-import me.shoptastic.app.Interface.ChangeNumberItemListener;
+import java.util.HashMap;
 
 public class Order {
+    private final String storeName;
+    private final ArrayList<Product> products;
+    private final HashMap<Product, Integer> quantities;
+    private boolean done;
 
-    public void insertProduct(Product product){
-        ArrayList<Product> listProduct = getListCart();
-        boolean existAlready = false;
-        int n = 0;
-        for(int i = 0; i < listProduct.size(); i ++){
-            if(listProduct.get(i).getId() == (product.getId())){
-                existAlready = true;
-                n = i;
-                break;
-            }
-        }
-        if(!existAlready){
-            listProduct.add(product);
+    public Order(String storeName) {
+        this.storeName = storeName;
+        this.products = new ArrayList<>();
+        this.quantities = new HashMap<>();
+    }
+
+    public void addProduct(Product product) {
+        if (quantities.containsKey(product)) {
+            quantities.put(product, quantities.get(product) + 1);
+        } else {
+            products.add(product);
+            quantities.put(product, 1);
         }
     }
 
-    public ArrayList<Product> getListCart(){
+    public void removeProduct(Product product) {
+        if (quantities.containsKey(product)) {
+            if (quantities.get(product) == 1) {
+                quantities.remove(product);
+                products.remove(product);
+            } else {
+                quantities.put(product, quantities.get(product) - 1);
+            }
+        }
+    }
+
+    public ArrayList<Product> getListCart() {
         //Testing(demo)
         Product p1 = new Product("Pizza", "delicous", 1.0f, 1);
         Product p2 = new Product("Apple", "fresh", 1.0f, 2);
@@ -34,43 +45,47 @@ public class Order {
         return anOrder;
     }
 
-    public void plusNumberProduct(ArrayList<Product> listProduct, int position, ChangeNumberItemListener changeNumberItemListener){
-        listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart() + 1);
-        changeNumberItemListener.changed();
-
-    }
-
-    public void minusNumberProduct(ArrayList<Product> listProduct, int position, ChangeNumberItemListener changeNumberItemListener){
-        if(listProduct.get(position).getNumberInCart() == 1){
-            listProduct.remove(position);
-        }
-        else{
-            listProduct.get(position).setNumberInCart(listProduct.get(position).getNumberInCart() - 1);
-        }
-        changeNumberItemListener.changed();
-    }
 
     public Float getSumPrice() {
-        ArrayList<Product> listProduct2 = getListCart();
-        Float fee = 0.0f;
-        for (int i = 0; i < listProduct2.size(); i++) {
-            fee = fee + (listProduct2.get(i).getPrice() * listProduct2.get(i).getNumberInCart());
+        Float sum = 0f;
+        for (Product product :
+                products) {
+            sum += product.getPrice() * quantities.getOrDefault(product, 0);
         }
-        return fee;
+        return sum;
     }
 
 
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o == null || this.getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return this.getSumPrice() == order.getSumPrice();
+    public Product get(int position) {
+        return products.get(position);
     }
 
-    @Override
-    public int hashCode(){
-        return (int) getSumPrice().floatValue();
+    public Integer getQuantity(Product product) {
+        return quantities.getOrDefault(product, 0);
+    }
+
+    public Integer size() {
+        return products.size();
+    }
+
+    public Integer totalQuantity() {
+        Integer sum = 0;
+        for (Integer i :
+                quantities.values()) {
+            sum += i;
+        }
+        return sum;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }
