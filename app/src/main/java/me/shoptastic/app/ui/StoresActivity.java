@@ -14,11 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.StoresAdapter;
+import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.firebase.UserRepository;
+import me.shoptastic.app.data.model.Store;
 import me.shoptastic.app.data.model.StoreOwner;
 import me.shoptastic.app.data.model.User;
-import me.shoptastic.app.data.firebase.StoreRepository;
-import me.shoptastic.app.data.model.Store;
 
 public class StoresActivity extends Activity implements StoresAdapter.StoreClickListener {
 
@@ -56,8 +56,8 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
                         cartView();
                         return true;
                     case 1:
-                        Intent i = new Intent(instance, ProductsActivity.class);
-                        StoreOwner s = (StoreOwner)UserRepository.getInstance().getUser();
+                        Intent i = new Intent(instance, StoreProductsActivity.class);
+                        StoreOwner s = (StoreOwner) UserRepository.getInstance().getUser();
                         i.putExtra(ProductsActivity.productStore, s.getStore().getName());
                         startActivity(i);
                         return true;
@@ -79,7 +79,8 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
         User user = UserRepository.getInstance().getUser();
 
         if (user instanceof StoreOwner) {
-            Intent s_intent = new Intent(this, ProductsActivity.class);
+            Intent s_intent = new Intent(this, ListOfOrders.class);
+            s_intent.putExtra(ProductsActivity.productStore, ((StoreOwner) user).getStore().getName());
             startActivity(s_intent);
         }else{
             Intent c_intent = new Intent(this, Cart.class);
