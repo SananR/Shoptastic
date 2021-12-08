@@ -20,16 +20,15 @@ public class RegisterOwnerPresenter {
         this.view = activity;
     }
 
-    public void register() {
+    public void register(Store store) {
         String name = view.getName();
         String email = view.getEmail();
         String phone = view.getPhone();
         String password = view.getPassword();
-        Store store = view.getStore();
         if (validateInput()) {
             userRepository.register(new StoreOwner(email, name, phone, password,
                     store));
-            storeRepository.addtodatabase(store);
+            storeRepository.addToDatabase(store);
         }
     }
 
