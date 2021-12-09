@@ -19,7 +19,7 @@
                 android:name=".ui.Cart"
                 android:exported="false" />
         <activity
-                android:name=".ui.ListOfOrders"
+                android:name=".ui.OrdersActivity"
                 android:exported="false" />
         <activity
                 android:name=".ui.LoginActivity"

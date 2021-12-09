@@ -41,7 +41,7 @@ public class Cart extends AppCompatActivity {
     }
 
     private void extracted() {
-        RecyclerView recyclerViewList = findViewById(R.id.recyclerview);
+        RecyclerView recyclerViewList = findViewById(R.id.ordersRecylerView);
         TextView emptyTxt = findViewById(R.id.emptyTxt);
         ScrollView scrollView = findViewById(R.id.scrollView2);
 

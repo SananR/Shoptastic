@@ -79,7 +79,7 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
         User user = UserRepository.getInstance().getUser();
 
         if (user instanceof StoreOwner) {
-            Intent s_intent = new Intent(this, ListOfOrders.class);
+            Intent s_intent = new Intent(this, OrdersActivity.class);
             s_intent.putExtra(ProductsActivity.productStore, ((StoreOwner) user).getStore().getName());
             startActivity(s_intent);
         }else{
@@ -105,7 +105,7 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
     }
 
     public void list_of_orders(View v){
-        Intent intent = new Intent(this, ListOfOrders.class);
+        Intent intent = new Intent(this, OrdersActivity.class);
         startActivity(intent);
     }
 

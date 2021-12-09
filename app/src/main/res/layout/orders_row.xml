@@ -19,37 +19,38 @@
             android:layout_width="match_parent"
             android:layout_height="115dp">
 
-            <ImageView
-                android:id="@+id/storeImageView"
-                android:layout_width="137dp"
-                android:layout_height="116dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:srcCompat="@tools:sample/avatars" />
-
             <TextView
                 android:id="@+id/orderTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Store Name"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Order Title"
                 android:textSize="34sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/storeImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/orderDescriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Store Description"
+                android:text="Order Description"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/orderTitleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/orderTitleTextView" />
+
+            <TextView
+                android:id="@+id/orderPriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="$0"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
