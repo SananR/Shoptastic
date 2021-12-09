@@ -1,8 +1,8 @@
 package me.shoptastic.app.data.firebase;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
+import me.shoptastic.app.Interface.Callback;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Result;
@@ -62,12 +62,12 @@ public class CartRepository {
         }
     }
 
-    public void getStoreOrders(String storename, ArrayList<Order> orders) {
-        dataSource.getStoreOrders(storename, orders);
+    public void getStoreOrders(String storename, ArrayList<Order> orders, Callback callback) {
+        dataSource.getStoreOrders(storename, orders, callback);
     }
 
 
-    public Result removeProduct(Product product){
+    public Result removeProduct(Product product) {
         order.removeProduct(product);
         dataSource.changeOrder(order);
         return new Result.Success<>(product);

@@ -4,28 +4,26 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
+import me.shoptastic.app.Interface.Callback;
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.firebase.CartRepository;
-import me.shoptastic.app.data.firebase.StoreRepository;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Store;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder> {
 
     private final Context context;
-    private OrderClickListener clickListener;
-    private Store store;
-    private CartRepository repository;
-    private ArrayList<Order> orders;
+    private final OrderClickListener clickListener;
+    private final Store store;
+    private final CartRepository repository;
+    private final ArrayList<Order> orders;
 
     public OrdersAdapter(Context ct, OrderClickListener clickListener, Store s) {
         this.context = ct;
@@ -40,7 +38,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
     public OrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(this.context);
         View view = inflater.inflate(R.layout.orders_row, parent, false);
-        repository.getStoreOrders(store.getName(), this.orders);
+        repository.getStoreOrders(store.getName(), this.orders, new Callback() {
+            @Override
+            public void callback() {
+                notifyDataSetChanged();
+            }
+        });
         return new OrdersViewHolder(view, this.clickListener);
     }
 

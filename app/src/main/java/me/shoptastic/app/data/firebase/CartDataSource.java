@@ -12,8 +12,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
+import me.shoptastic.app.Interface.Callback;
 import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.Resources;
 
@@ -52,15 +52,16 @@ public class CartDataSource {
                 });
     }
 
-    public void getStoreOrders(String storename, ArrayList<Order> orders) {
+    public void getStoreOrders(String storename, ArrayList<Order> orders, Callback callback) {
         dRef.child(ordersKey).child(storename).orderByValue().
                 addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
+                        if (snapshot.exists()) {
                             Order order = snapshot.getValue(Order.class);
                             orders.remove(order);
                             orders.add(order);
+                            callback.callback();
                         }
                     }
 
