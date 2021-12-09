@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -51,7 +52,7 @@ public class CartDataSource {
                 });
     }
 
-    public void getStoreOrders(String storename, HashSet<Order> orders) {
+    public void getStoreOrders(String storename, ArrayList<Order> orders) {
         dRef.child(ordersKey).child(storename).orderByValue().
                 addValueEventListener(new ValueEventListener() {
                     @Override

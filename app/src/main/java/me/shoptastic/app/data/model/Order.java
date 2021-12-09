@@ -102,6 +102,12 @@ public class Order {
         return quantities;
     }
 
+    public int getTotalQuantity() {
+        int sum = 0;
+        for (Integer i : this.quantities.values()) sum+=i;
+        return sum;
+    }
+
 
     @Override
     public String toString() {

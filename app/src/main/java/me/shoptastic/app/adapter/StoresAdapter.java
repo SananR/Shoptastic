@@ -1,7 +1,6 @@
 package me.shoptastic.app.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 import me.shoptastic.app.R;
 import me.shoptastic.app.data.firebase.StoreRepository;
-import me.shoptastic.app.data.model.Store;
 
 public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresViewHolder> {
 
@@ -57,8 +53,8 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
 
         public StoresViewHolder(@NonNull View itemView, StoreClickListener clickListener) {
             super(itemView);
-            this.storeTitle = itemView.findViewById(R.id.storeTitleTextView);
-            this.storeDescription = itemView.findViewById(R.id.storeDescriptionTextView);
+            this.storeTitle = itemView.findViewById(R.id.orderTitleTextView);
+            this.storeDescription = itemView.findViewById(R.id.orderDescriptionTextView);
             this.storeIcon = itemView.findViewById(R.id.storeImageView);
             this.clickListener = clickListener;
 

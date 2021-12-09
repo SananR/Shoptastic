@@ -20,22 +20,31 @@ public class StoreProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sproducts);
 
-        if (UserRepository.getInstance().getUser() instanceof StoreOwner) {
-            Button b = findViewById(R.id.addProductButton);
-            b.setVisibility(View.VISIBLE);
-            b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        Button add = findViewById(R.id.addProductButton);
+        Button view = findViewById(R.id.viewOrdersButton);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                     addProductView();
                 }
-            });
-        }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { viewOrdersView(); }
+        });
+
 
         recyclerView();
     }
 
     public String getStoreName() {
         return getIntent().getStringExtra(ProductsActivity.productStore);
+    }
+
+    private void viewOrdersView() {
+        Intent i = new Intent(this, OrdersActivity.class);
+        startActivity(i);
     }
 
     private void addProductView() {
