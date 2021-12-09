@@ -40,6 +40,7 @@ public class StoreProductsActivity extends AppCompatActivity {
 
     private void addProductView() {
         Intent i = new Intent(this, ProductAddActivity.class);
+        i.putExtra(ProductsActivity.productStore, getStoreName());
         startActivity(i);
     }
 
