@@ -78,20 +78,20 @@
             android:textSize="16sp" />
 
         <Button
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="start"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_shape"
-                android:enabled="true"
-                android:text="@string/action_sign_in"
-                android:textColor="#FFFF"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginPasswordLayout" />
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_shape"
+            android:enabled="true"
+            android:text="Sign In"
+            android:textColor="#FFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginPasswordLayout" />
 
         <ProgressBar
                 android:id="@+id/loading"
@@ -107,6 +107,27 @@
                 app:layout_constraintStart_toStartOf="@+id/loginPasswordLayout"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.499" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="OR" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:background="@drawable/button_shape"
+            android:backgroundTint="#4CAF50"
+            android:enabled="true"
+            android:text="Register"
+            android:textColor="#FFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

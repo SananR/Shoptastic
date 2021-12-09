@@ -7,7 +7,7 @@
     tools:context=".ui.OrdersActivity">
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/orderDetailsTitle"
         android:layout_width="210dp"
         android:layout_height="40dp"
         android:text="Pending Orders"

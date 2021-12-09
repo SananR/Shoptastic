@@ -1,5 +1,6 @@
 package me.shoptastic.app.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -24,6 +25,17 @@ public class LoginActivity extends Activity {
                 signIn(view);
             }
         });
+        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerView();
+            }
+        });
+    }
+
+    private void registerView() {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
     }
 
     public String getEmail() {

@@ -2,6 +2,8 @@ package me.shoptastic.app.data.firebase;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +55,25 @@ public class CartDataSource {
     }
 
     public void getStoreOrders(String storename, ArrayList<Order> orders, Callback callback) {
+        dRef.child(ordersKey).child(storename).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    DataSnapshot snap = task.getResult();
+
+                    if (snap.exists()) {
+                        for (DataSnapshot child : snap.getChildren()) {
+                            Order order = child.getValue(Order.class);
+                            orders.remove(order);
+                            orders.add(order);
+                            callback.callback();
+                        }
+                    }
+
+                } else throw new RuntimeException(task.getException());
+            }
+        });/*
         dRef.child(ordersKey).child(storename).orderByValue().
                 addValueEventListener(new ValueEventListener() {
                     @Override
@@ -69,7 +90,7 @@ public class CartDataSource {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                });*/
     }
 
 }

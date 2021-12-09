@@ -22,6 +22,9 @@
                 android:name=".ui.OrdersActivity"
                 android:exported="false" />
         <activity
+            android:name=".ui.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
                 android:name=".ui.LoginActivity"
                 android:exported="false" />
         <activity
@@ -49,9 +52,6 @@
                 android:exported="false" />
         <activity
                 android:name=".ui.ShowDetailActivity"
-                android:exported="false" />
-        <activity
-                android:name=".ui.SignIn"
                 android:exported="false" />
         <activity
                 android:name=".ui.StoreProductsActivity"
