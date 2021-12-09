@@ -30,12 +30,12 @@ public class CartDataSource {
 
     public void changeOrder(Order o) {
         dRef.child(ordersKey).child(o.getStoreName()).child(
-                UserRepository.getInstance().getUser().getUUID()
+                UserRepository.getInstance().getUser().getEmail()
         ).setValue(o);
     }
 
     public void getCustomerOrder() {
-        dRef.child(ordersKey).orderByKey().equalTo(UserRepository.getInstance().getUser().getUUID()).
+        dRef.child(ordersKey).orderByKey().equalTo(UserRepository.getInstance().getUser().getEmail()).
                 addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
