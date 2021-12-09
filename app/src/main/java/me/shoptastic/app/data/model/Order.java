@@ -1,5 +1,8 @@
 package me.shoptastic.app.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
@@ -10,8 +13,8 @@ import me.shoptastic.app.data.firebase.UserRepository;
 public class Order {
 
     private final String storeName;
-    private final ArrayList<Product> products;
-    private final HashMap<String, Integer> quantities;
+    private ArrayList<Product> products;
+    private HashMap<String, Integer> quantities;
     private boolean checkout = false;
     private boolean pickup = false;
     private final String user;
@@ -22,6 +25,20 @@ public class Order {
         this.products = new ArrayList<>();
         this.quantities = new HashMap<>();
         this.user = UserRepository.getInstance().getUser().getEmail();
+    }
+
+    public Order() {
+        this.products = new ArrayList<>();
+        this.quantities = new HashMap<>();
+        this.storeName = "";
+        this.user = "";
+    }
+
+    protected Order(Parcel in) {
+        storeName = in.readString();
+        checkout = in.readByte() != 0;
+        pickup = in.readByte() != 0;
+        user = in.readString();
     }
 
     public void addProduct(Product product) {
@@ -127,4 +144,5 @@ public class Order {
     public String getUser() {
         return user;
     }
+
 }
