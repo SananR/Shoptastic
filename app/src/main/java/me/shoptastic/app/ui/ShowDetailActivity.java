@@ -1,5 +1,6 @@
 package me.shoptastic.app.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -79,8 +80,13 @@ public class ShowDetailActivity extends Activity {
                 for (int i = 0; i < numberOrder; i++) {
                     repository.addProduct(aProduct);
                 }
+                cartView();
             }
         });
+    }
+
+    public void cartView() {
+        this.startActivity(new Intent(this, Cart.class));
     }
 
 }
