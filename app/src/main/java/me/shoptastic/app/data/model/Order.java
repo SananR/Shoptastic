@@ -5,6 +5,8 @@ import com.google.firebase.database.Exclude;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import me.shoptastic.app.data.firebase.UserRepository;
+
 public class Order {
 
     private final String storeName;
@@ -12,12 +14,14 @@ public class Order {
     private final HashMap<String, Integer> quantities;
     private boolean checkout = false;
     private boolean pickup = false;
+    private final String user;
 
 
     public Order(String storeName) {
         this.storeName = storeName;
         this.products = new ArrayList<>();
         this.quantities = new HashMap<>();
+        this.user = UserRepository.getInstance().getUser().getEmail();
     }
 
     public void addProduct(Product product) {
@@ -112,5 +116,9 @@ public class Order {
                 ", checkout=" + checkout +
                 ", pickup=" + pickup +
                 '}';
+    }
+
+    public String getUser() {
+        return user;
     }
 }
