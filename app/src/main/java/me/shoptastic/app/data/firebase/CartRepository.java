@@ -1,5 +1,7 @@
 package me.shoptastic.app.data.firebase;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -8,6 +10,7 @@ import me.shoptastic.app.data.model.Product;
 import me.shoptastic.app.data.model.Result;
 
 public class CartRepository {
+
     private static CartRepository instance;
     private final CartDataSource dataSource;
     private Order order;

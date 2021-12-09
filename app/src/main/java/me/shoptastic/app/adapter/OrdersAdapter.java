@@ -1,6 +1,7 @@
 package me.shoptastic.app.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
         this.clickListener = clickListener;
         this.repository = CartRepository.getInstance();
         this.store = s;
-        this.orders = new ArrayList<>();
+        this.orders = orders;
+        Log.d("test1", s.getName());
+        Log.d("test2", this.orders.size() + " wtf");
     }
 
     @NonNull
@@ -40,15 +43,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
     public OrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(this.context);
         View view = inflater.inflate(R.layout.orders_row, parent, false);
-        repository.getStoreOrders(store.getName(), this.orders);
         return new OrdersViewHolder(view, this.clickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrdersViewHolder holder, int position) {
         holder.orderTitle.setText("Placeholder Name");
-        holder.orderDescription.setText(orders.get(position).getTotalQuantity() + " Items");
-        holder.orderPrice.setText("$"+orders.get(position).getSumPrice());
+        holder.orderDescription.setText(String.format("%d Items", orders.get(position).getTotalQuantity()));
+        holder.orderPrice.setText("$" + orders.get(position).getSumPrice());
     }
 
     @Override

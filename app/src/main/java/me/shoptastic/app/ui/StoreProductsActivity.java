@@ -9,9 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import me.shoptastic.app.R;
 import me.shoptastic.app.adapter.EditProductAdapter;
+import me.shoptastic.app.data.firebase.CartRepository;
 import me.shoptastic.app.data.firebase.UserRepository;
+import me.shoptastic.app.data.model.Order;
 import me.shoptastic.app.data.model.StoreOwner;
 
 public class StoreProductsActivity extends AppCompatActivity {

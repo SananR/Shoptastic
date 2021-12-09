@@ -31,6 +31,4 @@ public class OrdersActivity extends AppCompatActivity implements OrdersAdapter.O
     public void onOrderClick(int position) {
 
     }
-
-
 }

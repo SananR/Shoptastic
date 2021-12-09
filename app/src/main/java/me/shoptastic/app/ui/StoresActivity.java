@@ -76,16 +76,9 @@ public class StoresActivity extends Activity implements StoresAdapter.StoreClick
 
     public void cartView(){
         // this button is for both store owner and user, as store owner is able to oder too
-        User user = UserRepository.getInstance().getUser();
 
-        if (user instanceof StoreOwner) {
-            Intent s_intent = new Intent(this, OrdersActivity.class);
-            s_intent.putExtra(ProductsActivity.productStore, ((StoreOwner) user).getStore().getName());
-            startActivity(s_intent);
-        }else{
-            Intent c_intent = new Intent(this, Cart.class);
-            startActivity(c_intent);
-        }
+        Intent c_intent = new Intent(this, Cart.class);
+        startActivity(c_intent);
 
 
     }
